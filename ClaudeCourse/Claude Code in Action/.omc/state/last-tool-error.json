@@ -1,0 +1,7 @@
+{
+  "tool_name": "Read",
+  "tool_input_preview": "{\"file_path\":\"D:\\\\Git\\\\_translated\\\\ClaudeCourse\\\\Claude Code in Action\\\\Adding context.html\",\"limit\":30}",
+  "error": "File content (3044935 tokens) exceeds maximum allowed tokens (25000). Use offset and limit parameters to read specific portions of the file, or search for specific content instead of reading the whole file.",
+  "timestamp": "2026-03-10T11:34:29.517Z",
+  "retry_count": 3
+}

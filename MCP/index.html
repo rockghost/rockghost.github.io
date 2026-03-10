@@ -1,0 +1,210 @@
+﻿<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MCP 문서 (한글 번역)</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #1f2328;
+      --muted: #6a6f75;
+      --border: #e6e8eb;
+      --pill: #eef0f3;
+      --pill-text: #111;
+      --link: #1f2328;
+      --link-hover: #0b57d0;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 100vh;
+    }
+    .sidebar {
+      border-right: 1px solid var(--border);
+      padding: 24px 18px 40px 18px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+    .brand .logo {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      border: 2px solid #111;
+    }
+    .top-tabs {
+      display: flex;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .top-tabs .active {
+      color: var(--text);
+      font-weight: 600;
+      border-bottom: 2px solid var(--text);
+      padding-bottom: 6px;
+    }
+    .group {
+      margin-top: 18px;
+    }
+    .group-title {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: none;
+      margin: 6px 0 8px;
+      font-weight: 600;
+    }
+    .nav {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 6px;
+    }
+    .nav a, .nav span {
+      display: block;
+      text-decoration: none;
+      color: var(--link);
+      font-size: 14px;
+      padding: 8px 10px;
+      border-radius: 10px;
+    }
+    .nav a:hover { color: var(--link-hover); }
+    .nav .active {
+      background: var(--pill);
+      color: var(--pill-text);
+      font-weight: 600;
+    }
+    .nav .disabled {
+      color: #9aa0a6;
+      cursor: default;
+    }
+    .caret {
+      float: right;
+      color: #9aa0a6;
+    }
+    .content {
+      padding: 0;
+    }
+    .viewer {
+      width: 100%;
+      height: 100vh;
+      border: 0;
+      display: block;
+    }
+    .content-header {
+      padding: 20px 24px 0 24px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media (max-width: 860px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { border-right: none; border-bottom: 1px solid var(--border); }
+      .viewer { height: 70vh; }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>Model Context Protocol</div>
+      </div>
+
+      <div class="top-tabs">
+        <div class="active">Documentation</div>
+        <div>Extensions</div>
+        <div>Specification</div>
+      </div>
+
+      <div class="group">
+        <div class="group-title">Get started</div>
+        <ul class="nav">
+          <li><a class="active" href="01_what-is-mcp.html" target="doc">What is MCP?</a></li>
+        </ul>
+      </div>
+
+      <div class="group">
+        <div class="group-title">About MCP</div>
+        <ul class="nav">
+          <li><a href="02_architecture.html" target="doc">Architecture</a></li>
+          <li><a href="03_server-concepts.html" target="doc">Servers</a></li>
+          <li><a href="04_client-concepts.html" target="doc">Clients</a></li>
+          <li><a href="05_versioning.html" target="doc">Versioning</a></li>
+        </ul>
+      </div>
+
+      <div class="group">
+        <div class="group-title">Develop with MCP</div>
+        <ul class="nav">
+          <li><a href="06_connect-local-servers.html" target="doc">Connect to local MCP servers</a></li>
+          <li><a href="07_connect-remote-servers.html" target="doc">Connect to remote MCP Servers</a></li>
+          <li><a href="08_build-server.html" target="doc">Build an MCP server</a></li>
+          <li><a href="09_build-client.html" target="doc">Build an MCP client</a></li>
+          <li><a href="10_sdks.html" target="doc">SDKs</a></li>
+          <li><span class="disabled">Security <span class="caret">›</span></span></li>
+        </ul>
+      </div>
+
+      <div class="group">
+        <div class="group-title">Developer tools</div>
+        <ul class="nav">
+          <li><a href="11_mcp-inspector.html" target="doc">MCP Inspector</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main class="content">
+      <div class="content-header">문서를 선택하면 이 영역에 본문이 표시됩니다.</div>
+      <iframe class="viewer" name="doc" src="01_what-is-mcp.html" title="MCP 문서 보기"></iframe>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      const links = Array.from(document.querySelectorAll('.nav a[target="doc"]'));
+      const frame = document.querySelector('iframe[name="doc"]');
+
+      function setActiveByHref(href) {
+        links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === href));
+      }
+
+      links.forEach(a => {
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          const href = a.getAttribute('href');
+          if (href) {
+            frame.setAttribute('src', href);
+            setActiveByHref(href);
+          }
+        });
+      });
+
+      frame.addEventListener('load', () => {
+        try {
+          const src = frame.getAttribute('src');
+          if (src) setActiveByHref(src);
+        } catch (e) {
+          // ignore
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
+

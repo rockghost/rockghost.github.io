@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -lh \"D:/Git/_translated/ClaudeCourse/Claude Code in Action/\"*.html)",
+      "Bash(cd \"D:/Git/_translated/ClaudeCourse/Claude Code in Action\" && python create_mhtml.py)",
+      "Bash(ls -la \"D:/Git/_translated/ClaudeCourse/Claude Code in Action/\"*.html 2>/dev/null || dir \"D:\\\\Git\\\\_translated\\\\ClaudeCourse\\\\Claude Code in Action\\\\*.html\" 2>/dev/null)",
+      "Bash(cd \"D:/Git/_translated/ClaudeCourse/Claude Code in Action\" && python build_epub.py)"
+    ]
+  }
+}

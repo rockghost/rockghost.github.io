@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude 101</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Source Serif 4', 'Georgia', serif; display: flex; height: 100vh; overflow: hidden; background: #faf9f5; }
+
+.sidebar {
+  width: 320px; min-width: 320px; height: 100vh;
+  background: #faf9f5; color: #141413;
+  overflow-y: auto; border-right: 1px solid #d5d5d5;
+  display: flex; flex-direction: column; padding-bottom: 60px;
+  transition: width 0.25s ease, min-width 0.25s ease;
+}
+.sidebar.collapsed {
+  width: 0; min-width: 0; overflow: hidden;
+  border-right: none;
+}
+.sidebar::-webkit-scrollbar { width: 6px; }
+.sidebar::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+
+.course-title {
+  color: #141413; font-size: 28px; font-weight: 600;
+  line-height: 140%; letter-spacing: -0.025em;
+  margin: 32px 16px 4px; text-align: left;
+}
+.course-overview {
+  display: block; margin: 0 16px 12px; font-size: 15px;
+  color: #5a697c; text-decoration: none; font-style: italic;
+}
+.course-overview:hover { color: #106f9c; }
+
+.section-title {
+  padding: 24px 16px 10px 16px; font-size: 18px; font-weight: 700;
+  color: #141413; letter-spacing: -0.015em;
+  line-height: 1.3; background: none;
+  border-top: 1px solid #d5d5d5; margin-top: 8px;
+}
+
+.sidebar .lesson {
+  display: flex; align-items: center;
+  padding: 10px 16px; color: #141413; text-decoration: none;
+  font-size: 16px; font-weight: 400;
+  letter-spacing: -0.015em; line-height: 1.4;
+  transition: background 0.12s;
+}
+.sidebar .lesson:hover { background: #DEDCD1; }
+.sidebar .lesson.active { font-weight: 500; background: #DEDCD1; }
+
+.sidebar .no-file {
+  display: flex; align-items: center;
+  padding: 10px 16px; color: #a0a0a0; font-size: 16px;
+  letter-spacing: -0.015em; line-height: 1.4;
+}
+
+.content {
+  flex: 1; height: 100vh; background: #faf9f5;
+  display: flex; flex-direction: column;
+}
+.content-header {
+  padding: 0.6rem 1.2rem; background: #faf9f5;
+  border-bottom: 1px solid #d5d5d5;
+  display: flex; align-items: center; gap: 0.8rem;
+  min-height: 48px;
+}
+.nav-btn {
+  padding: 6px 14px; background: #fff; border: 1px solid #d5d5d5;
+  border-radius: 6px; cursor: pointer; font-size: 13px; color: #141413;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  transition: background 0.12s;
+}
+.nav-btn:hover { background: #DEDCD1; }
+.sidebar-toggle {
+  padding: 6px 10px; background: #fff; border: 1px solid #d5d5d5;
+  border-radius: 6px; cursor: pointer; font-size: 15px; color: #141413;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  transition: background 0.12s; line-height: 1;
+}
+.sidebar-toggle:hover { background: #DEDCD1; }
+.content-header .title {
+  flex: 1; font-weight: 500; color: #141413; font-size: 15px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+iframe { flex: 1; border: none; width: 100%; background: #fff; }
+</style>
+</head>
+<body>
+
+<nav class="sidebar">
+  <div class="course-title">Claude 101</div>
+  <a class="course-overview" href="#" onclick="return false;">Course Overview</a>
+
+  <div class="section-title">Meet Claude</div>
+  <a class="lesson" href="What is Claude？.html" target="viewer" onclick="setActive(this)">What is Claude?</a>
+  <a class="lesson" href="Your first conversation with Claude.html" target="viewer" onclick="setActive(this)">Your first conversation with Claude</a>
+  <a class="lesson" href="Getting better results.html" target="viewer" onclick="setActive(this)">Getting better results</a>
+  <a class="lesson" href="Claude desktop app： Chat, Cowork, Code.html" target="viewer" onclick="setActive(this)">Claude desktop app: Chat, Cowork, Code</a>
+
+  <div class="section-title">Organizing your work and knowledge</div>
+  <a class="lesson" href="Introduction to projects.html" target="viewer" onclick="setActive(this)">Introduction to projects</a>
+  <a class="lesson" href="Creating with artifacts.html" target="viewer" onclick="setActive(this)">Creating with artifacts</a>
+  <a class="lesson" href="Working with skills.html" target="viewer" onclick="setActive(this)">Working with skills</a>
+
+  <div class="section-title">Expanding Claude's reach</div>
+  <a class="lesson" href="Connecting your tools.html" target="viewer" onclick="setActive(this)">Connecting your tools</a>
+  <a class="lesson" href="Enterprise search.html" target="viewer" onclick="setActive(this)">Enterprise search</a>
+  <a class="lesson" href="Research mode for deep dives.html" target="viewer" onclick="setActive(this)">Research mode for deep dives</a>
+
+  <div class="section-title">Putting it all together</div>
+  <a class="lesson" href="Claude in action： use-cases by role.html" target="viewer" onclick="setActive(this)">Claude in action: use-cases by role</a>
+  <a class="lesson" href="Other ways to work with Claude.html" target="viewer" onclick="setActive(this)">Other ways to work with Claude</a>
+
+  <div class="section-title">Conclusion &amp; certificate</div>
+  <a class="lesson" href="What's next？.html" target="viewer" onclick="setActive(this)">What's next?</a>
+  <span class="no-file">Certificate of completion</span>
+</nav>
+
+<main class="content">
+  <div class="content-header">
+    <button class="sidebar-toggle" onclick="toggleSidebar()" title="메뉴 접기/펼치기">&#9776;</button>
+    <button class="nav-btn" onclick="navigate(-1)">&larr; Prev</button>
+    <button class="nav-btn" onclick="navigate(1)">Next &rarr;</button>
+    <span class="title" id="currentTitle"></span>
+  </div>
+  <iframe name="viewer" id="viewer" onload="onFrameLoad()"></iframe>
+</main>
+
+<script>
+const links = Array.from(document.querySelectorAll('.sidebar a.lesson[target=viewer]'));
+let currentIndex = -1;
+
+function setActive(el) {
+  document.querySelectorAll('.sidebar a.lesson').forEach(a => a.classList.remove('active'));
+  el.classList.add('active');
+  currentIndex = links.indexOf(el);
+  document.getElementById('currentTitle').textContent = el.textContent;
+  el.scrollIntoView({ block: 'nearest' });
+}
+
+function navigate(dir) {
+  const next = currentIndex + dir;
+  if (next >= 0 && next < links.length) {
+    links[next].click();
+  }
+}
+
+function onFrameLoad() {
+  const frame = document.getElementById('viewer');
+  if (frame.contentWindow && frame.contentWindow.location.href !== 'about:blank') {
+    const href = decodeURIComponent(frame.contentWindow.location.href.split('/').pop());
+    const match = links.find(a => decodeURIComponent(a.getAttribute('href')) === href);
+    if (match && !match.classList.contains('active')) setActive(match);
+  }
+}
+
+function toggleSidebar() {
+  document.querySelector('.sidebar').classList.toggle('collapsed');
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft') navigate(-1);
+  if (e.key === 'ArrowRight') navigate(1);
+});
+
+// Auto-load first lesson
+if (links.length > 0) { links[0].click(); }
+</script>
+
+</body>
+</html>

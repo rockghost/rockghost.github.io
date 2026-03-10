@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building with the Claude API</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Source Serif 4', 'Georgia', serif; display: flex; height: 100vh; overflow: hidden; background: #faf9f5; }
+
+/* Left sidebar */
+.sidebar {
+  width: 320px; min-width: 320px; height: 100vh;
+  background: #faf9f5; color: #141413;
+  overflow-y: auto; border-right: 1px solid #d5d5d5;
+  display: flex; flex-direction: column;
+  padding-bottom: 60px;
+  transition: width 0.25s ease, min-width 0.25s ease;
+}
+.sidebar.collapsed {
+  width: 0; min-width: 0; overflow: hidden;
+  border-right: none;
+}
+.sidebar::-webkit-scrollbar { width: 6px; }
+.sidebar::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+
+.course-title {
+  color: #141413; font-size: 28px; font-weight: 600;
+  line-height: 140%; letter-spacing: -0.025em;
+  margin: 32px 16px 4px; text-align: left;
+}
+.course-overview {
+  display: block; margin: 0 16px 12px; font-size: 15px;
+  color: #5a697c; text-decoration: none; font-style: italic;
+}
+.course-overview:hover { color: #106f9c; }
+
+.section-title {
+  padding: 24px 16px 10px 16px; font-size: 18px; font-weight: 700;
+  color: #141413; letter-spacing: -0.015em;
+  line-height: 1.3; background: none;
+  border-top: 1px solid #d5d5d5; margin-top: 8px;
+}
+
+.sidebar .lesson {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px; color: #141413; text-decoration: none;
+  font-size: 16px; font-weight: 400;
+  letter-spacing: -0.015em; line-height: 1.4;
+  transition: background 0.12s;
+}
+.sidebar .lesson:hover { background: #DEDCD1; }
+.sidebar .lesson.active { font-weight: 500; background: #DEDCD1; }
+
+.lesson .icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0;
+  border: 2px solid #5a697c; font-size: 0;
+}
+.lesson .icon.checked {
+  background: #5a697c; border-color: #5a697c;
+}
+.lesson .icon.checked::after {
+  content: ''; display: block; width: 6px; height: 10px;
+  border: solid #fff; border-width: 0 2px 2px 0;
+  transform: rotate(45deg); margin-top: -2px;
+}
+
+.sidebar .no-file {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px; color: #a0a0a0; font-size: 16px;
+  letter-spacing: -0.015em; line-height: 1.4;
+}
+
+/* Right content */
+.content {
+  flex: 1; height: 100vh; background: #faf9f5;
+  display: flex; flex-direction: column;
+}
+.content-header {
+  padding: 0.6rem 1.2rem; background: #faf9f5;
+  border-bottom: 1px solid #d5d5d5;
+  display: flex; align-items: center; gap: 0.8rem;
+  min-height: 48px;
+}
+.nav-btn {
+  padding: 6px 14px; background: #fff; border: 1px solid #d5d5d5;
+  border-radius: 6px; cursor: pointer; font-size: 13px; color: #141413;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  transition: background 0.12s;
+}
+.nav-btn:hover { background: #DEDCD1; }
+.sidebar-toggle {
+  padding: 6px 10px; background: #fff; border: 1px solid #d5d5d5;
+  border-radius: 6px; cursor: pointer; font-size: 15px; color: #141413;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  transition: background 0.12s; line-height: 1;
+}
+.sidebar-toggle:hover { background: #DEDCD1; }
+.content-header .title {
+  flex: 1; font-weight: 500; color: #141413; font-size: 15px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+iframe {
+  flex: 1; border: none; width: 100%; background: #fff;
+}
+.welcome {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  flex-direction: column; color: #7a7a6e; gap: 0.8rem;
+}
+.welcome h2 { color: #141413; font-size: 1.6rem; font-weight: 600; }
+.welcome p { font-size: 1rem; font-family: -apple-system, sans-serif; }
+</style>
+</head>
+<body>
+
+<nav class="sidebar">
+  <div class="course-title">Building with the Claude API</div>
+  <a class="course-overview" href="#" onclick="return false;">Course Overview</a>
+
+  <div class="section-title">Introduction</div>
+  <span class="no-file">Welcome to the course</span>
+  <span class="no-file">Overview of Claude models</span>
+
+  <div class="section-title">Accessing Claude with the API</div>
+  <a class="lesson" href="Accessing the API.html" target="viewer" onclick="setActive(this)">Accessing the API</a>
+  <a class="lesson" href="Getting an API key.html" target="viewer" onclick="setActive(this)">Getting an API key</a>
+  <a class="lesson" href="Making a request.html" target="viewer" onclick="setActive(this)">Making a request</a>
+  <a class="lesson" href="Multi-Turn conversations.html" target="viewer" onclick="setActive(this)">Multi-Turn conversations</a>
+  <a class="lesson" href="System prompts.html" target="viewer" onclick="setActive(this)">System prompts</a>
+  <a class="lesson" href="Temperature.html" target="viewer" onclick="setActive(this)">Temperature</a>
+  <a class="lesson" href="Response streaming.html" target="viewer" onclick="setActive(this)">Response streaming</a>
+  <a class="lesson" href="Controlling model output.html" target="viewer" onclick="setActive(this)">Controlling model output</a>
+  <a class="lesson" href="Structured data.html" target="viewer" onclick="setActive(this)">Structured data</a>
+
+  <div class="section-title">Prompt evaluation</div>
+  <a class="lesson" href="Prompt evaluation.html" target="viewer" onclick="setActive(this)">Prompt evaluation</a>
+  <a class="lesson" href="A typical eval workflow.html" target="viewer" onclick="setActive(this)">A typical eval workflow</a>
+  <a class="lesson" href="Generating test datasets.html" target="viewer" onclick="setActive(this)">Generating test datasets</a>
+  <a class="lesson" href="Running the eval.html" target="viewer" onclick="setActive(this)">Running the eval</a>
+  <a class="lesson" href="Model based grading.html" target="viewer" onclick="setActive(this)">Model based grading</a>
+  <a class="lesson" href="Code based grading.html" target="viewer" onclick="setActive(this)">Code based grading</a>
+
+  <div class="section-title">Prompt engineering techniques</div>
+  <a class="lesson" href="Prompt engineering.html" target="viewer" onclick="setActive(this)">Prompt engineering</a>
+  <a class="lesson" href="Being clear and direct.html" target="viewer" onclick="setActive(this)">Being clear and direct</a>
+  <a class="lesson" href="Being specific.html" target="viewer" onclick="setActive(this)">Being specific</a>
+  <a class="lesson" href="Structure with XML tags.html" target="viewer" onclick="setActive(this)">Structure with XML tags</a>
+  <a class="lesson" href="Providing examples.html" target="viewer" onclick="setActive(this)">Providing examples</a>
+
+  <div class="section-title">Tool use with Claude</div>
+  <a class="lesson" href="Introducing tool use.html" target="viewer" onclick="setActive(this)">Introducing tool use</a>
+  <a class="lesson" href="Project overview.html" target="viewer" onclick="setActive(this)">Project overview</a>
+  <a class="lesson" href="Tool functions.html" target="viewer" onclick="setActive(this)">Tool functions</a>
+  <a class="lesson" href="Tool schemas.html" target="viewer" onclick="setActive(this)">Tool schemas</a>
+  <a class="lesson" href="Handling message blocks.html" target="viewer" onclick="setActive(this)">Handling message blocks</a>
+  <a class="lesson" href="Sending tool results.html" target="viewer" onclick="setActive(this)">Sending tool results</a>
+  <a class="lesson" href="Multi-turn conversations with tools.html" target="viewer" onclick="setActive(this)">Multi-turn conversations with tools</a>
+  <a class="lesson" href="Implementing multiple turns.html" target="viewer" onclick="setActive(this)">Implementing multiple turns</a>
+  <a class="lesson" href="Using multiple tools.html" target="viewer" onclick="setActive(this)">Using multiple tools</a>
+  <a class="lesson" href="The batch tool.html" target="viewer" onclick="setActive(this)">The batch tool</a>
+  <a class="lesson" href="Tools for structured data.html" target="viewer" onclick="setActive(this)">Tools for structured data</a>
+  <a class="lesson" href="Fine grained tool calling.html" target="viewer" onclick="setActive(this)">Fine grained tool calling</a>
+  <a class="lesson" href="The text edit tool.html" target="viewer" onclick="setActive(this)">The text edit tool</a>
+  <a class="lesson" href="The web search tool.html" target="viewer" onclick="setActive(this)">The web search tool</a>
+
+  <div class="section-title">Retrieval Augmented Generation</div>
+  <a class="lesson" href="Introducing Retrieval Augmented Generation.html" target="viewer" onclick="setActive(this)">Introducing Retrieval Augmented Generation</a>
+  <a class="lesson" href="Text chunking strategies.html" target="viewer" onclick="setActive(this)">Text chunking strategies</a>
+  <a class="lesson" href="Text embeddings.html" target="viewer" onclick="setActive(this)">Text embeddings</a>
+  <a class="lesson" href="The full RAG flow.html" target="viewer" onclick="setActive(this)">The full RAG flow</a>
+  <a class="lesson" href="Implementing the RAG flow.html" target="viewer" onclick="setActive(this)">Implementing the RAG flow</a>
+  <a class="lesson" href="BM25 lexical search.html" target="viewer" onclick="setActive(this)">BM25 lexical search</a>
+  <a class="lesson" href="A Multi-Index RAG pipeline.html" target="viewer" onclick="setActive(this)">A Multi-Index RAG pipeline</a>
+  <a class="lesson" href="Reranking results.html" target="viewer" onclick="setActive(this)">Reranking results</a>
+  <a class="lesson" href="Contextual retrieval.html" target="viewer" onclick="setActive(this)">Contextual retrieval</a>
+
+  <div class="section-title">Features of Claude</div>
+  <a class="lesson" href="Extended thinking.html" target="viewer" onclick="setActive(this)">Extended thinking</a>
+  <a class="lesson" href="Image support.html" target="viewer" onclick="setActive(this)">Image support</a>
+  <a class="lesson" href="PDF support.html" target="viewer" onclick="setActive(this)">PDF support</a>
+  <a class="lesson" href="Citations.html" target="viewer" onclick="setActive(this)">Citations</a>
+  <a class="lesson" href="Prompt caching.html" target="viewer" onclick="setActive(this)">Prompt caching</a>
+  <a class="lesson" href="Rules of prompt caching.html" target="viewer" onclick="setActive(this)">Rules of prompt caching</a>
+  <a class="lesson" href="Prompt caching in action.html" target="viewer" onclick="setActive(this)">Prompt caching in action</a>
+  <a class="lesson" href="Code execution and the Files API.html" target="viewer" onclick="setActive(this)">Code execution and the Files API</a>
+
+  <div class="section-title">Model Context Protocol</div>
+  <a class="lesson" href="Introducing MCP.html" target="viewer" onclick="setActive(this)">Introducing MCP</a>
+  <a class="lesson" href="MCP clients.html" target="viewer" onclick="setActive(this)">MCP clients</a>
+  <a class="lesson" href="Project setup.html" target="viewer" onclick="setActive(this)">Project setup</a>
+  <a class="lesson" href="Defining tools with MCP.html" target="viewer" onclick="setActive(this)">Defining tools with MCP</a>
+  <a class="lesson" href="The server inspector.html" target="viewer" onclick="setActive(this)">The server inspector</a>
+  <a class="lesson" href="Implementing a client.html" target="viewer" onclick="setActive(this)">Implementing a client</a>
+  <a class="lesson" href="Defining resources.html" target="viewer" onclick="setActive(this)">Defining resources</a>
+  <a class="lesson" href="Accessing resources.html" target="viewer" onclick="setActive(this)">Accessing resources</a>
+  <a class="lesson" href="Defining prompts.html" target="viewer" onclick="setActive(this)">Defining prompts</a>
+  <a class="lesson" href="Prompts in the client.html" target="viewer" onclick="setActive(this)">Prompts in the client</a>
+
+  <div class="section-title">Anthropic apps</div>
+  <a class="lesson" href="Anthropic apps.html" target="viewer" onclick="setActive(this)">Anthropic apps</a>
+  <a class="lesson" href="Claude Code setup.html" target="viewer" onclick="setActive(this)">Claude Code setup</a>
+  <a class="lesson" href="Claude Code in action.html" target="viewer" onclick="setActive(this)">Claude Code in action</a>
+  <a class="lesson" href="Enhancements with MCP servers.html" target="viewer" onclick="setActive(this)">Enhancements with MCP servers</a>
+  <a class="lesson" href="Parallelizing Claude Code.html" target="viewer" onclick="setActive(this)">Parallelizing Claude Code</a>
+  <a class="lesson" href="Automated debugging.html" target="viewer" onclick="setActive(this)">Automated debugging</a>
+  <a class="lesson" href="Computer use.html" target="viewer" onclick="setActive(this)">Computer use</a>
+  <a class="lesson" href="How Computer use works.html" target="viewer" onclick="setActive(this)">How Computer use works</a>
+
+  <div class="section-title">Agents and workflows</div>
+  <a class="lesson" href="Agents and workflows.html" target="viewer" onclick="setActive(this)">Agents and workflows</a>
+  <a class="lesson" href="Parallelization workflows.html" target="viewer" onclick="setActive(this)">Parallelization workflows</a>
+  <a class="lesson" href="Chaining workflows.html" target="viewer" onclick="setActive(this)">Chaining workflows</a>
+  <a class="lesson" href="Routing workflows.html" target="viewer" onclick="setActive(this)">Routing workflows</a>
+  <a class="lesson" href="Agents and tools.html" target="viewer" onclick="setActive(this)">Agents and tools</a>
+  <a class="lesson" href="Environment inspection.html" target="viewer" onclick="setActive(this)">Environment inspection</a>
+  <a class="lesson" href="Workflows vs agents.html" target="viewer" onclick="setActive(this)">Workflows vs agents</a>
+</nav>
+
+<main class="content">
+  <div class="content-header">
+    <button class="sidebar-toggle" onclick="toggleSidebar()" title="메뉴 접기/펼치기">&#9776;</button>
+    <button class="nav-btn" onclick="navigate(-1)">&larr; Prev</button>
+    <button class="nav-btn" onclick="navigate(1)">Next &rarr;</button>
+    <span class="title" id="currentTitle"></span>
+  </div>
+  <iframe name="viewer" id="viewer" onload="onFrameLoad()"></iframe>
+</main>
+
+<script>
+const links = Array.from(document.querySelectorAll('.sidebar a.lesson[target=viewer]'));
+let currentIndex = -1;
+
+function setActive(el) {
+  document.querySelectorAll('.sidebar a.lesson').forEach(a => a.classList.remove('active'));
+  el.classList.add('active');
+  currentIndex = links.indexOf(el);
+  document.getElementById('currentTitle').textContent = el.textContent;
+  el.scrollIntoView({ block: 'nearest' });
+}
+
+function navigate(dir) {
+  const next = currentIndex + dir;
+  if (next >= 0 && next < links.length) {
+    links[next].click();
+  }
+}
+
+function onFrameLoad() {
+  const frame = document.getElementById('viewer');
+  if (frame.contentWindow && frame.contentWindow.location.href !== 'about:blank') {
+    const href = decodeURIComponent(frame.contentWindow.location.href.split('/').pop());
+    const match = links.find(a => decodeURIComponent(a.getAttribute('href')) === href);
+    if (match && !match.classList.contains('active')) setActive(match);
+  }
+}
+
+function toggleSidebar() {
+  document.querySelector('.sidebar').classList.toggle('collapsed');
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft') navigate(-1);
+  if (e.key === 'ArrowRight') navigate(1);
+});
+
+// Auto-load first lesson on page load
+if (links.length > 0) { links[0].click(); }
+</script>
+
+</body>
+</html>

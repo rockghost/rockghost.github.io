@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code in Action - Anthropic Academy</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Source Serif 4', 'Georgia', serif; display: flex; height: 100vh; overflow: hidden; background: #faf9f5; }
+
+/* Left sidebar */
+.sidebar {
+  width: 320px; min-width: 320px; height: 100vh;
+  background: #faf9f5; color: #141413;
+  overflow-y: auto; border-right: 1px solid #d5d5d5;
+  display: flex; flex-direction: column;
+  padding-bottom: 60px;
+  transition: width 0.25s ease, min-width 0.25s ease;
+}
+.sidebar.collapsed {
+  width: 0; min-width: 0; overflow: hidden;
+  border-right: none;
+}
+
+/* Sidebar toggle button */
+.sidebar-toggle {
+  padding: 6px 10px; background: #fff; border: 1px solid #d5d5d5;
+  border-radius: 6px; cursor: pointer; font-size: 15px; color: #141413;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  transition: background 0.12s; line-height: 1;
+}
+.sidebar-toggle:hover { background: #DEDCD1; }
+.sidebar::-webkit-scrollbar { width: 6px; }
+.sidebar::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+
+.course-title {
+  color: #141413; font-size: 28px; font-weight: 600;
+  line-height: 140%; letter-spacing: -0.025em;
+  margin: 32px 16px 4px; text-align: left;
+}
+.course-overview {
+  display: block; margin: 0 16px 12px; font-size: 15px;
+  color: #5a697c; text-decoration: none; font-style: italic;
+}
+.course-overview:hover { color: #106f9c; }
+
+.section-title {
+  padding: 24px 16px 10px 16px; font-size: 18px; font-weight: 700;
+  color: #141413; letter-spacing: -0.015em;
+  line-height: 1.3; background: none;
+  border-top: 1px solid #d5d5d5; margin-top: 8px;
+}
+
+.sidebar .lesson {
+  display: flex; align-items: center;
+  padding: 10px 16px; color: #141413; text-decoration: none;
+  font-size: 16px; font-weight: 400;
+  letter-spacing: -0.015em; line-height: 1.4;
+  transition: background 0.12s;
+}
+.sidebar .lesson:hover { background: #DEDCD1; }
+.sidebar .lesson.active { font-weight: 500; background: #DEDCD1; }
+
+.sidebar .no-file {
+  display: flex; align-items: center;
+  padding: 10px 16px; color: #a0a0a0; font-size: 16px;
+  letter-spacing: -0.015em; line-height: 1.4;
+}
+
+/* Right content */
+.content {
+  flex: 1; height: 100vh; background: #faf9f5;
+  display: flex; flex-direction: column;
+}
+.content-header {
+  padding: 0.6rem 1.2rem; background: #faf9f5;
+  border-bottom: 1px solid #d5d5d5;
+  display: flex; align-items: center; gap: 0.8rem;
+  min-height: 48px;
+}
+.nav-btn {
+  padding: 6px 14px; background: #fff; border: 1px solid #d5d5d5;
+  border-radius: 6px; cursor: pointer; font-size: 13px; color: #141413;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  transition: background 0.12s;
+}
+.nav-btn:hover { background: #DEDCD1; }
+.content-header .title {
+  flex: 1; font-weight: 500; color: #141413; font-size: 15px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+iframe {
+  flex: 1; border: none; width: 100%; background: #fff;
+}
+</style>
+</head>
+<body>
+
+<nav class="sidebar">
+  <div class="course-title">Claude Code in Action</div>
+  <a class="course-overview" href="#" onclick="return false;">Course Overview</a>
+
+  <div class="section-title">What is Claude Code?</div>
+  <span class="no-file">Introduction</span>
+  <a class="lesson" href="What is a coding assistant？.html" target="viewer" onclick="setActive(this)">What is a coding assistant?</a>
+  <a class="lesson" href="Claude Code in action.html" target="viewer" onclick="setActive(this)">Claude Code in action</a>
+
+  <div class="section-title">Getting hands on</div>
+  <a class="lesson" href="Claude Code setup.html" target="viewer" onclick="setActive(this)">Claude Code setup</a>
+  <a class="lesson" href="Project setup.html" target="viewer" onclick="setActive(this)">Project setup</a>
+  <a class="lesson" href="Adding context.html" target="viewer" onclick="setActive(this)">Adding context</a>
+  <a class="lesson" href="Making changes.html" target="viewer" onclick="setActive(this)">Making changes</a>
+  <a class="lesson" href="Controlling context.html" target="viewer" onclick="setActive(this)">Controlling context</a>
+  <a class="lesson" href="Custom commands.html" target="viewer" onclick="setActive(this)">Custom commands</a>
+  <a class="lesson" href="MCP servers with Claude Code.html" target="viewer" onclick="setActive(this)">MCP servers with Claude Code</a>
+  <a class="lesson" href="Github integration.html" target="viewer" onclick="setActive(this)">Github integration</a>
+
+  <div class="section-title">Hooks and the SDK</div>
+  <a class="lesson" href="Introducing hooks.html" target="viewer" onclick="setActive(this)">Introducing hooks</a>
+  <a class="lesson" href="Defining hooks.html" target="viewer" onclick="setActive(this)">Defining hooks</a>
+  <a class="lesson" href="Implementing a hook.html" target="viewer" onclick="setActive(this)">Implementing a hook</a>
+  <a class="lesson" href="Gotchas around hooks.html" target="viewer" onclick="setActive(this)">Gotchas around hooks</a>
+  <a class="lesson" href="Useful hooks!.html" target="viewer" onclick="setActive(this)">Useful hooks!</a>
+  <a class="lesson" href="Another useful hook.html" target="viewer" onclick="setActive(this)">Another useful hook</a>
+  <a class="lesson" href="The Claude Code SDK.html" target="viewer" onclick="setActive(this)">The Claude Code SDK</a>
+
+  <div class="section-title">Wrapping up</div>
+  <span class="no-file">Quiz on Claude Code</span>
+  <span class="no-file">Summary and next steps</span>
+</nav>
+
+<main class="content">
+  <div class="content-header">
+    <button class="sidebar-toggle" onclick="toggleSidebar()" title="메뉴 접기/펼치기">&#9776;</button>
+    <button class="nav-btn" onclick="navigate(-1)">&larr; Prev</button>
+    <button class="nav-btn" onclick="navigate(1)">Next &rarr;</button>
+    <span class="title" id="currentTitle"></span>
+  </div>
+  <iframe name="viewer" id="viewer" onload="onFrameLoad()"></iframe>
+</main>
+
+<script>
+const links = Array.from(document.querySelectorAll('.sidebar a.lesson[target=viewer]'));
+let currentIndex = -1;
+
+function setActive(el) {
+  document.querySelectorAll('.sidebar a.lesson').forEach(a => a.classList.remove('active'));
+  el.classList.add('active');
+  currentIndex = links.indexOf(el);
+  document.getElementById('currentTitle').textContent = el.textContent;
+  el.scrollIntoView({ block: 'nearest' });
+}
+
+function navigate(dir) {
+  const next = currentIndex + dir;
+  if (next >= 0 && next < links.length) {
+    links[next].click();
+  }
+}
+
+function onFrameLoad() {
+  const frame = document.getElementById('viewer');
+  if (frame.contentWindow && frame.contentWindow.location.href !== 'about:blank') {
+    const href = decodeURIComponent(frame.contentWindow.location.href.split('/').pop());
+    const match = links.find(a => decodeURIComponent(a.getAttribute('href')) === href);
+    if (match && !match.classList.contains('active')) setActive(match);
+  }
+}
+
+function toggleSidebar() {
+  document.querySelector('.sidebar').classList.toggle('collapsed');
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft') navigate(-1);
+  if (e.key === 'ArrowRight') navigate(1);
+});
+
+// Auto-load first lesson on page load
+if (links.length > 0) { links[0].click(); }
+</script>
+
+</body>
+</html>

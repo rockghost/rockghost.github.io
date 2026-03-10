@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>MCP 아키텍처 개요</title>
+  <style>
+    body { font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; line-height: 1.7; max-width: 980px; margin: 40px auto; padding: 0 20px; color: #111; }
+    h1, h2, h3, h4 { line-height: 1.3; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+    pre { background: #f6f8fa; padding: 12px; overflow: auto; border-radius: 6px; }
+    a { color: #0b57d0; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .meta { color: #555; font-size: 0.95em; }
+    .note { border-left: 4px solid #0b57d0; background: #f1f6ff; padding: 10px 12px; margin: 16px 0; }
+  </style>
+</head>
+<body>
+  <h1>아키텍처 개요</h1>
+  <p class="meta">원문: https://modelcontextprotocol.io/docs/learn/architecture</p>
+
+  <p>
+    이 문서는 Model Context Protocol(MCP)의 <strong>범위</strong>와 <strong>핵심 개념</strong>을 설명하고,
+    각 핵심 개념을 보여주는 <strong>예시</strong>를 제공합니다.
+  </p>
+  <p>
+    MCP SDK는 많은 세부사항을 추상화하므로, 대부분의 개발자에게는
+    MCP 서버가 AI 애플리케이션에 컨텍스트를 제공하는 방식을 다루는
+    <a href="#data-layer-protocol">데이터 레이어 프로토콜</a> 부분이 가장 유용합니다.
+  </p>
+  <p>
+    구현 세부 사항은 사용 중인 <a href="https://modelcontextprotocol.io/docs/sdk">언어별 SDK 문서</a>를 참고하세요.
+  </p>
+
+  <h2>범위</h2>
+  <p>Model Context Protocol은 다음 프로젝트를 포함합니다.</p>
+  <ul>
+    <li><a href="https://modelcontextprotocol.io/specification/latest">MCP 사양</a>: 클라이언트와 서버가 구현해야 할 요구사항을 정의</li>
+    <li><a href="https://modelcontextprotocol.io/docs/sdk">MCP SDK</a>: 다양한 언어로 MCP를 구현한 SDK</li>
+    <li><strong>MCP 개발 도구</strong>: MCP 서버·클라이언트 개발을 돕는 도구(예: <a href="https://github.com/modelcontextprotocol/inspector">MCP Inspector</a>)</li>
+    <li><a href="https://github.com/modelcontextprotocol/servers">MCP 레퍼런스 서버 구현</a>: 예시용 서버 구현 모음</li>
+  </ul>
+
+  <div class="note">
+    MCP는 <strong>컨텍스트 교환을 위한 프로토콜</strong>에 집중합니다.
+    AI 애플리케이션이 LLM을 어떻게 사용하고 제공된 컨텍스트를 어떻게 관리하는지는 강제하지 않습니다.
+  </div>
+
+  <h2>핵심 개념</h2>
+
+  <h3>참여자(Participants)</h3>
+  <p>
+    MCP는 클라이언트‑서버 아키텍처를 따릅니다. MCP 호스트(예: <a href="https://www.anthropic.com/claude-code">Claude Code</a>,
+    <a href="https://www.claude.ai/download">Claude Desktop</a> 같은 AI 애플리케이션)가 하나 이상의 MCP 서버에 연결합니다.
+    이를 위해 호스트는 서버마다 하나의 MCP 클라이언트를 생성하고, 각 클라이언트는 해당 서버와 전용 연결을 유지합니다.
+  </p>
+  <p>
+    STDIO 전송을 사용하는 로컬 MCP 서버는 일반적으로 하나의 MCP 클라이언트만 обслуж합니다.
+    반면 Streamable HTTP 전송을 사용하는 원격 MCP 서버는 여러 MCP 클라이언트를 обслуж하는 경우가 많습니다.
+  </p>
+  <p>주요 참여자는 다음과 같습니다.</p>
+  <ul>
+    <li><strong>MCP 호스트</strong>: 하나 이상의 MCP 클라이언트를 관리·조정하는 AI 애플리케이션</li>
+    <li><strong>MCP 클라이언트</strong>: MCP 서버와의 연결을 유지하고, 서버가 제공하는 컨텍스트를 호스트에 전달하는 구성 요소</li>
+    <li><strong>MCP 서버</strong>: MCP 클라이언트에 컨텍스트를 제공하는 프로그램</li>
+  </ul>
+  <p>
+    <strong>예시</strong>: Visual Studio Code는 MCP 호스트로 동작합니다.
+    VS Code가 <a href="https://docs.sentry.io/product/sentry-mcp/">Sentry MCP 서버</a>에 연결하면,
+    VS Code 런타임은 해당 서버와 연결을 유지하는 MCP 클라이언트를 생성합니다.
+    이후 <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem">로컬 파일시스템 서버</a>에 연결하면
+    또 다른 MCP 클라이언트가 생성되어 별도의 연결을 유지합니다.
+  </p>
+
+  <pre><code class="language-mermaid">graph TB
+    subgraph "MCP Host (AI Application)"
+        Client1["MCP Client 1"]
+        Client2["MCP Client 2"]
+        Client3["MCP Client 3"]
+        Client4["MCP Client 4"]
+    end
+
+    ServerA["MCP Server A - Local<br/>(e.g. Filesystem)"]
+    ServerB["MCP Server B - Local<br/>(e.g. Database)"]
+    ServerC["MCP Server C - Remote<br/>(e.g. Sentry)"]
+
+    Client1 ---|"Dedicated<br/>connection"| ServerA
+    Client2 ---|"Dedicated<br/>connection"| ServerB
+    Client3 ---|"Dedicated<br/>connection"| ServerC
+    Client4 ---|"Dedicated<br/>connection"| ServerC
+</code></pre>
+
+  <p>
+    여기서 <strong>MCP 서버</strong>는 실행 위치와 관계없이 컨텍스트 데이터를 제공하는 프로그램을 의미합니다.
+    예를 들어 Claude Desktop이 <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem">filesystem 서버</a>를 실행하면
+    STDIO 전송을 사용하므로 동일한 머신에서 로컬로 실행됩니다. 이를 일반적으로 “로컬 MCP 서버”라고 부릅니다.
+    반면 <a href="https://docs.sentry.io/product/sentry-mcp/">Sentry MCP 서버</a>는 Sentry 플랫폼에서 실행되고
+    Streamable HTTP 전송을 사용하므로 “원격 MCP 서버”로 분류됩니다.
+  </p>
+
+  <h3>레이어(Layers)</h3>
+  <p>MCP는 두 개의 레이어로 구성됩니다.</p>
+  <ul>
+    <li><strong>데이터 레이어</strong>: JSON‑RPC 기반의 클라이언트‑서버 통신, 수명주기 관리, 핵심 프리미티브(도구·리소스·프롬프트·알림 등)를 정의</li>
+    <li><strong>전송 레이어</strong>: 전송 채널, 연결 수립, 메시지 프레이밍, 인증 등을 정의</li>
+  </ul>
+  <p>개념적으로 데이터 레이어가 내부, 전송 레이어가 외부 레이어입니다.</p>
+
+  <h4>데이터 레이어</h4>
+  <p>
+    데이터 레이어는 <a href="https://www.jsonrpc.org/">JSON‑RPC 2.0</a> 기반의 교환 프로토콜을 구현합니다.
+    여기에는 다음이 포함됩니다.
+  </p>
+  <ul>
+    <li><strong>수명주기 관리</strong>: 연결 초기화, 기능 협상, 연결 종료</li>
+    <li><strong>서버 기능</strong>: 도구, 리소스, 프롬프트 제공</li>
+    <li><strong>클라이언트 기능</strong>: 호스트 LLM 샘플링 요청, 사용자 입력 요청, 로그 전송</li>
+    <li><strong>유틸리티 기능</strong>: 알림, 장시간 작업의 진행 상황 추적</li>
+  </ul>
+
+  <h4>전송 레이어</h4>
+  <p>
+    전송 레이어는 통신 채널과 인증을 관리합니다. 연결 수립, 메시지 프레이밍, 보안 통신을 처리합니다.
+  </p>
+  <p>MCP는 두 가지 전송 방식을 지원합니다.</p>
+  <ul>
+    <li><strong>Stdio 전송</strong>: 로컬 프로세스 간 표준 입출력 스트림을 사용. 네트워크 오버헤드가 없고 성능이 좋음.</li>
+    <li><strong>Streamable HTTP 전송</strong>: 클라이언트→서버 메시지는 HTTP POST로 전송하고, 스트리밍이 필요하면 SSE를 사용.
+      인증은 bearer 토큰, API 키, 커스텀 헤더 등 표준 HTTP 인증 방식을 지원하며,
+      MCP는 OAuth를 통해 인증 토큰을 획득하는 방식을 권장합니다.</li>
+  </ul>
+  <p>
+    전송 레이어는 통신 세부사항을 추상화하여, 모든 전송에서 동일한 JSON‑RPC 2.0 메시지 형식을 사용할 수 있게 합니다.
+  </p>
+
+  <h3 id="data-layer-protocol">데이터 레이어 프로토콜</h3>
+  <p>
+    MCP의 핵심은 MCP 클라이언트와 서버 사이의 스키마와 의미를 정의하는 것입니다.
+    특히 <a href="#primitives">프리미티브</a>는 서버가 어떤 컨텍스트를 공유하고 어떤 작업을 수행할 수 있는지를 규정하므로
+    개발자에게 가장 중요한 부분입니다.
+  </p>
+  <p>
+    MCP는 기본 RPC 프로토콜로 <a href="https://www.jsonrpc.org/">JSON‑RPC 2.0</a>을 사용합니다.
+    클라이언트와 서버는 서로 요청을 보내고 응답합니다. 응답이 필요 없는 경우에는 알림(notification)을 사용할 수 있습니다.
+  </p>
+
+  <h4 id="lifecycle-management">수명주기 관리</h4>
+  <p>
+    MCP는 <strong>상태를 유지하는(stateful) 프로토콜</strong>입니다.
+    다만 Streamable HTTP 전송을 사용하면 일부는 무상태(stateless)로 구성할 수 있습니다.
+    수명주기 관리의 목적은 클라이언트와 서버가 지원하는 <strong>기능(캡빌리티)</strong>을 협상하는 데 있습니다.
+    자세한 내용은 <a href="https://modelcontextprotocol.io/specification/latest/basic/lifecycle">사양의 수명주기</a>를 참고하세요.
+  </p>
+
+  <h4 id="primitives">프리미티브(Primitives)</h4>
+  <p>
+    프리미티브는 MCP에서 가장 중요한 개념입니다. 클라이언트와 서버가 서로에게 무엇을 제공할 수 있는지를 정의합니다.
+    이는 AI 애플리케이션에 어떤 종류의 컨텍스트를 공유할 수 있는지, 어떤 행동을 수행할 수 있는지를 규정합니다.
+  </p>
+  <p>서버가 노출할 수 있는 핵심 프리미티브는 다음 3가지입니다.</p>
+  <ul>
+    <li><strong>도구(Tools)</strong>: AI 애플리케이션이 호출해 실행하는 함수(예: 파일 조작, API 호출, DB 쿼리)</li>
+    <li><strong>리소스(Resources)</strong>: AI 애플리케이션에 제공되는 컨텍스트 데이터(예: 파일 내용, DB 레코드)</li>
+    <li><strong>프롬프트(Prompts)</strong>: 상호작용을 구조화하는 재사용 템플릿(예: 시스템 프롬프트, few‑shot 예시)</li>
+  </ul>
+  <p>
+    각 프리미티브는 발견을 위한 <code>*/list</code>, 조회를 위한 <code>*/get</code>,
+    필요 시 실행을 위한 <code>tools/call</code> 같은 메서드를 가집니다.
+    예를 들어 클라이언트는 <code>tools/list</code>로 도구 목록을 확인하고 특정 도구를 실행할 수 있습니다.
+  </p>
+  <p>
+    예를 들어 데이터베이스 컨텍스트를 제공하는 MCP 서버는
+    데이터베이스를 조회하는 도구, 스키마를 담은 리소스, 도구 사용 예시를 담은 프롬프트를 제공할 수 있습니다.
+  </p>
+  <p>
+    서버 프리미티브에 대한 자세한 내용은 <a href="https://modelcontextprotocol.io/docs/learn/server-concepts">서버 개념</a> 문서를 참고하세요.
+  </p>
+
+  <p>클라이언트가 제공할 수 있는 프리미티브도 정의되어 있어 더 풍부한 상호작용을 가능하게 합니다.</p>
+  <ul>
+    <li><strong>샘플링(Sampling)</strong>: 서버가 클라이언트의 AI 애플리케이션에 LLM 완성을 요청할 수 있습니다.
+      서버가 특정 모델 SDK에 종속되지 않으면서 모델 출력을 활용할 수 있게 합니다. (<code>sampling/complete</code>)</li>
+    <li><strong>요청 유도(Elicitation)</strong>: 서버가 사용자로부터 추가 정보를 요청할 수 있습니다. (<code>elicitation/request</code>)</li>
+    <li><strong>로깅(Logging)</strong>: 서버가 디버깅/모니터링을 위해 로그 메시지를 클라이언트에 보낼 수 있습니다.</li>
+  </ul>
+  <p>
+    클라이언트 프리미티브에 대한 자세한 내용은 <a href="https://modelcontextprotocol.io/docs/learn/client-concepts">클라이언트 개념</a>을 참고하세요.
+  </p>
+
+  <p>또한 교차 기능으로 다음과 같은 유틸리티 프리미티브가 있습니다.</p>
+  <ul>
+    <li><strong>작업(Tasks, Experimental)</strong>: 장시간 요청의 결과 조회/상태 추적을 가능하게 하는 실행 래퍼</li>
+  </ul>
+
+  <h4>알림(Notifications)</h4>
+  <p>
+    MCP는 실시간 업데이트를 위해 알림(notification)을 지원합니다.
+    예를 들어 서버의 사용 가능한 도구가 변경되면 서버는 도구 업데이트 알림을 보내 클라이언트에 변화를 알릴 수 있습니다.
+    알림은 JSON‑RPC 2.0 알림 메시지로 전송되며 응답을 요구하지 않습니다.
+  </p>
+
+  <h2>예시</h2>
+  <h3>데이터 레이어</h3>
+  <p>
+    이 섹션에서는 MCP 클라이언트‑서버 상호작용을 단계별로 보여줍니다.
+    수명주기, 도구 동작, 알림을 JSON‑RPC 2.0 메시지로 설명합니다.
+  </p>
+
+  <h4>1) 초기화(수명주기 관리)</h4>
+  <p>
+    MCP는 기능 협상(handshake)을 통해 수명주기 관리를 시작합니다.
+    클라이언트는 <code>initialize</code> 요청을 보내 연결을 수립하고 지원 기능을 협상합니다.
+  </p>
+
+  <pre><code class="language-json">{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "initialize",
+  "params": {
+    "protocolVersion": "2025-06-18",
+    "capabilities": {
+      "elicitation": {}
+    },
+    "clientInfo": {
+      "name": "example-client",
+      "version": "1.0.0"
+    }
+  }
+}
+</code></pre>
+
+  <pre><code class="language-json">{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "protocolVersion": "2025-06-18",
+    "capabilities": {
+      "tools": {
+        "listChanged": true
+      },
+      "resources": {}
+    },
+    "serverInfo": {
+      "name": "example-server",
+      "version": "1.0.0"
+    }
+  }
+}
+</code></pre>
+
+  <h4>초기화 교환의 의미</h4>
+  <p>초기화 과정은 다음과 같은 중요한 목적을 가집니다.</p>
+  <ol>
+    <li><strong>프로토콜 버전 협상</strong>: <code>protocolVersion</code>(예: "2025-06-18")을 통해 양측이 호환되는 버전을 사용함을 보장합니다. 호환 버전이 없으면 연결을 종료해야 합니다.</li>
+    <li><strong>기능 협상</strong>: 양측이 지원하는 기능을 교환합니다. 예시에서 클라이언트는 <code>elicitation</code>을, 서버는 <code>tools</code>와 <code>resources</code>를 지원합니다.</li>
+    <li><strong>식별 정보 교환</strong>: 클라이언트/서버 이름과 버전을 교환하여 진단과 호환성 검증에 활용합니다.</li>
+  </ol>
+
+  <h4>2) 도구 탐색(프리미티브)</h4>
+  <p>
+    연결이 성립되면 클라이언트는 <code>tools/list</code> 요청으로 서버가 제공하는 도구를 탐색할 수 있습니다.
+    이는 사용 가능한 도구를 파악한 뒤에 실행하기 위한 MCP의 핵심 메커니즘입니다.
+  </p>
+
+  <pre><code class="language-json">{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "method": "tools/list"
+}
+</code></pre>
+
+  <pre><code class="language-json">{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "result": {
+    "tools": [
+      {
+        "name": "calculator_arithmetic",
+        "title": "Calculator",
+        "description": "Perform mathematical calculations including basic arithmetic, trigonometric functions, and algebraic operations",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "expression": {
+              "type": "string",
+              "description": "Mathematical expression to evaluate (e.g., '2 + 3 * 4', 'sin(30)', 'sqrt(16)')"
+            }
+          },
+          "required": ["expression"]
+        }
+      },
+      {
+        "name": "weather_current",
+        "title": "Weather Information",
+        "description": "Get current weather information for any location worldwide",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "location": {
+              "type": "string",
+              "description": "City name, address, or coordinates (latitude,longitude)"
+            },
+            "units": {
+              "type": "string",
+              "enum": ["metric", "imperial", "kelvin"],
+              "description": "Temperature units to use in response",
+              "default": "metric"
+            }
+          },
+          "required": ["location"]
+        }
+      }
+    ]
+  }
+}
+</code></pre>
+
+  <h4>도구 탐색 요청 이해하기</h4>
+  <p><code>tools/list</code> 요청은 파라미터가 없는 단순한 요청입니다.</p>
+
+  <h4>도구 탐색 응답 이해하기</h4>
+  <p>
+    응답의 <code>tools</code> 배열에는 각 도구에 대한 상세 메타데이터가 포함됩니다.
+    이 배열 구조 덕분에 서버는 여러 도구를 동시에 노출하면서도 기능 간 경계를 명확히 유지할 수 있습니다.
+  </p>
+  <p>각 도구 객체에는 다음과 같은 핵심 필드가 포함됩니다.</p>
+  <ul>
+    <li><strong><code>name</code></strong>: 서버 네임스페이스 내에서 도구를 식별하는 고유 ID입니다.
+      도구 실행의 기본 키로 사용되며, 예시처럼 명확한 네이밍을 권장합니다(<code>calculator_arithmetic</code>).</li>
+    <li><strong><code>title</code></strong>: 사용자에게 표시할 수 있는 사람이 읽기 쉬운 도구 이름입니다.</li>
+    <li><strong><code>description</code></strong>: 도구의 기능과 사용 시점을 설명합니다.</li>
+    <li><strong><code>inputSchema</code></strong>: 입력 파라미터를 정의하는 JSON Schema입니다.
+      타입 검증과 필수/선택 파라미터 문서화를 가능하게 합니다.</li>
+  </ul>
+
+  <h4>AI 애플리케이션에서의 동작</h4>
+  <p>
+    AI 애플리케이션은 연결된 모든 MCP 서버에서 도구를 가져와 하나의 통합 레지스트리로 합칩니다.
+    이 레지스트리는 LLM이 수행 가능한 작업을 이해하고 대화 중 자동으로 도구 호출을 생성하는 데 사용됩니다.
+  </p>
+
+  <pre><code class="language-python"># AI 애플리케이션 도구 탐색 예시(의사 코드)
+# MCP Python SDK 패턴을 사용한 의사 코드
+available_tools = []
+for session in app.mcp_server_sessions():
+    tools_response = await session.list_tools()
+    available_tools.extend(tools_response.tools)
+conversation.register_available_tools(available_tools)
+</code></pre>
+
+  <h4>3) 도구 실행(프리미티브)</h4>
+  <p>
+    클라이언트는 <code>tools/call</code>로 도구를 실행할 수 있습니다.
+    이는 도구 탐색 후 실제로 도구를 호출하는 과정을 보여줍니다.
+  </p>
+
+  <h4>도구 실행 요청 이해하기</h4>
+  <p>
+    <code>tools/call</code> 요청은 타입 안정성과 명확한 통신을 위해 구조화된 형식을 사용합니다.
+    여기서는 탐색 응답에서 받은 정확한 도구 이름(<code>weather_current</code>)을 사용합니다.
+  </p>
+
+  <pre><code class="language-json">{
+  "jsonrpc": "2.0",
+  "id": 3,
+  "method": "tools/call",
+  "params": {
+    "name": "weather_current",
+    "arguments": {
+      "location": "San Francisco",
+      "units": "imperial"
+    }
+  }
+}
+</code></pre>
+
+  <pre><code class="language-json">{
+  "jsonrpc": "2.0",
+  "id": 3,
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Current weather in San Francisco: 68°F, partly cloudy with light winds from the west at 8 mph. Humidity: 65%"
+      }
+    ]
+  }
+}
+</code></pre>
+
+  <h4>도구 실행의 핵심 요소</h4>
+  <p>요청 구조에는 다음과 같은 중요한 구성 요소가 있습니다.</p>
+  <ol>
+    <li><strong><code>name</code></strong>: 탐색 응답의 도구 이름(<code>weather_current</code>)과 정확히 일치해야 합니다. 그래야 서버가 실행할 도구를 식별할 수 있습니다.</li>
+    <li><strong><code>arguments</code></strong>: 도구의 <code>inputSchema</code>에 정의된 입력 파라미터입니다.
+      이 예시에서는 <code>location</code>(필수)과 <code>units</code>(선택, 지정하지 않으면 기본값은 <code>metric</code>)가 있습니다.</li>
+    <li><strong>JSON‑RPC 구조</strong>: 요청‑응답을 매칭하기 위한 고유 <code>id</code>를 포함하는 표준 JSON‑RPC 2.0 형식을 사용합니다.</li>
+  </ol>
+
+  <h4>도구 실행 응답 이해하기</h4>
+  <p>MCP의 유연한 콘텐츠 시스템을 보여주는 응답입니다.</p>
+  <ol>
+    <li><strong><code>content</code> 배열</strong>: 텍스트, 이미지, 리소스 등 다양한 형식의 결과를 담을 수 있습니다.</li>
+    <li><strong>콘텐츠 타입</strong>: 각 항목은 <code>type</code> 필드를 갖습니다. 예시에서는 <code>text</code>가 일반 텍스트를 의미합니다.</li>
+    <li><strong>구조화된 출력</strong>: 응답은 AI 애플리케이션이 LLM 컨텍스트로 활용할 수 있는 정보를 제공합니다.</li>
+  </ol>
+  <p>
+    이 실행 패턴은 AI 애플리케이션이 서버 기능을 동적으로 호출하고,
+    대화 흐름에 통합 가능한 구조화된 응답을 받게 해줍니다.
+  </p>
+
+  <h4>AI 애플리케이션에서의 동작</h4>
+  <p>
+    대화 중 LLM이 도구 사용을 결정하면, AI 애플리케이션은 도구 호출을 가로채 해당 MCP 서버로 전달하고 실행합니다.
+    실행 결과는 다시 LLM에 반환되어 실시간 데이터와 외부 액션을 활용할 수 있게 합니다.
+  </p>
+
+  <pre><code class="language-python"># AI 애플리케이션 도구 실행 예시(의사 코드)
+async def handle_tool_call(conversation, tool_name, arguments):
+    session = app.find_mcp_session_for_tool(tool_name)
+    result = await session.call_tool(tool_name, arguments)
+    conversation.add_tool_result(result.content)
+</code></pre>
+
+  <h4>4) 실시간 업데이트(알림)</h4>
+  <p>
+    MCP는 서버가 요청 없이도 변경 사항을 알릴 수 있도록 실시간 알림을 지원합니다.
+    이는 MCP 연결을 동기화되고 반응적으로 유지하는 핵심 기능입니다.
+  </p>
+
+  <h4>도구 목록 변경 알림 이해하기</h4>
+  <p>
+    서버의 도구 목록이 변경되면(새 도구 추가, 기존 도구 수정, 일시적 사용 불가 등)
+    서버는 연결된 클라이언트에게 선제적으로 알림을 보낼 수 있습니다.
+  </p>
+
+  <pre><code class="language-json">{
+  "jsonrpc": "2.0",
+  "method": "notifications/tools/list_changed"
+}
+</code></pre>
+
+  <h4>MCP 알림의 핵심 특징</h4>
+  <ol>
+    <li><strong>응답 불필요</strong>: 알림에는 <code>id</code> 필드가 없습니다. JSON‑RPC 2.0 알림 규칙상 응답을 기대하지 않습니다.</li>
+    <li><strong>기능 기반</strong>: 초기화 단계에서 도구 기능에 <code>"listChanged": true</code>를 선언한 서버만 이 알림을 보냅니다.</li>
+    <li><strong>이벤트 기반</strong>: 서버 내부 상태 변화에 따라 알림을 전송하므로 연결이 동적으로 유지됩니다.</li>
+  </ol>
+
+  <h4>클라이언트의 알림 처리</h4>
+  <p>
+    클라이언트는 알림을 받으면 보통 최신 도구 목록을 다시 요청합니다.
+    이 갱신 사이클 덕분에 클라이언트는 항상 최신 도구 정보를 유지할 수 있습니다.
+  </p>
+
+  <pre><code class="language-json">{
+  "jsonrpc": "2.0",
+  "id": 4,
+  "method": "tools/list"
+}
+</code></pre>
+
+  <h4>알림이 중요한 이유</h4>
+  <ol>
+    <li><strong>동적 환경 대응</strong>: 서버 상태, 외부 의존성, 사용자 권한에 따라 도구가 달라질 수 있습니다.</li>
+    <li><strong>효율성</strong>: 클라이언트가 주기적으로 폴링할 필요 없이 변경 시점에 알림을 받습니다.</li>
+    <li><strong>일관성</strong>: 서버가 제공하는 기능에 대한 정보를 항상 최신으로 유지합니다.</li>
+    <li><strong>실시간 협업</strong>: 변화하는 컨텍스트에 즉시 반응하는 AI 애플리케이션을 가능하게 합니다.</li>
+  </ol>
+
+  <p>
+    이 알림 패턴은 도구뿐 아니라 MCP의 다른 프리미티브에도 확장되어
+    클라이언트‑서버 간 실시간 동기화를 전반적으로 지원합니다.
+  </p>
+
+  <h4>AI 애플리케이션에서의 동작</h4>
+  <p>
+    AI 애플리케이션은 도구 변경 알림을 받으면 즉시 도구 레지스트리를 갱신하고
+    LLM이 사용할 수 있는 기능을 업데이트합니다. 활성 대화가 있다면
+    새 기능을 즉시 사용할 수 있도록 LLM에 알립니다.
+  </p>
+
+  <pre><code class="language-python"># AI 애플리케이션 알림 처리 예시(의사 코드)
+async def handle_tools_changed_notification(session):
+    tools_response = await session.list_tools()
+    app.update_available_tools(session, tools_response.tools)
+    if app.conversation.is_active():
+        app.conversation.notify_llm_of_new_capabilities()
+</code></pre>
+</body>
+</html>
