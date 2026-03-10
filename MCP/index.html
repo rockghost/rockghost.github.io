@@ -74,6 +74,13 @@
       display: grid;
       gap: 6px;
     }
+    .subnav {
+      list-style: none;
+      padding: 0 0 0 14px;
+      margin: 6px 0 0;
+      display: grid;
+      gap: 6px;
+    }
     .nav a, .nav span {
       display: block;
       text-decoration: none;
@@ -82,8 +89,22 @@
       padding: 8px 10px;
       border-radius: 10px;
     }
+    .subnav a {
+      display: block;
+      text-decoration: none;
+      color: var(--link);
+      font-size: 13px;
+      padding: 7px 10px;
+      border-radius: 10px;
+    }
     .nav a:hover { color: var(--link-hover); }
+    .subnav a:hover { color: var(--link-hover); }
     .nav .active {
+      background: var(--pill);
+      color: var(--pill-text);
+      font-weight: 600;
+    }
+    .subnav .active {
       background: var(--pill);
       color: var(--pill-text);
       font-weight: 600;
@@ -157,7 +178,13 @@
           <li><a href="08_build-server.html" target="doc">Build an MCP server</a></li>
           <li><a href="09_build-client.html" target="doc">Build an MCP client</a></li>
           <li><a href="10_sdks.html" target="doc">SDKs</a></li>
-          <li><span class="disabled">Security <span class="caret">›</span></span></li>
+          <li>
+            <span>Security <span class="caret">›</span></span>
+            <ul class="subnav">
+              <li><a href="12_understanding-authorization.html" target="doc">Understanding Authorization in MCP</a></li>
+              <li><a href="13_security-best-practices.html" target="doc">Security Best Practices</a></li>
+            </ul>
+          </li>
         </ul>
       </div>
 
