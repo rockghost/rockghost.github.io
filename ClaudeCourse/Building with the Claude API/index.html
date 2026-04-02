@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Building with the Claude API</title>
+<title>Anthropic API로 Claude 활용하기</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Source Serif 4', 'Georgia', serif; display: flex; height: 100vh; overflow: hidden; background: #faf9f5; }
 
-/* Left sidebar */
 .sidebar {
   width: 320px; min-width: 320px; height: 100vh;
   background: #faf9f5; color: #141413;
   overflow-y: auto; border-right: 1px solid #d5d5d5;
-  display: flex; flex-direction: column;
-  padding-bottom: 60px;
+  display: flex; flex-direction: column; padding-bottom: 60px;
   transition: width 0.25s ease, min-width 0.25s ease;
 }
 .sidebar.collapsed {
@@ -45,7 +45,7 @@ body { font-family: 'Source Serif 4', 'Georgia', serif; display: flex; height: 1
 }
 
 .sidebar .lesson {
-  display: flex; align-items: center; gap: 10px;
+  display: flex; align-items: center;
   padding: 10px 16px; color: #141413; text-decoration: none;
   font-size: 16px; font-weight: 400;
   letter-spacing: -0.015em; line-height: 1.4;
@@ -54,27 +54,12 @@ body { font-family: 'Source Serif 4', 'Georgia', serif; display: flex; height: 1
 .sidebar .lesson:hover { background: #DEDCD1; }
 .sidebar .lesson.active { font-weight: 500; background: #DEDCD1; }
 
-.lesson .icon {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0;
-  border: 2px solid #5a697c; font-size: 0;
-}
-.lesson .icon.checked {
-  background: #5a697c; border-color: #5a697c;
-}
-.lesson .icon.checked::after {
-  content: ''; display: block; width: 6px; height: 10px;
-  border: solid #fff; border-width: 0 2px 2px 0;
-  transform: rotate(45deg); margin-top: -2px;
-}
-
 .sidebar .no-file {
-  display: flex; align-items: center; gap: 10px;
+  display: flex; align-items: center;
   padding: 10px 16px; color: #a0a0a0; font-size: 16px;
   letter-spacing: -0.015em; line-height: 1.4;
 }
 
-/* Right content */
 .content {
   flex: 1; height: 100vh; background: #faf9f5;
   display: flex; flex-direction: column;
@@ -103,127 +88,120 @@ body { font-family: 'Source Serif 4', 'Georgia', serif; display: flex; height: 1
   flex: 1; font-weight: 500; color: #141413; font-size: 15px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
-iframe {
-  flex: 1; border: none; width: 100%; background: #fff;
-}
-.welcome {
-  flex: 1; display: flex; align-items: center; justify-content: center;
-  flex-direction: column; color: #7a7a6e; gap: 0.8rem;
-}
-.welcome h2 { color: #141413; font-size: 1.6rem; font-weight: 600; }
-.welcome p { font-size: 1rem; font-family: -apple-system, sans-serif; }
+iframe { flex: 1; border: none; width: 100%; background: #fff; }
 </style>
 </head>
 <body>
 
 <nav class="sidebar">
-  <div class="course-title">Building with the Claude API</div>
-  <a class="course-overview" href="#" onclick="return false;">Course Overview</a>
+  <div class="course-title">Anthropic API로 Claude 활용하기</div>
+  <a class="course-overview" href="#" onclick="return false;">강의 개요</a>
 
-  <div class="section-title">Introduction</div>
-  <span class="no-file">Welcome to the course</span>
-  <span class="no-file">Overview of Claude models</span>
-
-  <div class="section-title">Accessing Claude with the API</div>
-  <a class="lesson" href="Accessing the API.html" target="viewer" onclick="setActive(this)">Accessing the API</a>
-  <a class="lesson" href="Getting an API key.html" target="viewer" onclick="setActive(this)">Getting an API key</a>
-  <a class="lesson" href="Making a request.html" target="viewer" onclick="setActive(this)">Making a request</a>
-  <a class="lesson" href="Multi-Turn conversations.html" target="viewer" onclick="setActive(this)">Multi-Turn conversations</a>
-  <a class="lesson" href="System prompts.html" target="viewer" onclick="setActive(this)">System prompts</a>
+  <div class="section-title">소개</div>
+  <span class="no-file">강의에 오신 것을 환영합니다</span>
+  <div class="section-title">Anthropic 개요</div>
+  <span class="no-file">Claude 모델 개요</span>
+  <div class="section-title">API로 Claude 접근하기</div>
+  <a class="lesson" href="Accessing the API.html" target="viewer" onclick="setActive(this)">API 접근하기</a>
+  <a class="lesson" href="Getting an API key.html" target="viewer" onclick="setActive(this)">API 키 발급받기</a>
+  <a class="lesson" href="Making a request.html" target="viewer" onclick="setActive(this)">요청 보내기</a>
+  <a class="lesson" href="Multi-Turn conversations.html" target="viewer" onclick="setActive(this)">멀티턴 대화</a>
+  <span class="no-file">채팅 실습</span>
+  <a class="lesson" href="System prompts.html" target="viewer" onclick="setActive(this)">시스템 프롬프트</a>
+  <span class="no-file">시스템 프롬프트 실습</span>
   <a class="lesson" href="Temperature.html" target="viewer" onclick="setActive(this)">Temperature</a>
-  <a class="lesson" href="Response streaming.html" target="viewer" onclick="setActive(this)">Response streaming</a>
-  <a class="lesson" href="Controlling model output.html" target="viewer" onclick="setActive(this)">Controlling model output</a>
-  <a class="lesson" href="Structured data.html" target="viewer" onclick="setActive(this)">Structured data</a>
-
-  <div class="section-title">Prompt evaluation</div>
-  <a class="lesson" href="Prompt evaluation.html" target="viewer" onclick="setActive(this)">Prompt evaluation</a>
-  <a class="lesson" href="A typical eval workflow.html" target="viewer" onclick="setActive(this)">A typical eval workflow</a>
-  <a class="lesson" href="Generating test datasets.html" target="viewer" onclick="setActive(this)">Generating test datasets</a>
-  <a class="lesson" href="Running the eval.html" target="viewer" onclick="setActive(this)">Running the eval</a>
-  <a class="lesson" href="Model based grading.html" target="viewer" onclick="setActive(this)">Model based grading</a>
-  <a class="lesson" href="Code based grading.html" target="viewer" onclick="setActive(this)">Code based grading</a>
-
-  <div class="section-title">Prompt engineering techniques</div>
-  <a class="lesson" href="Prompt engineering.html" target="viewer" onclick="setActive(this)">Prompt engineering</a>
-  <a class="lesson" href="Being clear and direct.html" target="viewer" onclick="setActive(this)">Being clear and direct</a>
-  <a class="lesson" href="Being specific.html" target="viewer" onclick="setActive(this)">Being specific</a>
-  <a class="lesson" href="Structure with XML tags.html" target="viewer" onclick="setActive(this)">Structure with XML tags</a>
-  <a class="lesson" href="Providing examples.html" target="viewer" onclick="setActive(this)">Providing examples</a>
-
-  <div class="section-title">Tool use with Claude</div>
-  <a class="lesson" href="Introducing tool use.html" target="viewer" onclick="setActive(this)">Introducing tool use</a>
-  <a class="lesson" href="Project overview.html" target="viewer" onclick="setActive(this)">Project overview</a>
-  <a class="lesson" href="Tool functions.html" target="viewer" onclick="setActive(this)">Tool functions</a>
-  <a class="lesson" href="Tool schemas.html" target="viewer" onclick="setActive(this)">Tool schemas</a>
-  <a class="lesson" href="Handling message blocks.html" target="viewer" onclick="setActive(this)">Handling message blocks</a>
-  <a class="lesson" href="Sending tool results.html" target="viewer" onclick="setActive(this)">Sending tool results</a>
-  <a class="lesson" href="Multi-turn conversations with tools.html" target="viewer" onclick="setActive(this)">Multi-turn conversations with tools</a>
-  <a class="lesson" href="Implementing multiple turns.html" target="viewer" onclick="setActive(this)">Implementing multiple turns</a>
-  <a class="lesson" href="Using multiple tools.html" target="viewer" onclick="setActive(this)">Using multiple tools</a>
-  <a class="lesson" href="The batch tool.html" target="viewer" onclick="setActive(this)">The batch tool</a>
-  <a class="lesson" href="Tools for structured data.html" target="viewer" onclick="setActive(this)">Tools for structured data</a>
-  <a class="lesson" href="Fine grained tool calling.html" target="viewer" onclick="setActive(this)">Fine grained tool calling</a>
-  <a class="lesson" href="The text edit tool.html" target="viewer" onclick="setActive(this)">The text edit tool</a>
-  <a class="lesson" href="The web search tool.html" target="viewer" onclick="setActive(this)">The web search tool</a>
-
-  <div class="section-title">Retrieval Augmented Generation</div>
-  <a class="lesson" href="Introducing Retrieval Augmented Generation.html" target="viewer" onclick="setActive(this)">Introducing Retrieval Augmented Generation</a>
-  <a class="lesson" href="Text chunking strategies.html" target="viewer" onclick="setActive(this)">Text chunking strategies</a>
-  <a class="lesson" href="Text embeddings.html" target="viewer" onclick="setActive(this)">Text embeddings</a>
-  <a class="lesson" href="The full RAG flow.html" target="viewer" onclick="setActive(this)">The full RAG flow</a>
-  <a class="lesson" href="Implementing the RAG flow.html" target="viewer" onclick="setActive(this)">Implementing the RAG flow</a>
-  <a class="lesson" href="BM25 lexical search.html" target="viewer" onclick="setActive(this)">BM25 lexical search</a>
-  <a class="lesson" href="A Multi-Index RAG pipeline.html" target="viewer" onclick="setActive(this)">A Multi-Index RAG pipeline</a>
-  <a class="lesson" href="Reranking results.html" target="viewer" onclick="setActive(this)">Reranking results</a>
-  <a class="lesson" href="Contextual retrieval.html" target="viewer" onclick="setActive(this)">Contextual retrieval</a>
-
-  <div class="section-title">Features of Claude</div>
-  <a class="lesson" href="Extended thinking.html" target="viewer" onclick="setActive(this)">Extended thinking</a>
-  <a class="lesson" href="Image support.html" target="viewer" onclick="setActive(this)">Image support</a>
-  <a class="lesson" href="PDF support.html" target="viewer" onclick="setActive(this)">PDF support</a>
-  <a class="lesson" href="Citations.html" target="viewer" onclick="setActive(this)">Citations</a>
-  <a class="lesson" href="Prompt caching.html" target="viewer" onclick="setActive(this)">Prompt caching</a>
-  <a class="lesson" href="Rules of prompt caching.html" target="viewer" onclick="setActive(this)">Rules of prompt caching</a>
-  <a class="lesson" href="Prompt caching in action.html" target="viewer" onclick="setActive(this)">Prompt caching in action</a>
-  <a class="lesson" href="Code execution and the Files API.html" target="viewer" onclick="setActive(this)">Code execution and the Files API</a>
-
+  <span class="no-file">강의 만족도 설문</span>
+  <a class="lesson" href="Response streaming.html" target="viewer" onclick="setActive(this)">응답 스트리밍</a>
+  <a class="lesson" href="Structured data.html" target="viewer" onclick="setActive(this)">구조화된 데이터</a>
+  <span class="no-file">구조화된 데이터 실습</span>
+  <span class="no-file">API로 Claude 접근하기 퀴즈</span>
+  <div class="section-title">프롬프트 평가</div>
+  <a class="lesson" href="Prompt evaluation.html" target="viewer" onclick="setActive(this)">프롬프트 평가</a>
+  <a class="lesson" href="A typical eval workflow.html" target="viewer" onclick="setActive(this)">일반적인 평가 워크플로우</a>
+  <a class="lesson" href="Generating test datasets.html" target="viewer" onclick="setActive(this)">테스트 데이터셋 생성</a>
+  <a class="lesson" href="Running the eval.html" target="viewer" onclick="setActive(this)">평가 실행하기</a>
+  <a class="lesson" href="Model based grading.html" target="viewer" onclick="setActive(this)">모델 기반 채점</a>
+  <a class="lesson" href="Code based grading.html" target="viewer" onclick="setActive(this)">코드 기반 채점</a>
+  <span class="no-file">프롬프트 평가 실습</span>
+  <span class="no-file">프롬프트 평가 퀴즈</span>
+  <div class="section-title">프롬프트 엔지니어링 기법</div>
+  <a class="lesson" href="Prompt engineering.html" target="viewer" onclick="setActive(this)">프롬프트 엔지니어링</a>
+  <a class="lesson" href="Being clear and direct.html" target="viewer" onclick="setActive(this)">명확하고 직접적으로 작성하기</a>
+  <a class="lesson" href="Being specific.html" target="viewer" onclick="setActive(this)">구체적으로 작성하기</a>
+  <a class="lesson" href="Structure with XML tags.html" target="viewer" onclick="setActive(this)">XML 태그로 구조화하기</a>
+  <a class="lesson" href="Providing examples.html" target="viewer" onclick="setActive(this)">예시 제공하기</a>
+  <span class="no-file">프롬프트 작성 실습</span>
+  <span class="no-file">프롬프트 엔지니어링 기법 퀴즈</span>
+  <div class="section-title">Claude의 도구 사용</div>
+  <a class="lesson" href="Introducing tool use.html" target="viewer" onclick="setActive(this)">도구 사용 소개</a>
+  <a class="lesson" href="Project overview.html" target="viewer" onclick="setActive(this)">프로젝트 개요</a>
+  <a class="lesson" href="Tool functions.html" target="viewer" onclick="setActive(this)">도구 함수</a>
+  <a class="lesson" href="Tool schemas.html" target="viewer" onclick="setActive(this)">도구 스키마</a>
+  <a class="lesson" href="Handling message blocks.html" target="viewer" onclick="setActive(this)">메시지 블록 처리</a>
+  <a class="lesson" href="Sending tool results.html" target="viewer" onclick="setActive(this)">도구 결과 전송</a>
+  <a class="lesson" href="Multi-turn conversations with tools.html" target="viewer" onclick="setActive(this)">도구를 활용한 멀티턴 대화</a>
+  <a class="lesson" href="Implementing multiple turns.html" target="viewer" onclick="setActive(this)">멀티턴 구현하기</a>
+  <a class="lesson" href="Using multiple tools.html" target="viewer" onclick="setActive(this)">여러 도구 사용하기</a>
+  <a class="lesson" href="Fine grained tool calling.html" target="viewer" onclick="setActive(this)">세밀한 도구 호출</a>
+  <a class="lesson" href="The text edit tool.html" target="viewer" onclick="setActive(this)">텍스트 편집 도구</a>
+  <a class="lesson" href="The web search tool.html" target="viewer" onclick="setActive(this)">웹 검색 도구</a>
+  <span class="no-file">Claude의 도구 사용 퀴즈</span>
+  <div class="section-title">RAG와 에이전틱 검색</div>
+  <a class="lesson" href="Introducing Retrieval Augmented Generation.html" target="viewer" onclick="setActive(this)">Retrieval Augmented Generation 소개</a>
+  <a class="lesson" href="Text chunking strategies.html" target="viewer" onclick="setActive(this)">텍스트 청킹 전략</a>
+  <a class="lesson" href="Text embeddings.html" target="viewer" onclick="setActive(this)">텍스트 임베딩</a>
+  <a class="lesson" href="The full RAG flow.html" target="viewer" onclick="setActive(this)">전체 RAG 흐름</a>
+  <a class="lesson" href="Implementing the RAG flow.html" target="viewer" onclick="setActive(this)">RAG 흐름 구현하기</a>
+  <a class="lesson" href="BM25 lexical search.html" target="viewer" onclick="setActive(this)">BM25 어휘 검색</a>
+  <a class="lesson" href="A Multi-Index RAG pipeline.html" target="viewer" onclick="setActive(this)">멀티 인덱스 RAG 파이프라인</a>
+  <div class="section-title">Claude의 기능</div>
+  <a class="lesson" href="Extended thinking.html" target="viewer" onclick="setActive(this)">확장 사고</a>
+  <a class="lesson" href="Image support.html" target="viewer" onclick="setActive(this)">이미지 지원</a>
+  <a class="lesson" href="PDF support.html" target="viewer" onclick="setActive(this)">PDF 지원</a>
+  <a class="lesson" href="Citations.html" target="viewer" onclick="setActive(this)">인용</a>
+  <a class="lesson" href="Prompt caching.html" target="viewer" onclick="setActive(this)">프롬프트 캐싱</a>
+  <a class="lesson" href="Rules of prompt caching.html" target="viewer" onclick="setActive(this)">프롬프트 캐싱 규칙</a>
+  <a class="lesson" href="Prompt caching in action.html" target="viewer" onclick="setActive(this)">프롬프트 캐싱 실전</a>
+  <a class="lesson" href="Code execution and the Files API.html" target="viewer" onclick="setActive(this)">코드 실행과 Files API</a>
+  <span class="no-file">Claude의 기능 퀴즈</span>
   <div class="section-title">Model Context Protocol</div>
-  <a class="lesson" href="Introducing MCP.html" target="viewer" onclick="setActive(this)">Introducing MCP</a>
-  <a class="lesson" href="MCP clients.html" target="viewer" onclick="setActive(this)">MCP clients</a>
-  <a class="lesson" href="Project setup.html" target="viewer" onclick="setActive(this)">Project setup</a>
-  <a class="lesson" href="Defining tools with MCP.html" target="viewer" onclick="setActive(this)">Defining tools with MCP</a>
-  <a class="lesson" href="The server inspector.html" target="viewer" onclick="setActive(this)">The server inspector</a>
-  <a class="lesson" href="Implementing a client.html" target="viewer" onclick="setActive(this)">Implementing a client</a>
-  <a class="lesson" href="Defining resources.html" target="viewer" onclick="setActive(this)">Defining resources</a>
-  <a class="lesson" href="Accessing resources.html" target="viewer" onclick="setActive(this)">Accessing resources</a>
-  <a class="lesson" href="Defining prompts.html" target="viewer" onclick="setActive(this)">Defining prompts</a>
-  <a class="lesson" href="Prompts in the client.html" target="viewer" onclick="setActive(this)">Prompts in the client</a>
-
-  <div class="section-title">Anthropic apps</div>
-  <a class="lesson" href="Anthropic apps.html" target="viewer" onclick="setActive(this)">Anthropic apps</a>
-  <a class="lesson" href="Claude Code setup.html" target="viewer" onclick="setActive(this)">Claude Code setup</a>
-  <a class="lesson" href="Claude Code in action.html" target="viewer" onclick="setActive(this)">Claude Code in action</a>
-  <a class="lesson" href="Enhancements with MCP servers.html" target="viewer" onclick="setActive(this)">Enhancements with MCP servers</a>
-  <a class="lesson" href="Parallelizing Claude Code.html" target="viewer" onclick="setActive(this)">Parallelizing Claude Code</a>
-  <a class="lesson" href="Automated debugging.html" target="viewer" onclick="setActive(this)">Automated debugging</a>
-  <a class="lesson" href="Computer use.html" target="viewer" onclick="setActive(this)">Computer use</a>
-  <a class="lesson" href="How Computer use works.html" target="viewer" onclick="setActive(this)">How Computer use works</a>
-
-  <div class="section-title">Agents and workflows</div>
-  <a class="lesson" href="Agents and workflows.html" target="viewer" onclick="setActive(this)">Agents and workflows</a>
-  <a class="lesson" href="Parallelization workflows.html" target="viewer" onclick="setActive(this)">Parallelization workflows</a>
-  <a class="lesson" href="Chaining workflows.html" target="viewer" onclick="setActive(this)">Chaining workflows</a>
-  <a class="lesson" href="Routing workflows.html" target="viewer" onclick="setActive(this)">Routing workflows</a>
-  <a class="lesson" href="Agents and tools.html" target="viewer" onclick="setActive(this)">Agents and tools</a>
-  <a class="lesson" href="Environment inspection.html" target="viewer" onclick="setActive(this)">Environment inspection</a>
-  <a class="lesson" href="Workflows vs agents.html" target="viewer" onclick="setActive(this)">Workflows vs agents</a>
+  <a class="lesson" href="Introducing MCP.html" target="viewer" onclick="setActive(this)">MCP 소개</a>
+  <a class="lesson" href="MCP clients.html" target="viewer" onclick="setActive(this)">MCP 클라이언트</a>
+  <a class="lesson" href="Project setup.html" target="viewer" onclick="setActive(this)">프로젝트 설정</a>
+  <a class="lesson" href="Defining tools with MCP.html" target="viewer" onclick="setActive(this)">MCP로 도구 정의하기</a>
+  <a class="lesson" href="The server inspector.html" target="viewer" onclick="setActive(this)">서버 인스펙터</a>
+  <a class="lesson" href="Implementing a client.html" target="viewer" onclick="setActive(this)">클라이언트 구현하기</a>
+  <a class="lesson" href="Defining resources.html" target="viewer" onclick="setActive(this)">리소스 정의하기</a>
+  <a class="lesson" href="Accessing resources.html" target="viewer" onclick="setActive(this)">리소스 접근하기</a>
+  <a class="lesson" href="Defining prompts.html" target="viewer" onclick="setActive(this)">프롬프트 정의하기</a>
+  <a class="lesson" href="Prompts in the client.html" target="viewer" onclick="setActive(this)">클라이언트에서의 프롬프트</a>
+  <span class="no-file">MCP 복습</span>
+  <span class="no-file">Model Context Protocol 퀴즈</span>
+  <div class="section-title">Anthropic 앱 - Claude Code와 컴퓨터 사용</div>
+  <a class="lesson" href="Anthropic apps.html" target="viewer" onclick="setActive(this)">Anthropic 앱</a>
+  <a class="lesson" href="Claude Code setup.html" target="viewer" onclick="setActive(this)">Claude Code 설정</a>
+  <a class="lesson" href="Claude Code in action.html" target="viewer" onclick="setActive(this)">Claude Code 실전</a>
+  <a class="lesson" href="Enhancements with MCP servers.html" target="viewer" onclick="setActive(this)">MCP 서버로 기능 강화</a>
+  <div class="section-title">에이전트와 워크플로우</div>
+  <a class="lesson" href="Agents and workflows.html" target="viewer" onclick="setActive(this)">에이전트와 워크플로우</a>
+  <a class="lesson" href="Parallelization workflows.html" target="viewer" onclick="setActive(this)">병렬화 워크플로우</a>
+  <a class="lesson" href="Chaining workflows.html" target="viewer" onclick="setActive(this)">체이닝 워크플로우</a>
+  <a class="lesson" href="Routing workflows.html" target="viewer" onclick="setActive(this)">라우팅 워크플로우</a>
+  <a class="lesson" href="Agents and tools.html" target="viewer" onclick="setActive(this)">에이전트와 도구</a>
+  <a class="lesson" href="Environment inspection.html" target="viewer" onclick="setActive(this)">환경 점검</a>
+  <a class="lesson" href="Workflows vs agents.html" target="viewer" onclick="setActive(this)">워크플로우 vs 에이전트</a>
+  <span class="no-file">에이전트와 워크플로우 퀴즈</span>
+  <div class="section-title">최종 평가</div>
+  <span class="no-file">최종 평가</span>
+  <div class="section-title">마무리!</div>
+  <span class="no-file">강의 마무리</span>
 </nav>
 
 <main class="content">
   <div class="content-header">
-    <button class="sidebar-toggle" onclick="toggleSidebar()" title="메뉴 접기/펼치기">&#9776;</button>
-    <button class="nav-btn" onclick="navigate(-1)">&larr; Prev</button>
-    <button class="nav-btn" onclick="navigate(1)">Next &rarr;</button>
+    <button class="sidebar-toggle" onclick="toggleSidebar()" title="사이드바 토글">&#9776;</button>
+    <button class="nav-btn" onclick="navigate(-1)">&larr; 이전</button>
+    <button class="nav-btn" onclick="navigate(1)">다음 &rarr;</button>
     <span class="title" id="currentTitle"></span>
   </div>
   <iframe name="viewer" id="viewer" onload="onFrameLoad()"></iframe>
@@ -266,7 +244,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') navigate(1);
 });
 
-// Auto-load first lesson on page load
+// Auto-load first lesson
 if (links.length > 0) { links[0].click(); }
 </script>
 

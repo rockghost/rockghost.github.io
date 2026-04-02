@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -95,38 +95,38 @@ iframe { flex: 1; border: none; width: 100%; background: #fff; }
 
 <nav class="sidebar">
   <div class="course-title">Claude 101</div>
-  <a class="course-overview" href="#" onclick="return false;">Course Overview</a>
+  <a class="course-overview" href="#" onclick="return false;">코스 개요</a>
 
-  <div class="section-title">Meet Claude</div>
-  <a class="lesson" href="What is Claude？.html" target="viewer" onclick="setActive(this)">What is Claude?</a>
-  <a class="lesson" href="Your first conversation with Claude.html" target="viewer" onclick="setActive(this)">Your first conversation with Claude</a>
-  <a class="lesson" href="Getting better results.html" target="viewer" onclick="setActive(this)">Getting better results</a>
-  <a class="lesson" href="Claude desktop app： Chat, Cowork, Code.html" target="viewer" onclick="setActive(this)">Claude desktop app: Chat, Cowork, Code</a>
+  <div class="section-title">Claude 만나기</div>
+  <a class="lesson" href="What is Claude？.html" target="viewer" onclick="setActive(this)">Claude란 무엇인가요?</a>
+  <a class="lesson" href="Your first conversation with Claude.html" target="viewer" onclick="setActive(this)">Claude와의 첫 번째 대화</a>
+  <a class="lesson" href="Getting better results.html" target="viewer" onclick="setActive(this)">더 나은 결과 얻기</a>
+  <a class="lesson" href="Claude desktop app： Chat, Cowork, Code.html" target="viewer" onclick="setActive(this)">Claude 데스크탑 앱: 채팅, 협업, 코딩</a>
 
-  <div class="section-title">Organizing your work and knowledge</div>
-  <a class="lesson" href="Introduction to projects.html" target="viewer" onclick="setActive(this)">Introduction to projects</a>
-  <a class="lesson" href="Creating with artifacts.html" target="viewer" onclick="setActive(this)">Creating with artifacts</a>
-  <a class="lesson" href="Working with skills.html" target="viewer" onclick="setActive(this)">Working with skills</a>
+  <div class="section-title">업무와 지식 정리하기</div>
+  <a class="lesson" href="Introduction to projects.html" target="viewer" onclick="setActive(this)">프로젝트 소개</a>
+  <a class="lesson" href="Creating with artifacts.html" target="viewer" onclick="setActive(this)">아티팩트로 만들기</a>
+  <a class="lesson" href="Working with skills.html" target="viewer" onclick="setActive(this)">스킬 활용하기</a>
 
-  <div class="section-title">Expanding Claude's reach</div>
-  <a class="lesson" href="Connecting your tools.html" target="viewer" onclick="setActive(this)">Connecting your tools</a>
-  <a class="lesson" href="Enterprise search.html" target="viewer" onclick="setActive(this)">Enterprise search</a>
-  <a class="lesson" href="Research mode for deep dives.html" target="viewer" onclick="setActive(this)">Research mode for deep dives</a>
+  <div class="section-title">Claude의 활용 범위 확장하기</div>
+  <a class="lesson" href="Connecting your tools.html" target="viewer" onclick="setActive(this)">도구 연결하기</a>
+  <a class="lesson" href="Enterprise search.html" target="viewer" onclick="setActive(this)">엔터프라이즈 검색</a>
+  <a class="lesson" href="Research mode for deep dives.html" target="viewer" onclick="setActive(this)">심층 탐구를 위한 리서치 모드</a>
 
-  <div class="section-title">Putting it all together</div>
-  <a class="lesson" href="Claude in action： use-cases by role.html" target="viewer" onclick="setActive(this)">Claude in action: use-cases by role</a>
-  <a class="lesson" href="Other ways to work with Claude.html" target="viewer" onclick="setActive(this)">Other ways to work with Claude</a>
+  <div class="section-title">모두 합쳐보기</div>
+  <a class="lesson" href="Claude in action： use-cases by role.html" target="viewer" onclick="setActive(this)">실전 Claude: 역할별 활용 사례</a>
+  <a class="lesson" href="Other ways to work with Claude.html" target="viewer" onclick="setActive(this)">Claude와 함께하는 다른 방법들</a>
 
-  <div class="section-title">Conclusion &amp; certificate</div>
-  <a class="lesson" href="What's next？.html" target="viewer" onclick="setActive(this)">What's next?</a>
-  <span class="no-file">Certificate of completion</span>
+  <div class="section-title">마무리 &amp; 수료증</div>
+  <a class="lesson" href="What's next？.html" target="viewer" onclick="setActive(this)">다음 단계는?</a>
+  <span class="no-file">수료증</span>
 </nav>
 
 <main class="content">
   <div class="content-header">
-    <button class="sidebar-toggle" onclick="toggleSidebar()" title="메뉴 접기/펼치기">&#9776;</button>
-    <button class="nav-btn" onclick="navigate(-1)">&larr; Prev</button>
-    <button class="nav-btn" onclick="navigate(1)">Next &rarr;</button>
+    <button class="sidebar-toggle" onclick="toggleSidebar()" title="사이드바 열기/닫기">&#9776;</button>
+    <button class="nav-btn" onclick="navigate(-1)">&larr; 이전</button>
+    <button class="nav-btn" onclick="navigate(1)">다음 &rarr;</button>
     <span class="title" id="currentTitle"></span>
   </div>
   <iframe name="viewer" id="viewer" onload="onFrameLoad()"></iframe>

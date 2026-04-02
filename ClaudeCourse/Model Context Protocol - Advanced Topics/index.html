@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Model Context Protocol: Advanced Topics - Anthropic Academy</title>
+<title>Model Context Protocol - 고급 주제</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Source Serif 4', 'Georgia', serif; display: flex; height: 100vh; overflow: hidden; background: #faf9f5; }
 
-/* Left sidebar */
 .sidebar {
   width: 320px; min-width: 320px; height: 100vh;
   background: #faf9f5; color: #141413;
   overflow-y: auto; border-right: 1px solid #d5d5d5;
-  display: flex; flex-direction: column;
-  padding-bottom: 60px;
+  display: flex; flex-direction: column; padding-bottom: 60px;
   transition: width 0.25s ease, min-width 0.25s ease;
 }
 .sidebar.collapsed {
@@ -60,7 +60,6 @@ body { font-family: 'Source Serif 4', 'Georgia', serif; display: flex; height: 1
   letter-spacing: -0.015em; line-height: 1.4;
 }
 
-/* Right content */
 .content {
   flex: 1; height: 100vh; background: #faf9f5;
   display: flex; flex-direction: column;
@@ -89,46 +88,44 @@ body { font-family: 'Source Serif 4', 'Georgia', serif; display: flex; height: 1
   flex: 1; font-weight: 500; color: #141413; font-size: 15px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
-iframe {
-  flex: 1; border: none; width: 100%; background: #fff;
-}
+iframe { flex: 1; border: none; width: 100%; background: #fff; }
 </style>
 </head>
 <body>
 
 <nav class="sidebar">
-  <div class="course-title">Model Context Protocol: Advanced Topics</div>
-  <a class="course-overview" href="#" onclick="return false;">Course Overview</a>
+  <div class="course-title">Model Context Protocol - 고급 주제</div>
+  <a class="course-overview" href="#" onclick="return false;">강좌 개요</a>
 
-  <div class="section-title">Introduction</div>
-  <span class="no-file">Let's get started!</span>
+  <div class="section-title">소개</div>
+  <span class="no-file">시작하기!</span>
 
-  <div class="section-title">Core MCP features</div>
-  <a class="lesson" href="Sampling.html" target="viewer" onclick="setActive(this)">Sampling</a>
-  <span class="no-file">Sampling walkthrough</span>
-  <a class="lesson" href="Log and progress notifications.html" target="viewer" onclick="setActive(this)">Log and progress notifications</a>
-  <span class="no-file">Notifications walkthrough</span>
+  <div class="section-title">핵심 MCP 기능</div>
+  <a class="lesson" href="Sampling.html" target="viewer" onclick="setActive(this)">샘플링</a>
+  <span class="no-file">샘플링 연습</span>
+  <a class="lesson" href="Log and progress notifications.html" target="viewer" onclick="setActive(this)">로그 및 진행 상황 알림</a>
+  <span class="no-file">알림 연습</span>
   <a class="lesson" href="Roots.html" target="viewer" onclick="setActive(this)">Roots</a>
-  <span class="no-file">Roots walkthrough</span>
-  <span class="no-file">Survey</span>
+  <span class="no-file">Roots 연습</span>
+  <span class="no-file">설문조사</span>
 
-  <div class="section-title">Transports and communication</div>
-  <a class="lesson" href="JSON message types.html" target="viewer" onclick="setActive(this)">JSON message types</a>
-  <a class="lesson" href="The STDIO transport.html" target="viewer" onclick="setActive(this)">The STDIO transport</a>
-  <a class="lesson" href="The StreamableHTTP transport.html" target="viewer" onclick="setActive(this)">The StreamableHTTP transport</a>
-  <a class="lesson" href="StreamableHTTP in depth.html" target="viewer" onclick="setActive(this)">StreamableHTTP in depth</a>
-  <a class="lesson" href="State and the StreamableHTTP transport.html" target="viewer" onclick="setActive(this)">State and the StreamableHTTP transport</a>
+  <div class="section-title">전송과 통신</div>
+  <a class="lesson" href="JSON message types.html" target="viewer" onclick="setActive(this)">JSON 메시지 유형</a>
+  <a class="lesson" href="The STDIO transport.html" target="viewer" onclick="setActive(this)">STDIO 전송</a>
+  <a class="lesson" href="The StreamableHTTP transport.html" target="viewer" onclick="setActive(this)">StreamableHTTP 전송</a>
+  <a class="lesson" href="StreamableHTTP in depth.html" target="viewer" onclick="setActive(this)">StreamableHTTP 심층 분석</a>
+  <a class="lesson" href="State and the StreamableHTTP transport.html" target="viewer" onclick="setActive(this)">상태와 StreamableHTTP 전송</a>
 
-  <div class="section-title">Assessment and next steps</div>
-  <span class="no-file">Assessment on MCP concepts</span>
-  <span class="no-file">Wrapping up</span>
+  <div class="section-title">평가 및 다음 단계</div>
+  <span class="no-file">MCP 개념 평가</span>
+  <span class="no-file">마무리</span>
 </nav>
 
 <main class="content">
   <div class="content-header">
     <button class="sidebar-toggle" onclick="toggleSidebar()" title="메뉴 접기/펼치기">&#9776;</button>
-    <button class="nav-btn" onclick="navigate(-1)">&larr; Prev</button>
-    <button class="nav-btn" onclick="navigate(1)">Next &rarr;</button>
+    <button class="nav-btn" onclick="navigate(-1)">&larr; 이전</button>
+    <button class="nav-btn" onclick="navigate(1)">다음 &rarr;</button>
     <span class="title" id="currentTitle"></span>
   </div>
   <iframe name="viewer" id="viewer" onload="onFrameLoad()"></iframe>
@@ -171,7 +168,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') navigate(1);
 });
 
-// Auto-load first lesson on page load
+// Auto-load first lesson
 if (links.length > 0) { links[0].click(); }
 </script>
 

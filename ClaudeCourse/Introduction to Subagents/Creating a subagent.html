@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html class="js no-htmlimports no-flash sizes no-proximity transferables adownload no-ambientlight no-applicationcache audio audioloop webaudio no-batteryapi no-battery-api no-lowbattery blobconstructor blob-constructor canvas canvasblending todataurljpeg todataurlpng todataurlwebp canvaswinding canvastext contenteditable no-contextmenu cookies cors customelements crypto getrandomvalues cssall cssanimations appearance backdropfilter backgroundblendmode backgroundcliptext bgpositionshorthand bgpositionxy bgrepeatround bgrepeatspace backgroundsize bgsizecover borderimage borderradius boxshadow boxsizing csscalc checked csschunit csscolumns csscolumns-width csscolumns-span csscolumns-fill csscolumns-gap csscolumns-rule csscolumns-rulecolor csscolumns-rulestyle csscolumns-rulewidth csscolumns-breakbefore csscolumns-breakafter csscolumns-breakinside no-cssgridlegacy cssgrid cubicbezierrange no-displayrunin no-display-runin displaytable display-table ellipsis cssescape cssexunit supports cssfilters flexbox flexboxlegacy no-flexboxtweener flexwrap fontface generatedcontent cssgradients no-hairline hsla cssinvalid lastchild cssmask mediaqueries multiplebgs nthchild objectfit object-fit opacity no-overflowscrolling csspointerevents csspositionsticky csspseudoanimations csstransitions no-csspseudotransitions cssreflections no-regions cssremunit cssresize rgba cssscrollbar scrollsnappoints shapes siblinggeneral subpixelfont target textalignlast textshadow csstransforms csstransformslevel2 csstransforms3d preserve3d userselect cssvalid cssvhunit cssvmaxunit cssvminunit cssvwunit willchange no-wrapflow customprotocolhandler customevent no-dart dataview classlist no-createelementattrs no-createelement-attrs dataset documentfragment hidden no-microdata mutationobserver passiveeventlisteners bdi datalistelem details outputelem picture progressbar meter ruby template no-time texttrackapi track unknownelements emoji es5array es5date es5function es5object strictmode es5string json es5syntax es5undefined es5 es6array es6collections no-contains generators es6math es6number es6object promises es6string devicemotion deviceorientation oninput eventlistener filereader filesystem no-capture fileinput fileinputdirectory formattribute formvalidation no-localizednumber placeholder no-requestautocomplete fullscreen gamepads geolocation hashchange no-hiddenscroll history no-ie8compat sandbox no-seamless srcdoc imgcrossorigin srcset inputformaction input-formaction inputformenctype input-formenctype inputformmethod no-inputformtarget no-input-formtarget inputsearchevent intl ligatures olreversed mathml hovermq pointermq messagechannel beacon no-lowbandwidth eventsource fetch xhrresponsetype xhrresponsetypearraybuffer xhrresponsetypeblob xhrresponsetypedocument xhrresponsetypejson xhrresponsetypetext xhr2 notification pagevisibility performance pointerevents pointerlock postmessage queryselector quotamanagement requestanimationframe raf scriptasync scriptdefer serviceworker speechrecognition speechsynthesis localstorage sessionstorage no-websqldatabase no-stylescoped svg svgasimg svgclippaths svgfilters svgforeignobject inlinesvg smil templatestrings textareamaxlength no-touchevents typedarrays unicode unicoderange bloburls urlparser urlsearchparams no-userdata vibrate video videocrossorigin videoloop videopreload no-vml no-webintents webanimations webgl peerconnection datachannel getusermedia websockets websocketsbinary no-framed sharedworkers webworkers no-xdomainrequest exiforientation apng webp webpalpha webpanimation webplossless no-jpeg2000 no-jpegxr webp-alpha webp-animation webp-lossless datauri blobworkers indexeddb dataworkers csshyphens softhyphens softhyphensfind no-audiopreload no-videoautoplay indexeddb-deletedatabase" lang="en-US" style="">
+ <!--
+ Page saved with SingleFile 
+ url: https://anthropic.skilljar.com/introduction-to-subagents/450699 
+ saved date: Wed Apr 01 2026 21:26:13 GMT+0900 (한국 표준시)
+-->
+ <!--<![endif]-->
+ <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# skilljar: http://ogp.me/ns/fb/skilljar#">
+  <meta charset="utf-8"/>
+  <link href="https://anthropic.skilljar.com/domain/open-search" rel="search" title="Skilljar" type="application/opensearchdescription+xml"/>
+  <link href="assets/shared-0.css" rel="stylesheet"/>
+  <meta content="width=device-width, initial-scale=1.0" id="viewport" name="viewport"/>
+  <meta content="Anthropic Courses" name="global-title"/>
+  <title>
+   서브에이전트 만들기
+  </title>
+  <link href="assets/css/Creating-a-subagent.css" rel="stylesheet"/>
+  <link href="assets/shared-1.css" rel="stylesheet"/>
+  <link href="assets/shared-2.css" rel="stylesheet"/>
+  <link href="assets/shared-3.css" rel="stylesheet"/>
+  <meta content="website" property="og:type"/>
+  <meta content="https://anthropic.skilljar.com/" property="og:url"/>
+  <meta content="Anthropic Courses" property="og:title"/>
+  <meta content="Learn to build with Claude through Anthropic's comprehensive courses and training programs." property="og:description"/>
+  <meta content="https://cdn.sanity.io/images/4zrzovbb/website/c4bd33e7c8e809a2f9a9a5896ee13961e2a738ec-2400x1260.png" property="og:image"/>
+  <meta content="2400" property="og:image:width"/>
+  <meta content="1260" property="og:image:height"/>
+  <meta content="Anthropic Courses" property="og:site_name"/>
+  <meta content="summary_large_image" name="twitter:card"/>
+  <meta content="https://anthropic.skilljar.com/" name="twitter:url"/>
+  <meta content="Anthropic Courses" name="twitter:title"/>
+  <meta content="Learn to build with Claude AI through Anthropic's comprehensive courses and training programs." name="twitter:description"/>
+  <meta content="https://cdn.sanity.io/images/4zrzovbb/website/c4bd33e7c8e809a2f9a9a5896ee13961e2a738ec-2400x1260.png" name="twitter:image"/>
+  <meta class="foundation-mq-small"/>
+  <meta class="foundation-mq-medium"/>
+  <meta class="foundation-mq-large"/>
+  <link href="assets/shared-4.css" rel="stylesheet"/>
+  <meta content="no-referrer" name="referrer"/>
+  <link href="assets/favicon.ico" rel="shortcut icon">
+   <link href="assets/shared-5.css" rel="stylesheet"/>
+   <link href="https://anthropic.skilljar.com/introduction-to-subagents/450699" rel="canonical">
+    <meta content="default-src 'none'; font-src 'self' data:; img-src 'self' data:; style-src 'unsafe-inline'; media-src 'self' data:; script-src 'unsafe-inline' data:; object-src 'self' data:; frame-src 'self' data:;" http-equiv="content-security-policy"/>
+   </link>
+  </link>
+ </head>
+ <body class="v1 sj-page-lesson lp-color-scheme-light details-pane-bottom cbp-spmenu-fixed sj-nested-header-links sj-nested-footer-links">
+  <div class="lesson-page" data-course="introduction-to-subagents" data-tags="" id="main-container">
+   <header id="header">
+    <div class="header-left" id="header-left">
+     <a aria-label="강의 목록" class="burger header-link focus-link-v2 show-search sf-hidden" id="left-nav-button" role="button" tabindex="0"></a>
+     <a class="header-logo-link focus-link-v2" href="https://anthropic.com/"><img alt="홈으로" class="header-center-img" src="assets/shared-1.png"/></a>
+    </div>
+    <div id="header-right">
+     <div aria-labelledby="header-links-navigation" class="header-links-container headerheight align-vertical">
+      <h2 class="hide sf-hidden" id="header-links-navigation">
+       헤더 내비게이션
+      </h2>
+      <a class="header-link header-link--base focus-link-v2" href="https://www.anthropic.com/learn" target="_self">Anthropic Academy</a>
+      <a class="header-link header-link--base focus-link-v2" href="https://anthropic.skilljar.com/" target="_self">강좌</a>
+     </div>
+     <div class="headerheight align-vertical">
+      <a aria-label="메뉴 열기" class="header-link focus-link-v2 sf-hidden" id="toggle-header-mobile-dropdown" tabindex="0"></a>
+     </div>
+     <div class="account-nav headerheight align-vertical hide-mobile">
+      <a aria-expanded="false" aria-label="사용자 설정 메뉴" class="header-dropdown-button-v2 header-dropdown-button focus-link-v2" data-dropdown="header-drop" href="#" role="button"><img alt="Mancheol Jeon's Avatar" height="" src="assets/shared-0.jpg" width="32"/></a>
+     </div>
+    </div>
+    <ul class="f-dropdown right profile-dropdown-v2 hide-mobile" data-dropdown-content="" id="header-drop">
+     <li>
+      <a class="sj-text-my-profile focus-link-v2" href="https://anthropic.skilljar.com/accounts/profile/?next=/introduction-to-subagents/450699" tabindex="-1"><span>내 프로필</span></a>
+     </li>
+     <li>
+      <a class="signout-link sj-text-sign-out focus-link-v2" href="https://anthropic.skilljar.com/auth/logout?next=https%3A%2F%2Fanthropic.skilljar.com%2Fintroduction-to-subagents" tabindex="-1"><span>로그아웃</span></a>
+     </li>
+    </ul>
+   </header>
+   <div class="sf-hidden" id="header-mobile-dropdown">
+   </div>
+   <div id="lp-wrapper">
+    <div id="lp-content">
+     <div class="row">
+      <div class="small-11 small-centered columns" id="messages">
+      </div>
+     </div>
+     <div class="row details-pane-bottom details-pane-closed" id="lesson-body">
+      <div class="columns fullheight" id="lesson-main">
+       <div id="lesson-main-inner">
+        <div class="lesson-top">
+         <h2>
+          서브에이전트 만들기
+         </h2>
+        </div>
+        <div id="lesson-main-content" style="top:57px">
+         <div>
+          <sjwc-lesson-content-item class="course-text-content course-scrollable-content">
+           <article>
+            <p>
+             Claude Code에는 기본 제공 서브에이전트가 있지만, 직접 만들 수도 있습니다. 커스텀 서브에이전트는 코드 리뷰, 테스트 작성, 문서 확인 등 특정 작업에 특화되어 있습니다. 서브에이전트는 마크다운 파일에 YAML 프론트매터를 사용해 정의하며, 이를 통해 Claude가 서브에이전트를 언제 사용할지, 어떻게 동작해야 하는지를 알 수 있습니다.
+            </p>
+            <h2>
+             서브에이전트 만들기
+            </h2>
+            <p>
+             서브에이전트를 만드는 가장 쉬운 방법은 <code>/agents</code> 슬래시 명령어를 사용하는 것입니다. 이 명령어를 실행하면 서브에이전트를 관리하는 메인 인터페이스가 열립니다. 거기서 <strong>새 에이전트 만들기</strong> 를 선택하세요.
+            </p>
+            <p>
+             먼저 서브에이전트의 범위를 선택하라는 메시지가 표시됩니다:
+            </p>
+            <ul>
+             <li>
+              <strong>프로젝트 수준</strong> -- 현재 프로젝트에서만 사용 가능
+             </li>
+             <li>
+              <strong>사용자 수준</strong> -- 내 컴퓨터의 모든 프로젝트에서 공유
+             </li>
+            </ul>
+            <p>
+             다음으로, 만드는 방식을 선택할 수 있습니다. 설정을 직접 작성할 수도 있지만, Claude가 자동으로 생성하도록 하는 방법을 권장합니다. 서브에이전트가 수행할 작업을 설명하면, Claude가 이를 바탕으로 이름, 설명, 시스템 프롬프트를 만들어 줍니다.
+            </p>
+            <img alt="" src="assets/images/img-9ff562cae71f.png"/>
+            <br/>
+            <h2>
+             도구 커스터마이징
+            </h2>
+            <p>
+             생성 과정에서 서브에이전트가 접근할 수 있는 도구를 커스터마이징할 수 있습니다. 도구 카테고리는 다음과 같습니다:
+            </p>
+            <ul>
+             <li>
+              읽기 전용 도구
+             </li>
+             <li>
+              편집 도구
+             </li>
+             <li>
+              실행 도구
+             </li>
+             <li>
+              MCP 도구
+             </li>
+             <li>
+              기타 도구
+             </li>
+            </ul>
+            <img alt="" src="assets/images/img-690b506b4c8d.png"/>
+            <br/>
+            <p>
+             서브에이전트에 실제로 필요한 것이 무엇인지 생각해 보세요. 코드 리뷰어라면 편집 도구는 필요하지 않을 것입니다 -- 코드를 수정하는 것이 아니라 읽고 분석하는 역할이기 때문입니다. 다만, 대기 중인 변경 사항을 더 쉽게 파악할 수 있도록 실행 도구는 활성화해 두는 것이 좋을 수 있습니다.
+            </p>
+            <h2>
+             모델 및 색상 선택
+            </h2>
+            <p>
+             도구 설정이 끝나면, 서브에이전트를 구동할 Claude 모델을 선택합니다. 선택지는 다음과 같습니다:
+            </p>
+            <ul>
+             <li>
+              <strong>Haiku</strong> -- 빠르고 가벼운 작업에 최적
+             </li>
+             <li>
+              <strong>Sonnet</strong> -- 속도와 심층 분석의 균형이 잘 맞는 중간 모델
+             </li>
+             <li>
+              <strong>Opus</strong> -- 복잡한 분석 작업에 최적
+             </li>
+             <li>
+              <strong>Inherit</strong> -- 메인 대화에서 사용 중인 모델을 그대로 사용
+             </li>
+            </ul>
+            <p>
+             마지막으로, 색상을 선택합니다. 이 색상은 UI에 표시되어 어떤 서브에이전트가 활성화되어 있는지 한눈에 알 수 있게 해줍니다. 작은 기능이지만 여러 서브에이전트를 동시에 사용할 때 유용합니다.
+            </p>
+            <img alt="" src="assets/images/img-76f7daeebe71.png"/>
+            <br/>
+            <h2>
+             설정 파일
+            </h2>
+            <p>
+             생성이 완료되면, 서브에이전트 설정 파일이 프로젝트에 저장됩니다 (일반적으로 <code>.claude/agents/your-agent-name.md</code> 경로에 저장됩니다). 일반적인 서브에이전트 설정 파일의 모습은 다음과 같습니다:
+            </p>
+            <br/>
+            <pre><code>---
+name: code-quality-reviewer
+description: Use this agent when you need to review recently written or modified code for quality, security, and best practice compliance.
+tools: Bash, Glob, Grep, Read, WebFetch, WebSearch
+model: sonnet
+color: purple
+---
+
+You are an expert code reviewer specializing in quality assurance, security best practices, and
+adherence to project standards. Your role is to thoroughly examine recently written or modified code
+and identify issues that could impact reliability, security, maintainability, or performance.</code></pre>
+            <p>
+             각 필드를 살펴보겠습니다:
+            </p>
+            <ul>
+             <li>
+              <strong><code>name</code></strong> -- 서브에이전트의 고유 식별자입니다. Claude에게 직접 요청하거나 메시지에 <code>@agent code-quality-reviewer</code> 를 입력해서 참조할 수 있습니다.
+             </li>
+             <li>
+              <strong><code>description</code></strong> -- Claude가 서브에이전트를 언제 사용할지 결정하는 기준입니다. 한 줄로 작성해야 하며 (줄 바꿈이 필요할 경우 이스케이프 줄바꿈 문자 <code>\n</code> 를 사용하세요). 예시 대화를 포함하면 Claude가 언제 위임해야 하는지 이해하는 데 도움이 됩니다.
+             </li>
+             <li>
+              <strong><code>tools</code></strong> -- 서브에이전트가 접근할 수 있는 도구 목록입니다. 생성 시 선택한 도구가 반영되지만, 언제든지 이 목록을 수정할 수 있습니다.
+             </li>
+             <li>
+              <strong><code>model</code></strong> -- 사용할 Claude 모델을 지정합니다: <code>sonnet</code> , <code>opus</code> , <code>haiku</code> , 또는 <code>inherit</code> .
+             </li>
+             <li>
+              <strong><code>color</code></strong> -- 서브에이전트를 식별하기 위한 UI 색상입니다.
+             </li>
+            </ul>
+            <h2>
+             시스템 프롬프트
+            </h2>
+            <p>
+             마크다운 파일의 본문 (YAML 프론트매터 아래의 모든 내용)이 시스템 프롬프트입니다. 여기에 서브에이전트에게 줄 지시사항을 작성합니다: 무엇에 집중해야 하는지, 어떻게 분석해야 하는지, 그리고 결과를 메인 에이전트에게 어떻게 보고해야 하는지를 정의합니다.
+            </p>
+            <p>
+             잘 작성된 시스템 프롬프트는 유용한 서브에이전트와 핵심을 놓치는 서브에이전트를 가르는 차이입니다. 서브에이전트가 무엇을 찾아야 하는지, 결과물을 어떻게 구조화해야 하는지 구체적으로 명시하세요.
+            </p>
+            <h2>
+             Claude가 자동으로 서브에이전트를 사용하게 하기
+            </h2>
+            <p>
+             명시적으로 요청하지 않아도 Claude가 자동으로 서브에이전트에 작업을 위임하게 하려면, description 필드에 <strong>"proactively"</strong> 라는 단어를 포함하세요. 예를 들어:
+            </p>
+            <pre><code>description: Proactively suggest running this agent after major code changes...</code></pre>
+            <p>
+             description에 예시 대화를 추가하면 Claude가 서브에이전트를 사용해야 하는 특정 상황을 더 잘 이해할 수 있습니다. 예시가 구체적일수록 Claude가 언제 위임해야 할지 더 잘 파악합니다.
+            </p>
+            <h2>
+             서브에이전트 테스트하기
+            </h2>
+            <p>
+             서브에이전트를 만든 후, 코드를 수정하고 Claude에게 리뷰를 요청해 보세요.
+            </p>
+            <img alt="" src="assets/images/img-4feb10c50ebd.png"/>
+            <br/>
+            <p>
+             예상할 때 서브에이전트가 사용되지 않는다면, description을 다시 확인하세요. 더 구체적인 예시와 트리거 시나리오를 추가하면 Claude가 언제 서브에이전트에 작업을 위임해야 할지 더 잘 이해할 수 있습니다.
+            </p>
+           </article>
+          </sjwc-lesson-content-item>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <footer id="lp-footer">
+    <div class="left">
+     <a aria-label="이전 - 서브에이전트란?" class="prev-lesson-button align-vertical focus-link-v2" data-track-click="Lesson,Prev,What are subagents?,0" href="https://anthropic.skilljar.com/introduction-to-subagents/450698" title="서브에이전트란?"><div class="button-content">
+       <i aria-hidden="true" class="fa fa-angle-left"></i>
+       <span class="button-prev-title"><span>이전</span></span>
+       <span class="lesson-title-label">- 서브에이전트란?</span>
+      </div></a>
+    </div>
+    <span class="lesson-title-footer sf-hidden">서브에이전트 만들기</span>
+    <div class="right">
+     <div class="full-footer-height-wrapper align-vertical">
+      <div class="next-lesson-button">
+       <span><span class="lesson-title-label">효과적인 서브에이전트 설계하기</span>
+        <a class="small button next-lesson-link" data-track-click="Lesson,Next,Designing effective subagents,0" role="button" tabindex="0" title="효과적인 서브에이전트 설계하기"><span>다음</span></a></span>
+      </div>
+      <div class="complete-lesson-button hide disabled sf-hidden">
+      </div>
+      <div aria-label="전체 화면 전환" aria-pressed="false" class="toggle-fullscreen focus-link-v2" role="button" tabindex="0">
+       <sjwc-icon aria-hidden="true" name="fa fa-arrows-alt">
+        <i class="fa fa-arrows-alt"></i>
+       </sjwc-icon>
+      </div>
+     </div>
+    </div>
+   </footer>
+   <div class="sf-hidden" id="lpLeftNavBackground">
+   </div>
+   <div id="course_completion_code">
+   </div>
+  </div>
+ </body>
+</html>

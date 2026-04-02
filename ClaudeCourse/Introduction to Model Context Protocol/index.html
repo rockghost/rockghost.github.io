@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Introduction to Model Context Protocol - Anthropic Academy</title>
+<title>Model Context Protocol 소개</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Source Serif 4', 'Georgia', serif; display: flex; height: 100vh; overflow: hidden; background: #faf9f5; }
 
-/* Left sidebar */
 .sidebar {
   width: 320px; min-width: 320px; height: 100vh;
   background: #faf9f5; color: #141413;
   overflow-y: auto; border-right: 1px solid #d5d5d5;
-  display: flex; flex-direction: column;
-  padding-bottom: 60px;
+  display: flex; flex-direction: column; padding-bottom: 60px;
   transition: width 0.25s ease, min-width 0.25s ease;
 }
 .sidebar.collapsed {
@@ -60,7 +60,6 @@ body { font-family: 'Source Serif 4', 'Georgia', serif; display: flex; height: 1
   letter-spacing: -0.015em; line-height: 1.4;
 }
 
-/* Right content */
 .content {
   flex: 1; height: 100vh; background: #faf9f5;
   display: flex; flex-direction: column;
@@ -89,45 +88,43 @@ body { font-family: 'Source Serif 4', 'Georgia', serif; display: flex; height: 1
   flex: 1; font-weight: 500; color: #141413; font-size: 15px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
-iframe {
-  flex: 1; border: none; width: 100%; background: #fff;
-}
+iframe { flex: 1; border: none; width: 100%; background: #fff; }
 </style>
 </head>
 <body>
 
 <nav class="sidebar">
-  <div class="course-title">Introduction to Model Context Protocol</div>
-  <a class="course-overview" href="#" onclick="return false;">Course Overview</a>
+  <div class="course-title">Model Context Protocol 소개</div>
+  <a class="course-overview" href="#" onclick="return false;">강좌 개요</a>
 
-  <div class="section-title">Introduction</div>
-  <a class="lesson" href="Welcome to the course.html" target="viewer" onclick="setActive(this)">Welcome to the course</a>
-  <a class="lesson" href="Introducing MCP.html" target="viewer" onclick="setActive(this)">Introducing MCP</a>
-  <a class="lesson" href="MCP clients.html" target="viewer" onclick="setActive(this)">MCP clients</a>
+  <div class="section-title">소개</div>
+  <span class="no-file">강좌에 오신 것을 환영합니다</span>
+  <a class="lesson" href="Introducing MCP.html" target="viewer" onclick="setActive(this)">MCP 소개</a>
+  <a class="lesson" href="MCP clients.html" target="viewer" onclick="setActive(this)">MCP 클라이언트</a>
 
-  <div class="section-title">Hands-on with MCP servers</div>
-  <a class="lesson" href="Project setup.html" target="viewer" onclick="setActive(this)">Project setup</a>
-  <a class="lesson" href="Defining tools with MCP.html" target="viewer" onclick="setActive(this)">Defining tools with MCP</a>
-  <a class="lesson" href="The server inspector.html" target="viewer" onclick="setActive(this)">The server inspector</a>
-  <span class="no-file">Course satisfaction survey</span>
+  <div class="section-title">MCP 서버 실습</div>
+  <span class="no-file">프로젝트 설정</span>
+  <a class="lesson" href="Defining tools with MCP.html" target="viewer" onclick="setActive(this)">MCP로 도구 정의하기</a>
+  <a class="lesson" href="The server inspector.html" target="viewer" onclick="setActive(this)">서버 인스펙터</a>
+  <span class="no-file">강좌 만족도 설문</span>
 
-  <div class="section-title">Connecting with MCP clients</div>
-  <a class="lesson" href="Implementing a client.html" target="viewer" onclick="setActive(this)">Implementing a client</a>
-  <a class="lesson" href="Defining resources.html" target="viewer" onclick="setActive(this)">Defining resources</a>
-  <a class="lesson" href="Accessing resources.html" target="viewer" onclick="setActive(this)">Accessing resources</a>
-  <a class="lesson" href="Defining prompts.html" target="viewer" onclick="setActive(this)">Defining prompts</a>
-  <a class="lesson" href="Prompts in the client.html" target="viewer" onclick="setActive(this)">Prompts in the client</a>
+  <div class="section-title">MCP 클라이언트 연결</div>
+  <a class="lesson" href="Implementing a client.html" target="viewer" onclick="setActive(this)">클라이언트 구현</a>
+  <a class="lesson" href="Defining resources.html" target="viewer" onclick="setActive(this)">리소스 정의하기</a>
+  <a class="lesson" href="Accessing resources.html" target="viewer" onclick="setActive(this)">리소스 접근하기</a>
+  <a class="lesson" href="Defining prompts.html" target="viewer" onclick="setActive(this)">프롬프트 정의하기</a>
+  <a class="lesson" href="Prompts in the client.html" target="viewer" onclick="setActive(this)">클라이언트에서의 프롬프트</a>
 
-  <div class="section-title">Assessment and wrap Up</div>
-  <span class="no-file">Final assessment on MCP</span>
-  <a class="lesson" href="MCP review.html" target="viewer" onclick="setActive(this)">MCP review</a>
+  <div class="section-title">평가 및 마무리</div>
+  <span class="no-file">MCP 최종 평가</span>
+  <a class="lesson" href="MCP review.html" target="viewer" onclick="setActive(this)">MCP 복습</a>
 </nav>
 
 <main class="content">
   <div class="content-header">
     <button class="sidebar-toggle" onclick="toggleSidebar()" title="메뉴 접기/펼치기">&#9776;</button>
-    <button class="nav-btn" onclick="navigate(-1)">&larr; Prev</button>
-    <button class="nav-btn" onclick="navigate(1)">Next &rarr;</button>
+    <button class="nav-btn" onclick="navigate(-1)">&larr; 이전</button>
+    <button class="nav-btn" onclick="navigate(1)">다음 &rarr;</button>
     <span class="title" id="currentTitle"></span>
   </div>
   <iframe name="viewer" id="viewer" onload="onFrameLoad()"></iframe>
@@ -170,7 +167,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') navigate(1);
 });
 
-// Auto-load first lesson on page load
+// Auto-load first lesson
 if (links.length > 0) { links[0].click(); }
 </script>
 

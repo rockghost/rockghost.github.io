@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html class="js no-htmlimports no-flash sizes no-proximity transferables adownload no-ambientlight no-applicationcache audio audioloop webaudio no-batteryapi no-battery-api no-lowbattery blobconstructor blob-constructor canvas canvasblending todataurljpeg todataurlpng todataurlwebp canvaswinding canvastext contenteditable no-contextmenu cookies cors customelements crypto getrandomvalues cssall cssanimations appearance backdropfilter backgroundblendmode backgroundcliptext bgpositionshorthand bgpositionxy bgrepeatround bgrepeatspace backgroundsize bgsizecover borderimage borderradius boxshadow boxsizing csscalc checked csschunit csscolumns csscolumns-width csscolumns-span csscolumns-fill csscolumns-gap csscolumns-rule csscolumns-rulecolor csscolumns-rulestyle csscolumns-rulewidth csscolumns-breakbefore csscolumns-breakafter csscolumns-breakinside no-cssgridlegacy cssgrid cubicbezierrange no-displayrunin no-display-runin displaytable display-table ellipsis cssescape cssexunit supports cssfilters flexbox flexboxlegacy no-flexboxtweener flexwrap fontface generatedcontent cssgradients no-hairline hsla cssinvalid lastchild cssmask mediaqueries multiplebgs nthchild objectfit object-fit opacity no-overflowscrolling csspointerevents csspositionsticky csspseudoanimations csstransitions no-csspseudotransitions cssreflections no-regions cssremunit cssresize rgba cssscrollbar scrollsnappoints shapes siblinggeneral subpixelfont target textalignlast textshadow csstransforms csstransformslevel2 csstransforms3d preserve3d userselect cssvalid cssvhunit cssvmaxunit cssvminunit cssvwunit willchange no-wrapflow customprotocolhandler customevent no-dart dataview classlist no-createelementattrs no-createelement-attrs dataset documentfragment hidden no-microdata mutationobserver passiveeventlisteners bdi datalistelem details outputelem picture progressbar meter ruby template no-time texttrackapi track unknownelements emoji es5array es5date es5function es5object strictmode es5string json es5syntax es5undefined es5 es6array es6collections no-contains generators es6math es6number es6object promises es6string devicemotion deviceorientation oninput eventlistener filereader filesystem no-capture fileinput fileinputdirectory formattribute formvalidation no-localizednumber placeholder no-requestautocomplete fullscreen gamepads geolocation hashchange no-hiddenscroll history no-ie8compat sandbox no-seamless srcdoc imgcrossorigin srcset inputformaction input-formaction inputformenctype input-formenctype inputformmethod no-inputformtarget no-input-formtarget inputsearchevent intl ligatures olreversed mathml hovermq pointermq messagechannel beacon no-lowbandwidth eventsource fetch xhrresponsetype xhrresponsetypearraybuffer xhrresponsetypeblob xhrresponsetypedocument xhrresponsetypejson xhrresponsetypetext xhr2 notification pagevisibility performance pointerevents pointerlock postmessage queryselector quotamanagement requestanimationframe raf scriptasync scriptdefer serviceworker speechrecognition speechsynthesis localstorage sessionstorage no-websqldatabase no-stylescoped svg svgasimg svgclippaths svgfilters svgforeignobject inlinesvg smil templatestrings textareamaxlength no-touchevents typedarrays unicode unicoderange bloburls urlparser urlsearchparams no-userdata vibrate video videocrossorigin videoloop videopreload no-vml no-webintents webanimations webgl peerconnection datachannel getusermedia websockets websocketsbinary no-framed sharedworkers webworkers no-xdomainrequest exiforientation apng webp webpalpha webpanimation webplossless no-jpeg2000 no-jpegxr webp-alpha webp-animation webp-lossless datauri blobworkers dataworkers indexeddb csshyphens softhyphens softhyphensfind no-audiopreload no-videoautoplay indexeddb-deletedatabase" lang="en-US" style="">
+ <!--
+ Page saved with SingleFile 
+ url: https://anthropic.skilljar.com/introduction-to-subagents/450701 
+ saved date: Wed Apr 01 2026 21:26:11 GMT+0900 (한국 표준시)
+-->
+ <!--<![endif]-->
+ <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# skilljar: http://ogp.me/ns/fb/skilljar#">
+  <meta charset="utf-8"/>
+  <link href="https://anthropic.skilljar.com/domain/open-search" rel="search" title="Skilljar" type="application/opensearchdescription+xml"/>
+  <link href="assets/shared-0.css" rel="stylesheet"/>
+  <meta content="width=device-width, initial-scale=1.0" id="viewport" name="viewport"/>
+  <meta content="Anthropic Courses" name="global-title"/>
+  <title>
+   서브에이전트 효과적으로 활용하기
+  </title>
+  <link href="assets/css/Using-subagents-effectively.css" rel="stylesheet"/>
+  <link href="assets/shared-1.css" rel="stylesheet"/>
+  <link href="assets/shared-3.css" rel="stylesheet"/>
+  <meta content="website" property="og:type"/>
+  <meta content="https://anthropic.skilljar.com/" property="og:url"/>
+  <meta content="Anthropic Courses" property="og:title"/>
+  <meta content="Learn to build with Claude through Anthropic's comprehensive courses and training programs." property="og:description"/>
+  <meta content="https://cdn.sanity.io/images/4zrzovbb/website/c4bd33e7c8e809a2f9a9a5896ee13961e2a738ec-2400x1260.png" property="og:image"/>
+  <meta content="2400" property="og:image:width"/>
+  <meta content="1260" property="og:image:height"/>
+  <meta content="Anthropic Courses" property="og:site_name"/>
+  <meta content="summary_large_image" name="twitter:card"/>
+  <meta content="https://anthropic.skilljar.com/" name="twitter:url"/>
+  <meta content="Anthropic Courses" name="twitter:title"/>
+  <meta content="Learn to build with Claude AI through Anthropic's comprehensive courses and training programs." name="twitter:description"/>
+  <meta content="https://cdn.sanity.io/images/4zrzovbb/website/c4bd33e7c8e809a2f9a9a5896ee13961e2a738ec-2400x1260.png" name="twitter:image"/>
+  <meta class="foundation-mq-small"/>
+  <meta class="foundation-mq-medium"/>
+  <meta class="foundation-mq-large"/>
+  <link href="assets/shared-4.css" rel="stylesheet"/>
+  <meta content="no-referrer" name="referrer"/>
+  <link href="assets/favicon.ico" rel="shortcut icon">
+   <link href="assets/shared-5.css" rel="stylesheet"/>
+   <link href="https://anthropic.skilljar.com/introduction-to-subagents/450701" rel="canonical">
+    <meta content="default-src 'none'; font-src 'self' data:; img-src 'self' data:; style-src 'unsafe-inline'; media-src 'self' data:; script-src 'unsafe-inline' data:; object-src 'self' data:; frame-src 'self' data:;" http-equiv="content-security-policy"/>
+   </link>
+  </link>
+ </head>
+ <body class="v1 sj-page-lesson lp-color-scheme-light details-pane-bottom cbp-spmenu-fixed sj-nested-header-links sj-nested-footer-links">
+  <div class="lesson-page" data-course="introduction-to-subagents" data-tags="" id="main-container">
+   <header id="header">
+    <div class="header-left" id="header-left">
+     <a aria-label="강의 목록" class="burger header-link focus-link-v2 show-search sf-hidden" id="left-nav-button" role="button" tabindex="0"></a>
+     <a class="header-logo-link focus-link-v2" href="https://anthropic.com/"><img alt="홈으로" class="header-center-img" src="assets/shared-1.png"/></a>
+    </div>
+    <div id="header-right">
+     <div aria-labelledby="header-links-navigation" class="header-links-container headerheight align-vertical">
+      <h2 class="hide sf-hidden" id="header-links-navigation">
+       헤더 내비게이션
+      </h2>
+      <a class="header-link header-link--base focus-link-v2" href="https://www.anthropic.com/learn" target="_self">Anthropic Academy</a>
+      <a class="header-link header-link--base focus-link-v2" href="https://anthropic.skilljar.com/" target="_self">강좌</a>
+     </div>
+     <div class="headerheight align-vertical">
+      <a aria-label="메뉴 열기" class="header-link focus-link-v2 sf-hidden" id="toggle-header-mobile-dropdown" tabindex="0"></a>
+     </div>
+     <div class="account-nav headerheight align-vertical hide-mobile">
+      <a aria-expanded="false" aria-label="사용자 설정 메뉴" class="header-dropdown-button-v2 header-dropdown-button focus-link-v2" data-dropdown="header-drop" href="#" role="button"><img alt="Mancheol Jeon's Avatar" height="" src="assets/shared-0.jpg" width="32"/></a>
+     </div>
+    </div>
+    <ul class="f-dropdown right profile-dropdown-v2 hide-mobile" data-dropdown-content="" id="header-drop">
+     <li>
+      <a class="sj-text-my-profile focus-link-v2" href="https://anthropic.skilljar.com/accounts/profile/?next=/introduction-to-subagents/450701" tabindex="-1"><span>내 프로필</span></a>
+     </li>
+     <li>
+      <a class="signout-link sj-text-sign-out focus-link-v2" href="https://anthropic.skilljar.com/auth/logout?next=https%3A%2F%2Fanthropic.skilljar.com%2Fintroduction-to-subagents" tabindex="-1"><span>로그아웃</span></a>
+     </li>
+    </ul>
+   </header>
+   <div class="sf-hidden" id="header-mobile-dropdown">
+   </div>
+   <div id="lp-wrapper">
+    <div id="lp-content">
+     <div class="row">
+      <div class="small-11 small-centered columns" id="messages">
+      </div>
+     </div>
+     <div class="row details-pane-bottom details-pane-closed" id="lesson-body">
+      <div class="columns fullheight" id="lesson-main">
+       <div id="lesson-main-inner">
+        <div class="lesson-top">
+         <h2>
+          서브에이전트 효과적으로 활용하기
+         </h2>
+        </div>
+        <div id="lesson-main-content" style="top:57px">
+         <div>
+          <sjwc-lesson-content-item class="course-text-content course-scrollable-content">
+           <article>
+            <p>
+             서브에이전트를 만들고 잘 설계하는 방법은 알고 있습니다. 이제 핵심 질문은 이것입니다: 서브에이전트가 실제로 도움이 되는 때는 언제이고, 오히려 방해가 되는 때는 언제일까요? 그 차이는 단 하나로 귀결됩니다 -- 중간 작업 과정이 메인 스레드에 중요한가 여부입니다.
+            </p>
+            <h2>
+             서브에이전트가 빛을 발하는 경우
+            </h2>
+            <p>
+             서브에이전트는 탐색과 실행이 분리되어 있을 때 가장 효과적입니다. 작업의 각 단계가 이전 단계에서 발견한 내용에 의존한다면, 그 작업은 메인 스레드에서 처리하는 것이 좋습니다. 하지만 결과만 필요하고 과정은 중요하지 않다면, 서브에이전트에게 위임하세요.
+            </p>
+            <p>
+             서브에이전트가 특히 뛰어난 작업은 다음과 같습니다:
+            </p>
+            <ul>
+             <li>
+              결과가 필요할 뿐, 찾아가는 과정을 단계별로 볼 필요가 없는 경우
+             </li>
+             <li>
+              탐색 작업이 메인 스레드의 컨텍스트를 복잡하게 만들 수 있는 경우
+             </li>
+             <li>
+              새로운 시각이나 커스텀 시스템 프롬프트가 작업에 도움이 되는 경우
+             </li>
+            </ul>
+            <h2>
+             리서치 작업
+            </h2>
+            <p>
+             리서치는 서브에이전트의 대표적인 활용 사례입니다. 낯선 코드베이스에서 인증이 어떻게 동작하는지 조사하는 경우를 생각해보세요. 메인 스레드는 JWT가 <em>어디서</em> 검증되는지만 알면 됩니다. 탐색 과정에서 검색한 모든 파일을 볼 필요는 없습니다.
+            </p>
+            <p>
+             리서치 서브에이전트는 수십 개의 파일을 읽고, 함수 호출을 추적하고, 다양한 코드 경로를 탐색할 수 있습니다. 모든 탐색 과정은 서브에이전트의 컨텍스트 안에 머뭅니다. 메인 스레드는 다음과 같은 깔끔한 요약만 받습니다:
+            </p>
+            <pre><code>JWT validation happens in middleware/auth.js line 42,
+called from the Express router in route/api.js</code></pre>
+            <p>
+             서브에이전트가 힘든 작업을 대신 처리했습니다. 메인 스레드는 다음 단계로 나아가는 데 필요한 정보만 정확히 받습니다.
+            </p>
+            <h2>
+             코드 리뷰
+            </h2>
+            <p>
+             Claude는 코드가 다른 사람이 작성한 것으로 제시될 때 더 효과적으로 리뷰합니다. 메인 스레드에서 여러 턴에 걸쳐 기능을 개발한 후 같은 스레드에 리뷰를 요청하면, 피드백이 약해지는 경우가 많습니다. Claude가 코드 작성에 관여했기 때문에 새로운 시각으로 바라보기 어렵습니다.
+            </p>
+            <p>
+             리뷰어 서브에이전트는 별도의 컨텍스트에서 변경 사항을 검토합니다. <code>git diff</code> 를 실행하고, 수정된 파일을 읽으며, 코드가 작성된 과정에 대한 기억 없이 전문화된 리뷰 기준을 적용합니다. 이러한 분리 덕분에 서브에이전트의 시스템 프롬프트에 프로젝트별 리뷰 기준을 담아, 팀 전체에서 일관된 리뷰 기준을 보장할 수 있습니다.
+            </p>
+            <h2>
+             커스텀 시스템 프롬프트
+            </h2>
+            <p>
+             Claude Code의 기본 시스템 프롬프트는 간결하고 코드 중심의 응답을 강조합니다. 코딩에는 훌륭하지만, 모든 작업에 적합한 것은 아닙니다.
+            </p>
+            <p>
+             커스텀 시스템 프롬프트를 사용하면 서브에이전트가 메인 스레드보다 확실히 더 나은 결과를 내는 두 가지 사례가 있습니다:
+            </p>
+            <ul>
+             <li>
+              <strong>카피라이팅 서브에이전트</strong> -- 톤, 대상 독자, 스타일에 대한 지침을 제공합니다. Claude Code의 기본 프롬프트는 간결한 기술 문서 작성 방향으로 치우치는데, 랜딩 페이지나 이메일 캠페인에는 맞지 않습니다. 카피라이팅 서브에이전트에는 문체와 구조에 대해 완전히 다른 지침을 부여할 수 있습니다.
+             </li>
+             <li>
+              <strong>스타일링 서브에이전트</strong> -- 디자인 시스템 파일을 가리킵니다. 서브에이전트가 실행될 때 해당 파일들이 컨텍스트에 자동으로 로드되므로, CSS 작성을 시작하기도 전에 색상 변수, 간격 규칙, 컴포넌트 패턴을 이미 파악하고 있습니다.
+             </li>
+            </ul>
+            <h2>
+             서브에이전트가 해가 되는 경우
+            </h2>
+            <p>
+             서브에이전트를 실행하는 오버헤드 -- 작업 과정의 가시성 손실과 결과를 요약으로 압축하는 것 -- 는 서브에이전트가 메인 스레드로는 할 수 없는 일을 할 때만 정당화됩니다. 주의해야 할 세 가지 흔한 안티패턴이 있습니다.
+            </p>
+            <h3>
+             전문가 주장
+            </h3>
+            <p>
+             전문성을 주장하는 서브에이전트는 거의 도움이 되지 않습니다. "당신은 Python 전문가입니다" 또는 "당신은 Kubernetes 전문가입니다"와 같은 프롬프트는 아무런 가치를 더하지 않습니다. Claude는 이미 그 지식을 갖고 있기 때문입니다. 소위 전문가 서브에이전트가 할 수 있는 일 중 메인 스레드가 직접 할 수 없는 것은 없습니다.
+            </p>
+            <h3>
+             순차적 파이프라인
+            </h3>
+            <p>
+             순차적 서브에이전트 파이프라인은 문제를 일으킵니다. 버그를 재현하는 에이전트, 디버깅하는 에이전트, 수정하는 에이전트로 구성된 3단계 흐름을 생각해보세요. 파이프라인은 작업이 진정으로 독립적일 때만 작동합니다. 각 단계가 이전 단계의 발견에 의존할 때는 실패하는데 -- 버그 수정은 거의 항상 그렇습니다. 에이전트 간 인계 과정에서 정보가 손실됩니다.
+            </p>
+            <h3>
+             테스트 러너
+            </h3>
+            <p>
+             테스트 러너 서브에이전트는 필요한 정보를 숨기는 경향이 있습니다. 테스트가 실패하면 문제를 진단하기 위해 전체 출력이 필요합니다. "테스트 실패"만 반환하는 서브에이전트는 직접 출력에서 바로 확인할 수 있었을 세부 정보를 얻기 위해 추가적인 디버그 스크립트를 만들도록 강제합니다. 테스트 결과에 따르면 테스트 러너 패턴은 모든 구성 중에서 가장 낮은 성능을 보였습니다.
+            </p>
+            <h2>
+             판단 기준
+            </h2>
+            <p>
+             서브에이전트 사용 여부를 결정할 때, 스스로에게 한 가지 질문을 하세요: <strong>중간 작업 과정이 중요한가?</strong>
+            </p>
+            <p>
+             답이 아니오라면 -- 최종 결과만 필요하다면 -- 서브에이전트에게 위임하세요. 답이 예라면 -- 진행 과정을 보고 반응해야 한다면 -- 메인 스레드에서 처리하세요.
+            </p>
+            <p>
+             서브에이전트를 활용할 때:
+            </p>
+            <ul>
+             <li>
+              리서치 및 탐색
+             </li>
+             <li>
+              코드 리뷰
+             </li>
+             <li>
+              커스텀 시스템 프롬프트가 필요한 작업
+             </li>
+            </ul>
+            <p>
+             서브에이전트를 피해야 할 때:
+            </p>
+            <ul>
+             <li>
+              실질적인 능력을 더하지 않는 "전문가" 페르소나
+             </li>
+             <li>
+              각 단계가 이전 단계에 의존하는 다단계 파이프라인
+             </li>
+             <li>
+              디버깅을 위해 전체 출력이 필요한 테스트 실행
+             </li>
+            </ul>
+           </article>
+          </sjwc-lesson-content-item>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <footer id="lp-footer">
+    <div class="left">
+     <a aria-label="이전 - 효과적인 서브에이전트 설계하기" class="prev-lesson-button align-vertical focus-link-v2" data-track-click="Lesson,Prev,Designing effective subagents,0" href="https://anthropic.skilljar.com/introduction-to-subagents/450700" title="효과적인 서브에이전트 설계하기"><div class="button-content">
+       <i aria-hidden="true" class="fa fa-angle-left"></i>
+       <span class="button-prev-title"><span>이전</span></span>
+       <span class="lesson-title-label">- 효과적인 서브에이전트 설계하기</span>
+      </div></a>
+    </div>
+    <span class="lesson-title-footer sf-hidden">서브에이전트 효과적으로 활용하기</span>
+    <div class="right">
+     <div class="full-footer-height-wrapper align-vertical">
+      <div class="complete-lesson-button hide disabled sf-hidden">
+      </div>
+      <div aria-label="전체 화면 전환" aria-pressed="false" class="toggle-fullscreen focus-link-v2" role="button" tabindex="0">
+       <sjwc-icon aria-hidden="true" name="fa fa-arrows-alt">
+        <i class="fa fa-arrows-alt"></i>
+       </sjwc-icon>
+      </div>
+     </div>
+    </div>
+   </footer>
+   <div class="sf-hidden" id="lpLeftNavBackground">
+   </div>
+   <div id="course_completion_code">
+   </div>
+  </div>
+ </body>
+</html>
