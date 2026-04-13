@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html class="js no-htmlimports no-flash sizes no-proximity transferables adownload no-ambientlight no-applicationcache audio audioloop webaudio no-batteryapi no-battery-api no-lowbattery blobconstructor blob-constructor canvas canvasblending todataurljpeg todataurlpng todataurlwebp canvaswinding canvastext contenteditable no-contextmenu cookies cors customelements crypto getrandomvalues cssall cssanimations appearance backdropfilter backgroundblendmode backgroundcliptext bgpositionshorthand bgpositionxy bgrepeatround bgrepeatspace backgroundsize bgsizecover borderimage borderradius boxshadow boxsizing csscalc checked csschunit csscolumns csscolumns-width csscolumns-span csscolumns-fill csscolumns-gap csscolumns-rule csscolumns-rulecolor csscolumns-rulestyle csscolumns-rulewidth csscolumns-breakbefore csscolumns-breakafter csscolumns-breakinside no-cssgridlegacy cssgrid cubicbezierrange no-displayrunin no-display-runin displaytable display-table ellipsis cssescape cssexunit supports cssfilters flexbox flexboxlegacy no-flexboxtweener flexwrap fontface generatedcontent cssgradients no-hairline hsla cssinvalid lastchild cssmask mediaqueries multiplebgs nthchild objectfit object-fit opacity no-overflowscrolling csspointerevents csspositionsticky csspseudoanimations csstransitions no-csspseudotransitions cssreflections no-regions cssremunit cssresize rgba cssscrollbar scrollsnappoints shapes siblinggeneral subpixelfont target textalignlast textshadow csstransforms csstransformslevel2 csstransforms3d preserve3d userselect cssvalid cssvhunit cssvmaxunit cssvminunit cssvwunit willchange no-wrapflow customprotocolhandler customevent no-dart dataview classlist no-createelementattrs no-createelement-attrs dataset documentfragment hidden no-microdata mutationobserver passiveeventlisteners bdi datalistelem details outputelem picture progressbar meter ruby template no-time texttrackapi track unknownelements emoji es5array es5date es5function es5object strictmode es5string json es5syntax es5undefined es5 es6array es6collections no-contains generators es6math es6number es6object promises es6string devicemotion deviceorientation oninput eventlistener filereader filesystem no-capture fileinput fileinputdirectory formattribute formvalidation no-localizednumber placeholder no-requestautocomplete fullscreen gamepads geolocation hashchange no-hiddenscroll history no-ie8compat sandbox no-seamless srcdoc imgcrossorigin srcset inputformaction input-formaction inputformenctype input-formenctype inputformmethod no-inputformtarget no-input-formtarget inputsearchevent intl ligatures olreversed mathml hovermq pointermq messagechannel beacon no-lowbandwidth eventsource fetch xhrresponsetype xhrresponsetypearraybuffer xhrresponsetypeblob xhrresponsetypedocument xhrresponsetypejson xhrresponsetypetext xhr2 notification pagevisibility performance pointerevents pointerlock postmessage queryselector quotamanagement requestanimationframe raf scriptasync scriptdefer serviceworker speechrecognition speechsynthesis localstorage sessionstorage no-websqldatabase no-stylescoped svg svgasimg svgclippaths svgfilters svgforeignobject inlinesvg smil templatestrings textareamaxlength no-touchevents typedarrays unicode unicoderange bloburls urlparser urlsearchparams no-userdata vibrate video videocrossorigin videoloop videopreload no-vml no-webintents webanimations webgl peerconnection datachannel getusermedia websockets websocketsbinary no-framed sharedworkers webworkers no-xdomainrequest exiforientation apng webp webpalpha webpanimation webplossless no-jpeg2000 no-jpegxr webp-alpha webp-animation webp-lossless datauri blobworkers indexeddb dataworkers csshyphens softhyphens softhyphensfind no-audiopreload no-videoautoplay indexeddb-deletedatabase" lang="en-US" style="">
+ <!--
+ Page saved with SingleFile 
+ url: https://anthropic.skilljar.com/claude-code-101/469798 
+ saved date: Mon Apr 13 2026 14:10:47 GMT+0900 (한국 표준시)
+-->
+ <!--<![endif]-->
+ <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# skilljar: http://ogp.me/ns/fb/skilljar#">
+  <meta charset="utf-8"/>
+  <link href="https://anthropic.skilljar.com/domain/open-search" rel="search" title="Skilljar" type="application/opensearchdescription+xml"/>
+  <link rel="stylesheet" href="assets/shared-0.css">
+  <meta content="width=device-width, initial-scale=1.0" id="viewport" name="viewport"/>
+  <meta content="Anthropic Courses" name="global-title"/>
+  <title>
+   훅(Hooks)
+  </title>
+  <link rel="stylesheet" href="assets/css/Hooks.css">
+  <link rel="stylesheet" href="assets/shared-1.css">
+  <link rel="stylesheet" href="assets/shared-2.css">
+  <link rel="stylesheet" href="assets/shared-3.css">
+  <meta content="website" property="og:type"/>
+  <meta content="https://anthropic.skilljar.com/" property="og:url"/>
+  <meta content="Anthropic Courses" property="og:title"/>
+  <meta content="Learn to build with Claude through Anthropic's comprehensive courses and training programs." property="og:description"/>
+  <meta content="https://cdn.sanity.io/images/4zrzovbb/website/c4bd33e7c8e809a2f9a9a5896ee13961e2a738ec-2400x1260.png" property="og:image"/>
+  <meta content="2400" property="og:image:width"/>
+  <meta content="1260" property="og:image:height"/>
+  <meta content="Anthropic Courses" property="og:site_name"/>
+  <meta content="summary_large_image" name="twitter:card"/>
+  <meta content="https://anthropic.skilljar.com/" name="twitter:url"/>
+  <meta content="Anthropic Courses" name="twitter:title"/>
+  <meta content="Learn to build with Claude AI through Anthropic's comprehensive courses and training programs." name="twitter:description"/>
+  <meta content="https://cdn.sanity.io/images/4zrzovbb/website/c4bd33e7c8e809a2f9a9a5896ee13961e2a738ec-2400x1260.png" name="twitter:image"/>
+  
+  <meta class="foundation-mq-small"/>
+  <meta class="foundation-mq-medium"/>
+  <meta class="foundation-mq-large"/>
+  <meta content="no-referrer" name="referrer"/>
+  <link href="assets/favicon.ico" rel="shortcut icon"/>
+  <link rel="stylesheet" href="assets/shared-4.css">
+  <link href="https://anthropic.skilljar.com/claude-code-101/469798" rel="canonical"/>
+  <meta content="default-src 'none'; font-src 'self' data:; img-src 'self' data:; style-src 'unsafe-inline'; media-src 'self' data:; script-src 'unsafe-inline' data:; object-src 'self' data:; frame-src 'self' data:;" http-equiv="content-security-policy"/>
+ </head>
+ <body class="v1 sj-page-lesson lp-color-scheme-light details-pane-bottom cbp-spmenu-fixed sj-nested-header-links sj-nested-footer-links">
+  <div class="lesson-page" data-course="claude-code-101" data-tags="" id="main-container">
+   <header id="header">
+    <div class="header-left" id="header-left">
+     <a aria-label="강의 목록" class="burger header-link focus-link-v2 show-search sf-hidden" id="left-nav-button" role="button" tabindex="0"></a>
+     <a class="header-logo-link focus-link-v2" href="https://anthropic.com/"><img alt="홈으로 이동" class="header-center-img" src="assets/shared-1.png"/></a>
+    </div>
+    <div id="header-right">
+     <div aria-labelledby="header-links-navigation" class="header-links-container headerheight align-vertical">
+      <h2 class="hide sf-hidden" id="header-links-navigation">
+       헤더 내비게이션
+      </h2>
+      <a class="header-link header-link--base focus-link-v2" href="https://www.anthropic.com/learn" target="_self">Anthropic 아카데미</a>
+      <a class="header-link header-link--base focus-link-v2" href="https://anthropic.skilljar.com/" target="_self">강좌</a>
+     </div>
+     <div class="headerheight align-vertical">
+      <a aria-label="메뉴 열기" class="header-link focus-link-v2 sf-hidden" id="toggle-header-mobile-dropdown" tabindex="0"></a>
+     </div>
+     <div class="account-nav headerheight align-vertical hide-mobile">
+      <a aria-expanded="false" aria-label="사용자 설정 메뉴" class="header-dropdown-button-v2 header-dropdown-button focus-link-v2" data-dropdown="header-drop" href="#" role="button"><img alt="Mancheol Jeon의 아바타" height="" src="assets/shared-0.jpg" width="32"/></a>
+     </div>
+    </div>
+    <ul class="f-dropdown right profile-dropdown-v2 hide-mobile" data-dropdown-content="" id="header-drop">
+     <li>
+      <a class="sj-text-my-profile focus-link-v2" href="https://anthropic.skilljar.com/accounts/profile/?next=/claude-code-101/469798" tabindex="-1"><span>내 프로필</span></a>
+     </li>
+     <li>
+      <a class="signout-link sj-text-sign-out focus-link-v2" href="https://anthropic.skilljar.com/auth/logout?next=https%3A%2F%2Fanthropic.skilljar.com%2Fclaude-code-101" tabindex="-1"><span>로그아웃</span></a>
+     </li>
+    </ul>
+   </header>
+   <div class="sf-hidden" id="header-mobile-dropdown">
+   </div>
+   <div id="lp-wrapper">
+    <div id="lp-content">
+     <div class="row">
+      <div class="small-11 small-centered columns" id="messages">
+      </div>
+     </div>
+     <div class="row details-pane-bottom details-pane-closed" id="lesson-body">
+      <div class="columns fullheight" id="lesson-main">
+       <div id="lesson-main-inner">
+        <div class="lesson-top sf-hidden">
+        </div>
+        <div id="lesson-main-content" style="top:0px">
+         <div>
+          <sjwc-lesson-content-item class="course-text-content course-scrollable-content" title="동영상">
+           <h3 class="sjwc-section-title">
+            동영상
+           </h3>
+           <p>
+            
+           </p>
+          </sjwc-lesson-content-item>
+          <sjwc-lesson-content-item class="course-text-content course-scrollable-content" title="훅(Hooks)">
+           <h3 class="sjwc-section-title">
+            훅(Hooks)
+           </h3>
+           <article>
+            <p>
+             훅을 사용하면 Claude Code의 라이프사이클에서 특정 시점에 명령을 실행할 수 있습니다. 훅과 이 강좌에서 다룬 다른 모든 것의 핵심 차이점은 훅이 <strong>결정론적</strong>이라는 것입니다 — 항상 실행됩니다.
+            </p>
+            <h2>
+             훅을 사용하는 이유
+            </h2>
+            <p>
+             CLAUDE.md에서 Claude에게 파일을 편집할 때마다 Prettier를 실행하라고 지시할 수 있습니다. 대부분의 경우 실행할 것입니다. 하지만 가끔은 실행하지 않을 수도 있습니다. 훅을 사용하면 예외 없이 매번 실행되도록 보장할 수 있습니다.
+            </p>
+            <p>
+             일반적인 사용 사례는 다음과 같습니다:
+            </p>
+            <ul>
+             <li>
+              파일 편집 후 자동 포매팅
+             </li>
+             <li>
+              규정 준수를 위한 모든 실행 명령 로깅
+             </li>
+             <li>
+              프로덕션 파일 수정과 같은 위험한 작업 차단
+             </li>
+             <li>
+              Claude가 작업을 완료했을 때 알림 보내기
+             </li>
+            </ul>
+            <h2>
+             작동 방식
+            </h2>
+            <p>
+             훅은 <code>settings.json</code>에서 설정합니다. 이벤트를 선택하고, 선택적으로 적용할 도구의 매처를 설정한 다음, 실행할 명령을 지정합니다. 사용 가능한 이벤트는 다음과 같습니다:
+            </p>
+            <ul>
+             <li>
+              <strong>PreToolUse</strong> — 도구 호출 전에 실행
+             </li>
+             <li>
+              <strong>PostToolUse</strong> — 도구 호출 완료 후 실행
+             </li>
+             <li>
+              <strong>UserPromptSubmit</strong> — 프롬프트를 제출할 때, Claude가 처리하기 전에 실행
+             </li>
+             <li>
+              <strong>Stop</strong> — Claude가 응답을 완료할 때 실행
+             </li>
+             <li>
+              <strong>Notification</strong> — Claude가 알림을 보낼 때 실행
+             </li>
+            </ul>
+            <p>
+             Claude Code 내부의 <code>/hooks</code> 명령이나 <code>settings.json</code>을 직접 편집하여 설정할 수 있습니다.
+            </p>
+            <img alt="훅 설정이 포함된 .claude 디렉토리 내의 settings.json 파일" src="assets/images/img-dd98d1ccdba2.jpg" style="max-width:100%;height:auto"/>
+            <h2>
+             실용적인 예시
+            </h2>
+            <p>
+             가장 일반적인 훅: 편집 후 자동 포매팅입니다. <strong>PostToolUse</strong> 훅에 <code>"Edit|MultiEdit|Write"</code> 매처를 설정하면 Claude가 파일을 수정할 때마다 실행됩니다. 이 명령은 파일 확장자를 확인하고 적절한 포매터를 실행합니다 — TypeScript에는 Prettier, Go에는 gofmt 등 프로젝트에서 사용하는 포매터를 실행합니다.
+            </p>
+            <h2>
+             PreToolUse로 차단하기
+            </h2>
+            <p>
+             PreToolUse 훅은 도구 호출이 실행되기 전에 <strong>차단</strong>할 수 있습니다. 훅은 stdin을 통해 도구 이름과 입력을 JSON으로 수신합니다. 종료 코드에 따라 동작이 결정됩니다:
+            </p>
+            <ul>
+             <li>
+              <strong>종료 코드 0</strong> — 정상적으로 진행합니다.
+             </li>
+             <li>
+              <strong>종료 코드 2</strong> — 작업을 차단합니다. stderr 메시지가 Claude에게 피드백으로 전달되어 차단된 이유를 알고 조정할 수 있습니다.
+             </li>
+             <li>
+              <strong>기타 종료 코드</strong> — 차단하지 않는 오류로, 사용자에게 표시되지만 아무것도 중단하지 않습니다.
+             </li>
+            </ul>
+            <p>
+             이것이 엄격한 규칙을 적용하는 방법입니다. 프로덕션 설정 디렉토리에 대한 쓰기를 차단합니다. <code>rm -rf</code>가 포함된 bash 명령을 차단합니다. main 브랜치에 대한 커밋을 차단합니다. 팀에서 제안이 아닌 <em>보장</em>이 필요한 모든 것에 적용할 수 있습니다.
+            </p>
+            <img alt="매처와 명령이 포함된 PreToolUse 및 PostToolUse 훅을 보여주는 settings.json 파일" src="assets/images/img-3dba0f9756f1.jpg" style="max-width:100%;height:auto"/>
+            <h2>
+             팀과 훅 공유하기
+            </h2>
+            <p>
+             <code>.claude/settings.json</code>에 설정된 훅은 프로젝트 수준이며 저장소에 커밋할 수 있습니다. 이렇게 하면 전체 팀이 자동으로 동일한 훅을 사용하게 됩니다. 명령에서 <code>CLAUDE_PROJECT_DIR</code> 환경 변수를 사용하여 프로젝트에 저장된 스크립트를 참조하면, Claude의 현재 작업 디렉토리와 관계없이 작동합니다.
+            </p>
+            <h2>
+             요약
+            </h2>
+            <p>
+             훅은 Claude Code의 동작에 대한 결정론적 제어를 제공합니다. 자동 포매팅과 로깅에는 PostToolUse를 사용하세요. 위험한 작업을 차단하려면 PreToolUse를 사용하세요. <code>/hooks</code> 명령이나 <code>settings.json</code>에서 설정하세요. 그리고 저장소에 커밋하여 팀 전체가 사용할 수 있도록 하세요.
+            </p>
+            <p>
+             매번 빠짐없이 실행되어야 하는 것이 있다면, 프롬프트에 넣지 마세요. 훅에 넣으세요.
+            </p>
+           </article>
+          </sjwc-lesson-content-item>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <footer id="lp-footer">
+    <div class="left">
+     <a aria-label="이전 - MCP" class="prev-lesson-button align-vertical focus-link-v2" data-track-click="Lesson,Prev,MCP,0" href="https://anthropic.skilljar.com/claude-code-101/469797" title="MCP"><div class="button-content">
+       <i aria-hidden="true" class="fa fa-angle-left"></i>
+       <span class="button-prev-title"><span>이전</span></span>
+       <span class="lesson-title-label">- MCP</span>
+      </div></a>
+    </div>
+    <span class="lesson-title-footer sf-hidden">훅(Hooks)</span>
+    <div class="right">
+     <div class="full-footer-height-wrapper align-vertical">
+      <div class="next-lesson-button">
+       <span><span class="lesson-title-label">강좌 퀴즈</span>
+        <a class="small button next-lesson-link" data-track-click="Lesson,Next,Course quiz,0" role="button" tabindex="0" title="강좌 퀴즈"><span>다음</span></a></span>
+      </div>
+      <div class="complete-lesson-button hide disabled sf-hidden">
+      </div>
+      <div aria-label="전체 화면 전환" aria-pressed="false" class="toggle-fullscreen focus-link-v2" role="button" tabindex="0">
+       <sjwc-icon aria-hidden="true" name="fa fa-arrows-alt">
+        <i class="fa fa-arrows-alt"></i>
+       </sjwc-icon>
+      </div>
+     </div>
+    </div>
+   </footer>
+   <div class="sf-hidden" id="lpLeftNavBackground">
+   </div>
+   <div id="course_completion_code">
+   </div>
+  </div>
+ </body>
+</html>

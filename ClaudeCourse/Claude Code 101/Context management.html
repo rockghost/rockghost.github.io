@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html class="js no-htmlimports no-flash sizes no-proximity transferables adownload no-ambientlight no-applicationcache audio audioloop webaudio no-batteryapi no-battery-api no-lowbattery blobconstructor blob-constructor canvas canvasblending todataurljpeg todataurlpng todataurlwebp canvaswinding canvastext contenteditable no-contextmenu cookies cors customelements crypto getrandomvalues cssall cssanimations appearance backdropfilter backgroundblendmode backgroundcliptext bgpositionshorthand bgpositionxy bgrepeatround bgrepeatspace backgroundsize bgsizecover borderimage borderradius boxshadow boxsizing csscalc checked csschunit csscolumns csscolumns-width csscolumns-span csscolumns-fill csscolumns-gap csscolumns-rule csscolumns-rulecolor csscolumns-rulestyle csscolumns-rulewidth csscolumns-breakbefore csscolumns-breakafter csscolumns-breakinside no-cssgridlegacy cssgrid cubicbezierrange no-displayrunin no-display-runin displaytable display-table ellipsis cssescape cssexunit supports cssfilters flexbox flexboxlegacy no-flexboxtweener flexwrap fontface generatedcontent cssgradients no-hairline hsla cssinvalid lastchild cssmask mediaqueries multiplebgs nthchild objectfit object-fit opacity no-overflowscrolling csspointerevents csspositionsticky csspseudoanimations csstransitions no-csspseudotransitions cssreflections no-regions cssremunit cssresize rgba cssscrollbar scrollsnappoints shapes siblinggeneral subpixelfont target textalignlast textshadow csstransforms csstransformslevel2 csstransforms3d preserve3d userselect cssvalid cssvhunit cssvmaxunit cssvminunit cssvwunit willchange no-wrapflow customprotocolhandler customevent no-dart dataview classlist no-createelementattrs no-createelement-attrs dataset documentfragment hidden no-microdata mutationobserver passiveeventlisteners bdi datalistelem details outputelem picture progressbar meter ruby template no-time texttrackapi track unknownelements emoji es5array es5date es5function es5object strictmode es5string json es5syntax es5undefined es5 es6array es6collections no-contains generators es6math es6number es6object promises es6string devicemotion deviceorientation oninput eventlistener filereader filesystem no-capture fileinput fileinputdirectory formattribute formvalidation no-localizednumber placeholder no-requestautocomplete fullscreen gamepads geolocation hashchange no-hiddenscroll history no-ie8compat sandbox no-seamless srcdoc imgcrossorigin srcset inputformaction input-formaction inputformenctype input-formenctype inputformmethod no-inputformtarget no-input-formtarget inputsearchevent intl ligatures olreversed mathml hovermq pointermq messagechannel beacon no-lowbandwidth eventsource fetch xhrresponsetype xhrresponsetypearraybuffer xhrresponsetypeblob xhrresponsetypedocument xhrresponsetypejson xhrresponsetypetext xhr2 notification pagevisibility performance pointerevents pointerlock postmessage queryselector quotamanagement requestanimationframe raf scriptasync scriptdefer serviceworker speechrecognition speechsynthesis localstorage sessionstorage no-websqldatabase no-stylescoped svg svgasimg svgclippaths svgfilters svgforeignobject inlinesvg smil templatestrings textareamaxlength no-touchevents typedarrays unicode unicoderange bloburls urlparser urlsearchparams no-userdata vibrate video videocrossorigin videoloop videopreload no-vml no-webintents webanimations webgl peerconnection datachannel getusermedia websockets websocketsbinary no-framed sharedworkers webworkers no-xdomainrequest exiforientation apng webp webpalpha webpanimation webplossless no-jpeg2000 no-jpegxr webp-alpha webp-animation webp-lossless datauri blobworkers dataworkers indexeddb csshyphens softhyphens softhyphensfind no-audiopreload no-videoautoplay indexeddb-deletedatabase" lang="en-US" style="">
+ <!--
+ Page saved with SingleFile 
+ url: https://anthropic.skilljar.com/claude-code-101/469793 
+ saved date: Mon Apr 13 2026 14:10:47 GMT+0900 (한국 표준시)
+-->
+ <!--<![endif]-->
+ <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# skilljar: http://ogp.me/ns/fb/skilljar#">
+  <meta charset="utf-8"/>
+  <link href="https://anthropic.skilljar.com/domain/open-search" rel="search" title="Skilljar" type="application/opensearchdescription+xml"/>
+  <link rel="stylesheet" href="assets/shared-0.css">
+  <meta content="width=device-width, initial-scale=1.0" id="viewport" name="viewport"/>
+  <meta content="Anthropic Courses" name="global-title"/>
+  <title>
+   컨텍스트 관리
+  </title>
+  <link rel="stylesheet" href="assets/css/Context-management.css">
+  <link rel="stylesheet" href="assets/shared-1.css">
+  <link rel="stylesheet" href="assets/shared-2.css">
+  <link rel="stylesheet" href="assets/shared-3.css">
+  <meta content="website" property="og:type"/>
+  <meta content="https://anthropic.skilljar.com/" property="og:url"/>
+  <meta content="Anthropic Courses" property="og:title"/>
+  <meta content="Learn to build with Claude through Anthropic's comprehensive courses and training programs." property="og:description"/>
+  <meta content="https://cdn.sanity.io/images/4zrzovbb/website/c4bd33e7c8e809a2f9a9a5896ee13961e2a738ec-2400x1260.png" property="og:image"/>
+  <meta content="2400" property="og:image:width"/>
+  <meta content="1260" property="og:image:height"/>
+  <meta content="Anthropic Courses" property="og:site_name"/>
+  <meta content="summary_large_image" name="twitter:card"/>
+  <meta content="https://anthropic.skilljar.com/" name="twitter:url"/>
+  <meta content="Anthropic Courses" name="twitter:title"/>
+  <meta content="Learn to build with Claude AI through Anthropic's comprehensive courses and training programs." name="twitter:description"/>
+  <meta content="https://cdn.sanity.io/images/4zrzovbb/website/c4bd33e7c8e809a2f9a9a5896ee13961e2a738ec-2400x1260.png" name="twitter:image"/>
+  
+  <meta class="foundation-mq-small"/>
+  <meta class="foundation-mq-medium"/>
+  <meta class="foundation-mq-large"/>
+  <meta content="no-referrer" name="referrer"/>
+  <link href="assets/favicon.ico" rel="shortcut icon"/>
+  <link rel="stylesheet" href="assets/shared-4.css">
+  <link href="https://anthropic.skilljar.com/claude-code-101/469793" rel="canonical"/>
+  <meta content="default-src 'none'; font-src 'self' data:; img-src 'self' data:; style-src 'unsafe-inline'; media-src 'self' data:; script-src 'unsafe-inline' data:; object-src 'self' data:; frame-src 'self' data:;" http-equiv="content-security-policy"/>
+ </head>
+ <body class="v1 sj-page-lesson lp-color-scheme-light details-pane-bottom cbp-spmenu-fixed sj-nested-header-links sj-nested-footer-links">
+  <div class="lesson-page" data-course="claude-code-101" data-tags="" id="main-container">
+   <header id="header">
+    <div class="header-left" id="header-left">
+     <a aria-label="레슨" class="burger header-link focus-link-v2 show-search sf-hidden" id="left-nav-button" role="button" tabindex="0"></a>
+     <a class="header-logo-link focus-link-v2" href="https://anthropic.com/"><img alt="홈으로 이동" class="header-center-img" src="assets/shared-1.png"/></a>
+    </div>
+    <div id="header-right">
+     <div aria-labelledby="header-links-navigation" class="header-links-container headerheight align-vertical">
+      <h2 class="hide sf-hidden" id="header-links-navigation">
+       헤더 내비게이션
+      </h2>
+      <a class="header-link header-link--base focus-link-v2" href="https://www.anthropic.com/learn" target="_self">Anthropic 아카데미</a>
+      <a class="header-link header-link--base focus-link-v2" href="https://anthropic.skilljar.com/" target="_self">강좌</a>
+     </div>
+     <div class="headerheight align-vertical">
+      <a aria-label="메뉴 열기" class="header-link focus-link-v2 sf-hidden" id="toggle-header-mobile-dropdown" tabindex="0"></a>
+     </div>
+     <div class="account-nav headerheight align-vertical hide-mobile">
+      <a aria-expanded="false" aria-label="사용자 설정 메뉴" class="header-dropdown-button-v2 header-dropdown-button focus-link-v2" data-dropdown="header-drop" href="#" role="button"><img alt="Mancheol Jeon의 아바타" height="" src="assets/shared-0.jpg" width="32"/></a>
+     </div>
+    </div>
+    <ul class="f-dropdown right profile-dropdown-v2 hide-mobile" data-dropdown-content="" id="header-drop">
+     <li>
+      <a class="sj-text-my-profile focus-link-v2" href="https://anthropic.skilljar.com/accounts/profile/?next=/claude-code-101/469793" tabindex="-1"><span>내 프로필</span></a>
+     </li>
+     <li>
+      <a class="signout-link sj-text-sign-out focus-link-v2" href="https://anthropic.skilljar.com/auth/logout?next=https%3A%2F%2Fanthropic.skilljar.com%2Fclaude-code-101" tabindex="-1"><span>로그아웃</span></a>
+     </li>
+    </ul>
+   </header>
+   <div class="sf-hidden" id="header-mobile-dropdown">
+   </div>
+   <div id="lp-wrapper">
+    <div id="lp-content">
+     <div class="row">
+      <div class="small-11 small-centered columns" id="messages">
+      </div>
+     </div>
+     <div class="row details-pane-bottom details-pane-closed" id="lesson-body">
+      <div class="columns fullheight" id="lesson-main">
+       <div id="lesson-main-inner">
+        <div class="lesson-top sf-hidden">
+        </div>
+        <div id="lesson-main-content" style="top:0px">
+         <div>
+          <sjwc-lesson-content-item class="course-text-content course-scrollable-content" title="동영상">
+           <h3 class="sjwc-section-title">
+            동영상
+           </h3>
+           <p>
+            
+           </p>
+          </sjwc-lesson-content-item>
+          <sjwc-lesson-content-item class="course-text-content course-scrollable-content" title="컨텍스트 관리">
+           <h3 class="sjwc-section-title">
+            컨텍스트 관리
+           </h3>
+           <article>
+            <p>
+             컨텍스트는 Claude의 작업 메모리입니다. Claude가 읽는 모든 파일, 실행하는 모든 명령, 여러분이 보내는 모든 메시지 — 이 모든 것이 컨텍스트 창의 공간을 차지합니다.
+            </p>
+            <h2>
+             컨텍스트 창이란 무엇인가?
+            </h2>
+            <p>
+             컨텍스트 창은 Claude가 메모리에 보유할 수 있는 공간의 크기라고 생각하면 됩니다. 프롬프트를 입력하거나, Claude가 파일을 읽거나, 도구를 호출하거나, 도구 호출 결과를 받을 때마다 모두 컨텍스트 창에 추가됩니다. 공간이 한정되어 있기 때문에, 이를 어떻게 활용하는지 최적화하는 것이 중요합니다.
+            </p>
+            <img alt="컨텍스트 창을 토큰 그리드로 보여주는 다이어그램 — 일부는 사용 중이고 대부분은 사용 가능" src="assets/images/img-c51658d47880.jpg" style="max-width:100%;height:auto"/>
+            <h2>
+             컨텍스트가 가득 차면 어떻게 되는가
+            </h2>
+            <p>
+             한계에 가까워지면 컨텍스트 창이 자동으로 <strong>압축</strong>됩니다. 압축은 중요한 세부 사항을 요약하고 불필요한 도구 호출 결과를 제거하여 공간을 확보합니다. 이 과정에서 세부 사항이 손실될 수 있다는 점에 유의하세요.
+            </p>
+            <img alt="Claude Code에서 컨텍스트를 요약하면서 '대화 압축 중...'을 표시하는 화면" src="assets/images/img-e0c13f3538df.jpg" style="max-width:100%;height:auto"/>
+            <img alt="주요 기술 개념과 파일을 포함한 이전 대화의 압축 요약을 표시하는 Claude Code 화면" src="assets/images/img-2432213f162d.jpg" style="max-width:100%;height:auto"/>
+            <h2>
+             명령어
+            </h2>
+            <p>
+             <code>/compact</code> 명령어를 사용하여 수동으로 압축을 실행할 수 있습니다. 이 명령은 해당 시점까지의 모든 내용을 압축합니다. 이전에 작업한 내용의 기억을 유지하면서 컨텍스트 공간을 확보하고 싶을 때 유용합니다.
+            </p>
+            <img alt="Claude Code 자동완성 메뉴의 /compact 명령어" src="assets/images/img-752561563e9f.jpg" style="max-width:100%;height:auto"/>
+            <p>
+             이전 세션의 기억 없이 완전히 처음부터 시작하고 싶다면 <code>/clear</code>를 실행하세요. 이 명령은 모든 것을 제거합니다.
+            </p>
+            <img alt="새 세션을 시작하기 위해 Claude Code에서 /clear를 실행하는 화면" src="assets/images/img-0c4fd5f66cb7.jpg" style="max-width:100%;height:auto"/>
+            <p>
+             컨텍스트 상태를 확인하려면 <code>/context</code> 명령어를 실행하세요. 컨텍스트 크기의 개요, 가장 많은 공간을 차지하는 카테고리, 그리고 분류를 보여주는 시각적 그래픽을 확인할 수 있습니다.
+            </p>
+            <img alt="시각적 막대 차트로 컨텍스트 사용량 분석을 보여주는 /context 명령어 출력 화면" src="assets/images/img-428d1ef03451.jpg" style="max-width:100%;height:auto"/>
+            <h2>
+             언제 무엇을 사용할 것인가
+            </h2>
+            <p>
+             일반적인 경험 법칙:
+            </p>
+            <ul>
+             <li>
+              <strong><code>/compact</code> 사용</strong> — 특정 기능을 작업하면서 컨텍스트 한계에 도달했지만 계속 작업해야 할 때 사용합니다. 컨텍스트를 현재 작업 중인 기능과 관련된 내용으로 유지하는 것이 중요합니다.
+             </li>
+             <li>
+              <strong><code>/clear</code> 사용</strong> — 새로운 기능을 시작하고 싶을 때 사용합니다. 이전 대화가 새로운 작업에 편향을 주는 것을 원하지 않을 것입니다. 세션 간에 Claude가 기억하기를 원하는 내용은 CLAUDE.md 파일에 넣어서 처음부터 다시 탐색할 필요가 없도록 하세요. <br/> <br/> <img alt="명령어, 중요 참고사항, 아키텍처 섹션이 포함된 CLAUDE.md 파일" src="assets/images/img-5d63486196b7.jpg" style="max-width:100%;height:auto"/>
+             </li>
+            </ul>
+            <h2>
+             컨텍스트 공간 절약 팁
+            </h2>
+            <p>
+             <strong>구체적으로 작성하세요.</strong> 모호한 프롬프트가 더 작아 보일 수 있지만, 장기적으로는 실제로 더 많은 컨텍스트를 소비합니다. 명확한 지시 없이는 Claude가 코드베이스를 더 많이 탐색하고 자체적으로 추론해야 하는데, 이는 상세한 프롬프트보다 훨씬 더 많은 컨텍스트 공간을 차지합니다.
+            </p>
+            <p>
+             <strong>MCP 서버를 관리하세요.</strong> MCP 서버는 사용하지 않을 때에도 기본적으로 사용 가능한 모든 도구를 컨텍스트에 로드합니다. 현재 프로젝트와 관련 없는 서버가 구성되어 있다면 끄는 것을 고려하세요. 또한 MCP 서버와 유사하게 작동하지만 모든 것을 미리 컨텍스트에 로드하지 않는 "스킬(Skills)"을 사용해 볼 수도 있습니다.
+            </p>
+            <p>
+             <strong>서브에이전트를 사용하세요.</strong> 서브에이전트는 메인 에이전트와 병렬로 실행되지만 완전히 별도의 컨텍스트 창을 가집니다. "인증 엔드포인트가 어디에 있나요?"와 같이 답변만 필요한 작업의 경우, 서브에이전트가 작업을 수행하고 메인 에이전트에 요약만 반환하여 주요 컨텍스트를 깔끔하게 유지합니다.
+            </p>
+            <br/>
+            <h2>
+             요약
+            </h2>
+            <p>
+             Claude Code 내에서 컨텍스트를 관리하는 것은 매우 중요합니다. <code>/compact</code>를 사용하여 긴 세션을 요약하고 <code>/clear</code>를 사용하여 새로 시작하세요. 컨텍스트 창을 효과적으로 사용하려면: 프롬프트를 구체적으로 작성하고, 현재 컨텍스트를 무엇이 소비하고 있는지 확인하고, 결과만 필요한 작업은 서브에이전트에 위임하세요.
+            </p>
+           </article>
+          </sjwc-lesson-content-item>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <footer id="lp-footer">
+    <div class="left">
+     <a aria-label="이전 - 탐색 → 계획 → 코딩 → 커밋 워크플로우" class="prev-lesson-button align-vertical focus-link-v2" data-track-click="Lesson,Prev,The explore → plan → code → commit workflow,0" href="https://anthropic.skilljar.com/claude-code-101/469792" title="탐색 → 계획 → 코딩 → 커밋 워크플로우"><div class="button-content">
+       <i aria-hidden="true" class="fa fa-angle-left"></i>
+       <span class="button-prev-title"><span>이전</span></span>
+       <span class="lesson-title-label">- 탐색 → 계획 → 코딩 → 커밋 워크플로우</span>
+      </div></a>
+    </div>
+    <span class="lesson-title-footer sf-hidden">컨텍스트 관리</span>
+    <div class="right">
+     <div class="full-footer-height-wrapper align-vertical">
+      <div class="next-lesson-button">
+       <span><span class="lesson-title-label">코드 리뷰</span>
+        <a class="small button next-lesson-link" data-track-click="Lesson,Next,Code review,0" role="button" tabindex="0" title="코드 리뷰"><span>다음</span></a></span>
+      </div>
+      <div class="complete-lesson-button hide disabled sf-hidden">
+      </div>
+      <div aria-label="전체 화면 전환" aria-pressed="false" class="toggle-fullscreen focus-link-v2" role="button" tabindex="0">
+       <sjwc-icon aria-hidden="true" name="fa fa-arrows-alt">
+        <i class="fa fa-arrows-alt"></i>
+       </sjwc-icon>
+      </div>
+     </div>
+    </div>
+   </footer>
+   <div class="sf-hidden" id="lpLeftNavBackground">
+   </div>
+   <div id="course_completion_code">
+   </div>
+  </div>
+ </body>
+</html>
