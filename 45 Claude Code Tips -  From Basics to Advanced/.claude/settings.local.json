@@ -1,0 +1,6 @@
+{
+  "enabledMcpjsonServers": [
+    "dooray-mcp-server"
+  ],
+  "enableAllProjectMcpServers": true
+}
