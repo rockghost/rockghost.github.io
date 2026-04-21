@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code Cheat Sheet</title>
+  <meta name="description" content="Claude Code cheat sheet — keyboard shortcuts, slash commands, CLI flags, MCP servers, memory files, skills, agents, env vars. Windows / macOS toggle.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>">
+  <style>
+    /* === RESET & BASE === */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      /* Section colors */
+      --keyboard-bg: #EFF6FF;
+      --keyboard-header: #2563EB;
+      --slash-bg: #F5F3FF;
+      --slash-header: #7C3AED;
+      --skills-bg: #ECFDF5;
+      --skills-header: #059669;
+      --memory-bg: #FFFBEB;
+      --memory-header: #D97706;
+      --config-bg: #FFF7ED;
+      --config-header: #C2410C;
+      --workflows-bg: #FEF2F2;
+      --workflows-header: #DC2626;
+      --mcp-bg: #ECFEFF;
+      --mcp-header: #0891B2;
+      --cli-bg: #F9FAFB;
+      --cli-header: #4B5563;
+
+      /* Typography */
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    }
+
+    html {
+      /* Fixed root size — header/footer stay at this scale regardless of --zoom */
+      --zoom: 1;
+      font-size: 15px;
+    }
+
+    /* Only the cheatsheet grid scales with --zoom */
+    .main-grid {
+      zoom: var(--zoom);
+    }
+
+    body {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      line-height: 1.25;
+      background: #fff;
+      color: #1F2937;
+      padding: 8mm;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* === HEADER === */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4mm;
+      padding-bottom: 2mm;
+      border-bottom: 1px solid #E5E7EB;
+      gap: 4mm;
+      flex-wrap: wrap;
+    }
+
+    .header h1 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 4mm;
+      flex-wrap: wrap;
+    }
+
+    .header-meta {
+      font-size: 0.8rem;
+      color: #6B7280;
+      text-align: right;
+    }
+
+    .header-meta .version-info {
+      display: block;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .header-meta .last-updated {
+      display: block;
+      font-size: 0.75rem;
+      color: #9CA3AF;
+    }
+
+    /* === ZOOM CONTROLS === */
+    .zoom-controls {
+      display: flex;
+      align-items: center;
+      border: 1px solid #D1D5DB;
+      border-radius: 6px;
+      background: #F9FAFB;
+      overflow: hidden;
+    }
+
+    .zoom-btn {
+      background: #fff;
+      border: none;
+      padding: 5px 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: #374151;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 28px;
+      transition: background 0.15s;
+    }
+
+    .zoom-btn:hover {
+      background: #F3F4F6;
+    }
+
+    .zoom-btn + .zoom-btn {
+      border-left: 1px solid #D1D5DB;
+    }
+
+    .zoom-level {
+      padding: 5px 10px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #4B5563;
+      cursor: pointer;
+      background: #fff;
+      min-width: 48px;
+      text-align: center;
+      user-select: none;
+    }
+
+    .zoom-level:hover {
+      background: #F3F4F6;
+    }
+
+    /* === OS TOGGLE === */
+    .os-toggle {
+      display: flex;
+      border: 1px solid #9CA3AF;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #F3F4F6;
+    }
+
+    .os-btn {
+      background: #fff;
+      border: none;
+      padding: 6px 12px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      line-height: 1;
+      color: #6B7280;
+      transition: background 0.15s, color 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      font-weight: 600;
+    }
+
+    .os-btn + .os-btn {
+      border-left: 1px solid #9CA3AF;
+    }
+
+    .os-btn.active {
+      background: #111827;
+      color: #fff;
+    }
+
+    .os-btn:hover:not(.active) {
+      background: #E5E7EB;
+    }
+
+    /* === FOOTER === */
+    .footer {
+      margin-top: 6mm;
+      padding-top: 3mm;
+      border-top: 1px solid #E5E7EB;
+      font-size: 1.1rem;
+      color: #6B7280;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2mm 4mm;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .footer a {
+      color: #2563EB;
+      text-decoration: none;
+      border-bottom: 1px dashed #93C5FD;
+      font-weight: 700;
+    }
+
+    .footer a:hover {
+      color: #1D4ED8;
+      border-bottom-style: solid;
+    }
+
+    /* === MAIN GRID === */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 0.88fr 1.04fr 1.02fr 1.06fr;
+      gap: 3mm;
+      align-items: stretch;
+    }
+
+    /* === SECTION BASE === */
+    .section {
+      border-radius: 5px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .section-keyboard-mcp > .section:last-child,
+    .section-slash-memory > .section:last-child,
+    .section-workflows-config > .section:last-child,
+    .section-skills-cli > .section:last-child {
+      flex: 1;
+    }
+
+    .section-header {
+      padding: 2mm 3mm;
+      color: white;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      display: flex;
+      align-items: center;
+      gap: 2mm;
+    }
+
+    .section-content {
+      padding: 2.5mm 3.5mm;
+      flex: 1;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+
+    /* === SUB-SECTION === */
+    .sub-header {
+      font-weight: 700;
+      font-style: italic;
+      font-size: 0.85rem;
+      color: #374151;
+      margin-top: 2mm;
+      margin-bottom: 0.8mm;
+      padding-bottom: 0.5mm;
+      border-bottom: 1px dotted rgba(0,0,0,0.15);
+    }
+
+    .sub-header:first-child {
+      margin-top: 0;
+    }
+
+    /* === KEY-VALUE ROWS === */
+    .row {
+      display: flex;
+      gap: 2mm;
+      padding: 0.6mm 0;
+      line-height: 1.3;
+    }
+
+    .key {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #1F2937;
+      white-space: nowrap;
+      flex-shrink: 0;
+      overflow-wrap: break-word;
+      word-break: break-all;
+    }
+
+    .desc {
+      font-size: 0.85rem;
+      color: #4B5563;
+      flex: 1;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      min-width: 0;
+    }
+
+    /* === KEYCAP STYLE === */
+    .keycap {
+      display: inline-block;
+      background: linear-gradient(180deg, #FAFAFA 0%, #E5E7EB 100%);
+      border: 1px solid #D1D5DB;
+      border-radius: 3px;
+      padding: 0.5mm 1.8mm;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #374151;
+      box-shadow: 0 1px 1px rgba(0,0,0,0.1), inset 0 -1px 0 rgba(0,0,0,0.05);
+      margin-right: 0.5mm;
+    }
+
+    /* === NEW BADGE === */
+    .badge-new {
+      display: inline-block;
+      background: #EF4444;
+      color: white;
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 0.3mm 1.5mm;
+      border-radius: 2px;
+      margin-left: 1.5mm;
+      vertical-align: middle;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    code {
+      font-family: var(--font-mono);
+      background: rgba(0,0,0,0.05);
+      padding: 0.2mm 1mm;
+      border-radius: 2px;
+      font-size: 0.95em;
+    }
+
+    /* === SECTION SPECIFIC COLORS === */
+    .section-keyboard { background: var(--keyboard-bg); }
+    .section-keyboard .section-header { background: var(--keyboard-header); }
+    .section-slash { background: var(--slash-bg); }
+    .section-slash .section-header { background: var(--slash-header); }
+    .section-skills { background: var(--skills-bg); }
+    .section-skills .section-header { background: var(--skills-header); }
+    .section-memory { background: var(--memory-bg); }
+    .section-memory .section-header { background: var(--memory-header); }
+    .section-workflows { background: var(--workflows-bg); }
+    .section-workflows .section-header { background: var(--workflows-header); }
+    .section-mcp { background: var(--mcp-bg); }
+    .section-mcp .section-header { background: var(--mcp-header); }
+    .section-cli { background: var(--cli-bg); }
+    .section-cli .section-header { background: var(--cli-header); }
+    .section-config { background: var(--config-bg); }
+    .section-config .section-header { background: var(--config-header); }
+
+    /* === GRID PLACEMENT === */
+    .section-keyboard-mcp,
+    .section-slash-memory,
+    .section-workflows-config,
+    .section-skills-cli {
+      display: flex;
+      flex-direction: column;
+      gap: 3mm;
+    }
+    .section-keyboard-mcp { grid-column: 1; grid-row: 1; }
+    .section-slash-memory { grid-column: 2; grid-row: 1; }
+    .section-workflows-config { grid-column: 3; grid-row: 1; }
+    .section-skills-cli { grid-column: 4; grid-row: 1; }
+
+    /* === OS-specific row visibility === */
+    body[data-os="mac"] [data-os="win"] { display: none !important; }
+    body[data-os="win"] [data-os="mac"] { display: none !important; }
+
+    /* === RESPONSIVE === */
+    @media screen and (max-width: 1200px) {
+      .main-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .section-keyboard-mcp { grid-column: 1; grid-row: 1; }
+      .section-slash-memory { grid-column: 2; grid-row: 1; }
+      .section-workflows-config { grid-column: 1; grid-row: 2; }
+      .section-skills-cli { grid-column: 2; grid-row: 2; }
+    }
+
+    @media screen and (max-width: 700px) {
+      body { padding: 4mm; }
+      .header h1 { font-size: 1.4rem; }
+      .main-grid { grid-template-columns: 1fr; }
+      .section-keyboard-mcp,
+      .section-slash-memory,
+      .section-workflows-config,
+      .section-skills-cli {
+        grid-column: 1;
+        grid-row: auto;
+      }
+    }
+  </style>
+</head>
+<body data-os="win">
+  <div class="page">
+    <!-- HEADER -->
+    <header class="header">
+      <h1>Claude Code Cheat Sheet</h1>
+      <div class="header-right">
+        <div class="zoom-controls" role="group" aria-label="Zoom controls">
+          <button class="zoom-btn" id="zoomOut" title="Zoom out" aria-label="Zoom out">−</button>
+          <span class="zoom-level" id="zoomLevel" title="Reset zoom">100%</span>
+          <button class="zoom-btn" id="zoomIn" title="Zoom in" aria-label="Zoom in">+</button>
+        </div>
+        <div class="os-toggle" id="osToggle">
+          <button class="os-btn active" data-os-btn="win" title="Windows shortcuts">
+            <svg width="14" height="14" viewBox="0 0 88 88" fill="currentColor"><path d="M0 12.402l35.687-4.86.016 34.423-35.67.203zm35.67 33.529l.028 34.453L.028 71.48l-.026-25.55zm4.326-39.025L87.314 0v41.527l-47.318.376zm47.329 39.349l-.011 41.34-47.318-6.678-.066-34.739z"/></svg>
+            Windows
+          </button>
+          <button class="os-btn" data-os-btn="mac" title="macOS shortcuts">
+            <svg width="14" height="14" viewBox="0 0 814 1000" fill="currentColor"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76.5 0-103.7 40.8-165.9 40.8s-105.6-57.8-155.5-127.4c-58.4-83-106.3-211.5-106.3-334.2 0-196.5 127.8-300.9 253.3-300.9 66.8 0 122.4 43.4 164.1 43.4 39.5 0 101.1-46 176.2-46 28.5 0 130.9 2.6 198.3 99.1zm-169.5-92.8c31.2-37 52.4-88.1 52.4-139.3 0-7.1-.6-14.3-1.9-20.1-50 1.6-109.2 33.3-145 75.1-25.8 29.3-52.4 79.8-52.4 131.6 0 7.8.6 15.6 1.3 18.2 2.6.6 6.4 1.3 10.3 1.3 44.7 0 101.1-30.5 135.3-66.8z"/></svg>
+            macOS
+          </button>
+        </div>
+        <div class="header-meta">
+          <span class="version-info">Claude Code v2.1.114</span>
+          <span class="last-updated">Last updated: April 18, 2026</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN GRID -->
+    <main class="main-grid">
+
+      <!-- KEYBOARD + MCP WRAPPER -->
+      <div class="section-keyboard-mcp">
+        <!-- KEYBOARD SHORTCUTS -->
+        <section class="section section-keyboard">
+          <div class="section-header">⌨️ Keyboard Shortcuts</div>
+          <div class="section-content">
+            <div class="sub-header">General Controls</div>
+            <div class="row"><span class="key"><span class="keycap">Ctrl</span><span class="keycap">C</span></span> <span class="desc">Cancel input/generation</span></div>
+            <div class="row"><span class="key"><span class="keycap">Ctrl</span><span class="keycap">D</span></span> <span class="desc">Exit session</span></div>
+            <div class="row"><span class="key"><span class="keycap">Ctrl</span><span class="keycap">L</span></span> <span class="desc">Clear prompt input + force full screen redraw</span></div>
+            <div class="row"><span class="key"><span class="keycap">Ctrl</span><span class="keycap">O</span></span> <span class="desc">Toggle transcript viewer (verbose tool usage); cycles focus view in fullscreen<span class="badge-new">NEW</span></span></div>
+            <div class="row"><span class="key"><span class="keycap">Ctrl</span><span class="keycap">U</span></span> <span class="desc">Clear entire input buffer</span></div>
+            <div class="row"><span class="key"><span class="keycap">Ctrl</span><span class="keycap">Y</span></span> <span class="desc">Restore cleared input buffer</span></div>
+            <div class="row"><span class="key"><span class="keycap">Ctrl</span><span class="keycap">G</span></span> <span class="desc">Open in editor (same as Ctrl+X Ctrl+E)</span></div>
+            <div class="row"><span class="key"><span class="keycap">Ctrl</span><span class="keycap">R</span></span> <span class="desc">Reverse search history</span></div>
+            <div class="row"><span class="key"><span class="keycap">Ctrl</span><span class="keycap">X</span> <span class="keycap">Ctrl</span><span class="keycap">K</span></span> <span class="desc">Kill all background agents (press twice to confirm)</span></div>
+            <div class="row"><span class="key"><span class="keycap">Ctrl</span><span class="keycap">B</span></span> <span class="desc">Background running tasks</span></div>
+            <div class="row"><span class="key"><span class="keycap">Ctrl</span><span class="keycap">T</span></span> <span class="desc">Toggle task list</span></div>
+            <div class="row"><span class="key"><span class="keycap">Esc</span><span class="keycap">Esc</span></span> <span class="desc">Rewind or summarize</span></div>
+
+            <div class="sub-header">Mode Switching</div>
+            <div class="row"><span class="key" data-os="mac"><span class="keycap">⇧</span><span class="keycap">Tab</span></span><span class="key" data-os="win"><span class="keycap">Shift</span><span class="keycap">Tab</span></span> <span class="desc">Cycle permission modes (default → acceptEdits → plan → …)</span></div>
+
+            <div class="sub-header" data-os="mac">Mac Option Keys (configure Option as Meta)</div>
+            <div class="sub-header" data-os="win">Windows Alt Keys</div>
+            <div class="row"><span class="key" data-os="mac"><span class="keycap">⌥</span><span class="keycap">P</span></span><span class="key" data-os="win"><span class="keycap">Alt</span><span class="keycap">P</span></span> <span class="desc">Switch model</span></div>
+            <div class="row"><span class="key" data-os="mac"><span class="keycap">⌥</span><span class="keycap">T</span></span><span class="key" data-os="win"><span class="keycap">Alt</span><span class="keycap">T</span></span> <span class="desc">Toggle extended thinking</span></div>
+            <div class="row"><span class="key" data-os="mac"><span class="keycap">⌥</span><span class="keycap">O</span></span><span class="key" data-os="win"><span class="keycap">Alt</span><span class="keycap">O</span></span> <span class="desc">Toggle fast mode</span></div>
+
+            <div class="sub-header">Input</div>
+            <div class="row"><span class="key"><span class="keycap">\</span><span class="keycap">Enter</span></span> <span class="desc">Newline</span></div>
+
+            <div class="sub-header">Prefixes</div>
+            <div class="row"><span class="key">/</span> <span class="desc">Slash command</span></div>
+            <div class="row"><span class="key">!</span> <span class="desc">Direct bash</span></div>
+            <div class="row"><span class="key">@</span> <span class="desc">File mention + autocomplete</span></div>
+
+            <div class="sub-header">Platform Notes</div>
+            <div class="row" data-os="mac"><span class="key">Terminal</span> <span class="desc">Terminal.app or iTerm2 — run <code>/terminal-setup</code> after install</span></div>
+            <div class="row" data-os="mac"><span class="key">Install</span> <span class="desc"><code>brew install claude-code</code> or <code>npm install -g @anthropic-ai/claude-code</code></span></div>
+            <div class="row" data-os="win"><span class="key">Terminal</span> <span class="desc">Windows Terminal (recommended) — PowerShell, cmd, or WSL</span></div>
+            <div class="row" data-os="win"><span class="key">Install</span> <span class="desc"><code>winget install Anthropic.ClaudeCode</code> or <code>npm install -g @anthropic-ai/claude-code</code></span></div>
+            <div class="row" data-os="win"><span class="key">WSL</span> <span class="desc">Recommended for Linux-style tooling and <code>/etc/claude-code/</code> managed policy</span></div>
+          </div>
+        </section>
+
+        <!-- MCP SERVERS -->
+        <section class="section section-mcp">
+          <div class="section-header">🔌 MCP Servers</div>
+          <div class="section-content">
+            <div class="sub-header">Add Servers</div>
+            <div class="row"><span class="key">--transport http</span> <span class="desc">Remote HTTP (recommended)</span></div>
+            <div class="row"><span class="key">--transport stdio</span> <span class="desc">Local process</span></div>
+            <div class="row"><span class="key">--transport sse</span> <span class="desc">Remote SSE</span></div>
+            <div class="sub-header">Scopes</div>
+            <div class="row"><span class="key">Local</span> <span class="desc">~/.claude.json (you only)</span></div>
+            <div class="row"><span class="key">Project</span> <span class="desc">.mcp.json (shared/VCS)</span></div>
+            <div class="row"><span class="key">User</span> <span class="desc">~/.claude.json (global)</span></div>
+            <div class="sub-header">Manage</div>
+            <div class="row"><span class="key">/mcp</span> <span class="desc">Interactive UI</span></div>
+            <div class="row"><span class="key">claude mcp list</span> <span class="desc">List all servers</span></div>
+            <div class="row"><span class="key">maxResultSizeChars</span> <span class="desc"><code>_meta["anthropic/maxResultSizeChars"]</code> raises per-tool text threshold (up to 500K chars)<span class="badge-new">NEW</span></span></div>
+          </div>
+        </section>
+      </div>
+
+      <!-- SLASH + MEMORY WRAPPER -->
+      <div class="section-slash-memory">
+        <!-- SLASH COMMANDS -->
+        <section class="section section-slash">
+          <div class="section-header">⚡ Slash Commands</div>
+          <div class="section-content">
+            <div class="sub-header">Session</div>
+            <div class="row"><span class="key">/clear</span> <span class="desc">Clear conversation</span></div>
+            <div class="row"><span class="key">/compact [focus]</span> <span class="desc">Compact context</span></div>
+            <div class="row"><span class="key">/branch [name]</span> <span class="desc">Branch conversation (/fork alias)</span></div>
+            <div class="row"><span class="key">/cost</span> <span class="desc">Token usage (per-model + cache breakdown)<span class="badge-new">NEW</span></span></div>
+            <div class="row"><span class="key">/context</span> <span class="desc">Visualize context (grid)</span></div>
+            <div class="row"><span class="key">/diff</span> <span class="desc">Interactive diff viewer</span></div>
+            <div class="row"><span class="key">/copy [N]</span> <span class="desc">Copy last (or Nth) response</span></div>
+            <div class="row"><span class="key">/recap</span> <span class="desc">Summarize session context when returning<span class="badge-new">NEW</span></span></div>
+            <div class="row"><span class="key">/undo</span> <span class="desc">Alias for /rewind<span class="badge-new">NEW</span></span></div>
+            <div class="row"><span class="key">/rewind</span> <span class="desc">Rewind conv / code checkpoint</span></div>
+            <div class="row"><span class="key">/export</span> <span class="desc">Export conversation</span></div>
+            <div class="row"><span class="key">/plan [desc]</span> <span class="desc">Enter plan mode directly</span></div>
+            <div class="row"><span class="key">/resume [session]</span> <span class="desc">Resume by ID/name</span></div>
+            <div class="row"><span class="key">/focus</span> <span class="desc">Toggle focus view (fullscreen only)<span class="badge-new">NEW</span></span></div>
+
+            <div class="sub-header">Config</div>
+            <div class="row"><span class="key">/model [model]</span> <span class="desc">Switch model (←→ effort)<span class="badge-new">NEW</span></span></div>
+            <div class="row"><span class="key">/fast [on|off]</span> <span class="desc">Toggle fast mode</span></div>
+            <div class="row"><span class="key">/theme</span> <span class="desc">Change color theme — includes "Auto (match terminal)" dark/light option</span></div>
+            <div class="row"><span class="key">/permissions</span> <span class="desc">View/update permissions</span></div>
+            <div class="row"><span class="key">/effort [level]</span> <span class="desc">Set effort (low/medium/high/xhigh/max); opens interactive slider with arrow keys when called without args</span></div>
+            <div class="row"><span class="key">/color [color]</span> <span class="desc">Set prompt-bar color</span></div>
+            <div class="row"><span class="key">/keybindings</span> <span class="desc">Customize keyboard shortcuts</span></div>
+            <div class="row"><span class="key">/terminal-setup</span> <span class="desc">Configure terminal keybindings</span></div>
+
+            <div class="sub-header">Tools</div>
+            <div class="row"><span class="key">/init</span> <span class="desc">Create CLAUDE.md</span></div>
+            <div class="row"><span class="key">/memory</span> <span class="desc">Edit CLAUDE.md files, toggle auto memory, view entries</span></div>
+            <div class="row"><span class="key">/mcp</span> <span class="desc">Manage MCP servers</span></div>
+            <div class="row"><span class="key">/hooks</span> <span class="desc">Manage hooks</span></div>
+            <div class="row"><span class="key">/skills</span> <span class="desc">List available skills</span></div>
+            <div class="row"><span class="key">/agents</span> <span class="desc">Manage agent configurations<span class="badge-new">NEW</span></span></div>
+            <div class="row"><span class="key">/review [PR]</span> <span class="desc">Review PR locally</span></div>
+            <div class="row"><span class="key">/ultrareview [PR#]</span> <span class="desc">Cloud code review — parallel multi-agent analysis</span></div>
+            <div class="row"><span class="key">/simplify [focus]</span> <span class="desc">Code review + fix (3 agents)<span class="badge-new">NEW</span></span></div>
+            <div class="row"><span class="key">/security-review</span> <span class="desc">Scan diff for vulnerabilities</span></div>
+            <div class="row"><span class="key">/less-permission-prompts</span> <span class="desc">Add allowlist to reduce prompts<span class="badge-new">NEW</span></span></div>
+            <div class="row"><span class="key">/loop [interval] [prompt]</span> <span class="desc">Recurring task (/proactive alias)<span class="badge-new">NEW</span></span></div>
+            <div class="row"><span class="key">/chrome</span> <span class="desc">Chrome integration</span></div>
+            <div class="row"><span class="key">/ide</span> <span class="desc">IDE integrations status</span></div>
+            <div class="row"><span class="key">/reload-plugins</span> <span class="desc">Hot-reload plugins</span></div>
+            <div class="row"><span class="key">/add-dir &lt;path&gt;</span> <span class="desc">Add working directory</span></div>
+
+            <div class="sub-header">Special</div>
+            <div class="row"><span class="key">/btw &lt;question&gt;</span> <span class="desc">Ask a side question without adding to the conversation</span></div>
+            <div class="row"><span class="key">/extra-usage</span> <span class="desc">Extra usage when rate limited</span></div>
+            <div class="row"><span class="key">/voice</span> <span class="desc">Toggle push-to-talk voice dictation</span></div>
+            <div class="row"><span class="key">/doctor</span> <span class="desc">Diagnose installation</span></div>
+            <div class="row"><span class="key">/insights</span> <span class="desc">Analyze sessions report</span></div>
+            <div class="row"><span class="key">/desktop</span> <span class="desc">Continue in Desktop app</span></div>
+            <div class="row"><span class="key">/rename [name]</span> <span class="desc">Rename current session</span></div>
+            <div class="row"><span class="key">/help</span> <span class="desc">Show help + commands</span></div>
+            <div class="row"><span class="key">/feedback</span> <span class="desc">Submit feedback (alias: /bug)</span></div>
+          </div>
+        </section>
+
+        <!-- MEMORY & FILES -->
+        <section class="section section-memory">
+          <div class="section-header">📁 Memory &amp; Files</div>
+          <div class="section-content">
+            <div class="sub-header">CLAUDE.md Locations</div>
+            <div class="row"><span class="key">./CLAUDE.md or ./.claude/CLAUDE.md</span> <span class="desc">Project (team-shared)</span></div>
+            <div class="row"><span class="key">./CLAUDE.local.md</span> <span class="desc">Local personal project notes (gitignored)</span></div>
+            <div class="row" data-os="mac"><span class="key">~/.claude/CLAUDE.md</span> <span class="desc">Personal (all projects) — <code>/Users/&lt;you&gt;/.claude/</code></span></div>
+            <div class="row" data-os="win"><span class="key">%USERPROFILE%\.claude\CLAUDE.md</span> <span class="desc">Personal (all projects) — <code>C:\Users\&lt;you&gt;\.claude\</code></span></div>
+            <div class="row" data-os="mac"><span class="key">/etc/claude-code/CLAUDE.md</span> <span class="desc">Managed policy (macOS, org-wide)</span></div>
+            <div class="row" data-os="win"><span class="key">%ProgramData%\ClaudeCode\CLAUDE.md</span> <span class="desc">Managed policy (Windows) or <code>/etc/claude-code/</code> under WSL</span></div>
+
+            <div class="sub-header">Rules &amp; Import</div>
+            <div class="row"><span class="key">.claude/rules/*.md</span> <span class="desc">Project rules</span></div>
+            <div class="row" data-os="mac"><span class="key">~/.claude/rules/*.md</span> <span class="desc">User rules</span></div>
+            <div class="row" data-os="win"><span class="key">%USERPROFILE%\.claude\rules\*.md</span> <span class="desc">User rules</span></div>
+            <div class="row"><span class="key">paths: frontmatter</span> <span class="desc">Path-specific rules</span></div>
+            <div class="row"><span class="key">@path/to/file</span> <span class="desc">Import in CLAUDE.md</span></div>
+
+            <div class="sub-header">Auto Memory</div>
+            <div class="row" data-os="mac"><span class="key">~/.claude/projects/&lt;proj&gt;/memory/</span> <span class="desc">Project memory dir</span></div>
+            <div class="row" data-os="win"><span class="key">%USERPROFILE%\.claude\projects\&lt;proj&gt;\memory\</span> <span class="desc">Project memory dir</span></div>
+            <div class="row"><span class="desc"><code>MEMORY.md</code> auto-loads at startup (first 25KB or 200 lines); topic files load on demand</span></div>
+          </div>
+        </section>
+      </div>
+
+      <!-- WORKFLOWS + CONFIG WRAPPER -->
+      <div class="section-workflows-config">
+        <!-- WORKFLOWS & TIPS -->
+        <section class="section section-workflows">
+          <div class="section-header">🧠 Workflows &amp; Tips</div>
+          <div class="section-content">
+            <div class="sub-header">Plan Mode</div>
+            <div class="row"><span class="key" data-os="mac"><span class="keycap">⇧</span><span class="keycap">Tab</span></span><span class="key" data-os="win"><span class="keycap">Shift</span><span class="keycap">Tab</span></span> <span class="desc">Normal → Auto-Accept → Plan</span></div>
+            <div class="row"><span class="key">--permission-mode plan</span> <span class="desc">Start in plan mode</span></div>
+            <div class="row"><span class="key">Plan file naming</span> <span class="desc">Files named after your prompt (e.g. <code>fix-auth-race-snug-otter.md</code>)</span></div>
+
+            <div class="sub-header">Thinking &amp; Effort</div>
+            <div class="row"><span class="key" data-os="mac"><span class="keycap">⌥</span><span class="keycap">T</span></span><span class="key" data-os="win"><span class="keycap">Alt</span><span class="keycap">T</span></span> <span class="desc">Toggle thinking on/off</span></div>
+            <div class="row"><span class="key">"ultrathink"</span> <span class="desc">Max effort for turn</span></div>
+            <div class="row"><span class="key"><span class="keycap">Ctrl</span><span class="keycap">O</span></span> <span class="desc">See thinking (verbose)</span></div>
+            <div class="row"><span class="key">/effort</span> <span class="desc">○ low · ◐ medium · ● high · ★ xhigh · ★★ max</span></div>
+
+            <div class="sub-header">Auto Mode Denied</div>
+            <div class="row"><span class="key">/permissions → Recent</span> <span class="desc">Retry denied with <span class="keycap">R</span><span class="badge-new">NEW</span></span></div>
+
+            <div class="sub-header">Git Worktrees</div>
+            <div class="row"><span class="key">--worktree name</span> <span class="desc">Isolated branch per feature</span></div>
+            <div class="row"><span class="key">isolation: worktree</span> <span class="desc">Agent in own worktree</span></div>
+            <div class="row"><span class="key">sparsePaths</span> <span class="desc">Checkout only needed dirs</span></div>
+            <div class="row"><span class="key">workspace.git_worktree</span> <span class="desc">Status line JSON: linked worktree path<span class="badge-new">NEW</span></span></div>
+            <div class="row"><span class="key">/batch</span> <span class="desc">Auto-creates worktrees</span></div>
+
+            <div class="sub-header">Voice Mode</div>
+            <div class="row"><span class="key">/voice</span> <span class="desc">Enable push-to-talk</span></div>
+            <div class="row"><span class="key"><span class="keycap">Space</span> (hold)</span> <span class="desc">Record, release to send</span></div>
+            <div class="row"><span class="key">20 languages</span> <span class="desc">EN, ES, FR, DE, CZ, PL…</span></div>
+
+            <div class="sub-header">Context Management</div>
+            <div class="row"><span class="key">/context</span> <span class="desc">Usage + optimization tips</span></div>
+            <div class="row"><span class="key">/compact [focus]</span> <span class="desc">Compress with focus</span></div>
+            <div class="row"><span class="key">Auto-compact</span> <span class="desc">~95% capacity (thrash detection: 3x)<span class="badge-new">NEW</span></span></div>
+            <div class="row"><span class="key">1M context</span> <span class="desc">Opus 4.6 (Max/Team/Ent)</span></div>
+            <div class="row"><span class="key">CLAUDE.md</span> <span class="desc">Survives compaction!</span></div>
+
+            <div class="sub-header">Session Power Moves</div>
+            <div class="row"><span class="key">claude -c</span> <span class="desc">Continue last conv</span></div>
+            <div class="row"><span class="key">claude -r "name"</span> <span class="desc">Resume by name</span></div>
+            <div class="row"><span class="key">/btw question</span> <span class="desc">Side Q, no context cost</span></div>
+
+            <div class="sub-header">SDK / Headless</div>
+            <div class="row"><span class="key">claude -p "query"</span> <span class="desc">Non-interactive</span></div>
+            <div class="row"><span class="key">--output-format json</span> <span class="desc">Structured output</span></div>
+            <div class="row"><span class="key">--max-budget-usd 5</span> <span class="desc">Cost cap</span></div>
+            <div class="row" data-os="mac"><span class="key">cat file | claude -p</span> <span class="desc">Pipe input</span></div>
+            <div class="row" data-os="win"><span class="key">type file | claude -p</span> <span class="desc">Pipe input (PowerShell: <code>Get-Content file | claude -p</code>)</span></div>
+
+            <div class="sub-header">Scheduling &amp; Remote</div>
+            <div class="row"><span class="key">/loop 5m msg</span> <span class="desc">Recurring task</span></div>
+            <div class="row"><span class="key">--remote</span> <span class="desc">Web session on claude.ai</span></div>
+          </div>
+        </section>
+
+        <!-- CONFIG & ENV -->
+        <section class="section section-config">
+          <div class="section-header">⚙️ Config &amp; Env</div>
+          <div class="section-content">
+            <div class="sub-header">Config Files</div>
+            <div class="row" data-os="mac"><span class="key">~/.claude/settings.json</span> <span class="desc">User settings</span></div>
+            <div class="row" data-os="win"><span class="key">%USERPROFILE%\.claude\settings.json</span> <span class="desc">User settings</span></div>
+            <div class="row"><span class="key">.claude/settings.json</span> <span class="desc">Project (shared)</span></div>
+            <div class="row"><span class="key">.claude/settings.local.json</span> <span class="desc">Local only</span></div>
+            <div class="row" data-os="mac"><span class="key">~/.claude.json</span> <span class="desc">OAuth, MCP, state</span></div>
+            <div class="row" data-os="win"><span class="key">%USERPROFILE%\.claude.json</span> <span class="desc">OAuth, MCP, state</span></div>
+            <div class="row"><span class="key">.mcp.json</span> <span class="desc">Project MCP servers</span></div>
+            <div class="row"><span class="key">managed-settings.d/</span> <span class="desc">Drop-in policy fragments</span></div>
+
+            <div class="sub-header">Key Settings</div>
+            <div class="row"><span class="key">modelOverrides</span> <span class="desc">Map model picker → custom IDs</span></div>
+            <div class="row"><span class="key">autoMemoryDirectory</span> <span class="desc">Custom memory dir</span></div>
+            <div class="row"><span class="key">worktree.sparsePaths</span> <span class="desc">Sparse checkout dirs</span></div>
+            <div class="row"><span class="key">sandbox.failIfUnavailable</span> <span class="desc">Exit if sandbox fails</span></div>
+            <div class="row"><span class="key">hooks: if</span> <span class="desc">Conditional hooks (permission rule syntax)</span></div>
+            <div class="row"><span class="key">DISABLE_PROMPT_CACHING*</span> <span class="desc">Startup warning when prompt caching is disabled<span class="badge-new">NEW</span></span></div>
+            <div class="row"><span class="key">Monitor tool</span> <span class="desc">Stream events from background scripts<span class="badge-new">NEW</span></span></div>
+            <div class="row"><span class="key">PermissionDenied</span> <span class="desc">Hook: auto-mode denial<span class="badge-new">NEW</span></span></div>
+            <div class="row"><span class="key">showThinkingSummaries</span> <span class="desc">Opt-in (off by default now)<span class="badge-new">NEW</span></span></div>
+            <div class="row"><span class="key">allowedChannelPlugins</span> <span class="desc">Admin channel plugin allowlist</span></div>
+            <div class="row"><span class="key">hooks: "defer"</span> <span class="desc">Pause headless → resume later</span></div>
+            <div class="row"><span class="key">disableSkillShellExec</span> <span class="desc">Block !`cmd`<span class="badge-new">NEW</span></span></div>
+            <div class="row"><span class="key">forceRemoteSettings…</span> <span class="desc">Block until fresh<span class="badge-new">NEW</span></span></div>
+            <div class="row"><span class="key">refreshInterval</span> <span class="desc">Re-run custom status line every N sec<span class="badge-new">NEW</span></span></div>
+
+            <div class="sub-header">Key Env Vars</div>
+            <div class="row" data-os="mac"><span class="key">export VAR=value</span> <span class="desc">Set env in <code>~/.zshrc</code> or <code>~/.bash_profile</code></span></div>
+            <div class="row" data-os="win"><span class="key">setx VAR value</span> <span class="desc">Persist env (PowerShell: <code>$env:VAR="value"</code> for session)</span></div>
+            <div class="row"><span class="key">ANTHROPIC_API_KEY</span></div>
+            <div class="row"><span class="key">ANTHROPIC_MODEL</span></div>
+            <div class="row"><span class="key">ANTHROPIC_BASE_URL</span> <span class="desc">Proxy/gateway override</span></div>
+            <div class="row"><span class="key">ANTHROPIC_BETAS</span> <span class="desc">Additional beta headers</span></div>
+            <div class="row"><span class="key">ANTHROPIC_CUSTOM_MODEL_OPTION</span> <span class="desc">Custom /model entry</span></div>
+            <div class="row"><span class="key">MAX_THINKING_TOKENS</span> <span class="desc">0=off</span></div>
+            <div class="row"><span class="key">ENABLE_PROMPT_CACHING_1H</span> <span class="desc">Opt into 1h prompt cache TTL<span class="badge-new">NEW</span></span></div>
+            <div class="row"><span class="key">FORCE_PROMPT_CACHING_5M</span> <span class="desc">Force 5-min prompt cache TTL<span class="badge-new">NEW</span></span></div>
+            <div class="row"><span class="key">CLAUDE_CODE_ENABLE_AWAY_SUMMARY</span> <span class="desc">Force recap when telemetry disabled<span class="badge-new">NEW</span></span></div>
+            <div class="row"><span class="key">CLAUDECODE</span> <span class="desc">Detect CC shell (=1)</span></div>
+            <div class="row"><span class="key">CLAUDE_CODE_DISABLE_CRON</span> <span class="desc">Disable scheduled tasks</span></div>
+            <div class="row"><span class="key">API_TIMEOUT_MS</span> <span class="desc">API timeout (default: 600000ms)</span></div>
+            <div class="row"><span class="key">MCP_TIMEOUT</span> <span class="desc">MCP server startup timeout (ms)</span></div>
+            <div class="row" data-os="win"><span class="key">CLAUDE_CODE_USE_POWERSHELL_TOOL</span> <span class="desc">Use PowerShell tool instead of Bash on Windows</span></div>
+            <div class="row"><span class="key">CLAUDE_AUTOCOMPACT_PCT_OVERRIDE</span></div>
+            <div class="row"><span class="key">CLAUDE_CODE_AUTO_COMPACT_WINDOW</span></div>
+            <div class="row"><span class="key">CLAUDE_CODE_DISABLE_AUTO_MEMORY</span></div>
+            <div class="row"><span class="key">CLAUDE_CODE_DISABLE_1M_CONTEXT</span></div>
+          </div>
+        </section>
+      </div>
+
+      <!-- SKILLS + CLI WRAPPER -->
+      <div class="section-skills-cli">
+        <!-- SKILLS & AGENTS -->
+        <section class="section section-skills">
+          <div class="section-header">🔧 Skills &amp; Agents</div>
+          <div class="section-content">
+            <div class="sub-header">Built-in Skills</div>
+            <div class="row"><span class="key">Skill tool</span> <span class="desc">Discovers built-in slash commands (/init, /review, /security-review…)<span class="badge-new">NEW</span></span></div>
+            <div class="row"><span class="key">/simplify</span> <span class="desc">Code review (3 parallel agents)</span></div>
+            <div class="row"><span class="key">/batch</span> <span class="desc">Large parallel changes (5-30 worktrees)</span></div>
+            <div class="row"><span class="key">/debug [desc]</span> <span class="desc">Troubleshoot from debug log</span></div>
+            <div class="row"><span class="key">/loop [interval]</span> <span class="desc">Recurring scheduled task</span></div>
+            <div class="row"><span class="key">/claude-api</span> <span class="desc">Load API + SDK reference</span></div>
+
+            <div class="sub-header">Custom Skill Locations</div>
+            <div class="row"><span class="key">.claude/skills/&lt;name&gt;/</span> <span class="desc">Project skills</span></div>
+            <div class="row" data-os="mac"><span class="key">~/.claude/skills/&lt;name&gt;/</span> <span class="desc">Personal skills</span></div>
+            <div class="row" data-os="win"><span class="key">%USERPROFILE%\.claude\skills\&lt;name&gt;\</span> <span class="desc">Personal skills</span></div>
+
+            <div class="sub-header">Skill Frontmatter</div>
+            <div class="row"><span class="key">description</span> <span class="desc">Auto-invocation trigger</span></div>
+            <div class="row"><span class="key">allowed-tools</span> <span class="desc">Skip permission prompts</span></div>
+            <div class="row"><span class="key">model</span> <span class="desc">Override model for skill</span></div>
+            <div class="row"><span class="key">effort</span> <span class="desc">Override effort level</span></div>
+            <div class="row"><span class="key">paths: [globs]</span> <span class="desc">Path-specific (YAML list)<span class="badge-new">NEW</span></span></div>
+            <div class="row"><span class="key">context: fork</span> <span class="desc">Run in subagent</span></div>
+            <div class="row"><span class="key">$ARGUMENTS</span> <span class="desc">User input placeholder</span></div>
+            <div class="row"><span class="key">${CLAUDE_SKILL_DIR}</span> <span class="desc">Skill's own directory</span></div>
+            <div class="row"><span class="key">!`cmd`</span> <span class="desc">Dynamic context injection</span></div>
+            <div class="row"><span class="key">plugin bin/</span> <span class="desc">Ship executables for Bash tool<span class="badge-new">NEW</span></span></div>
+
+            <div class="sub-header">Built-in Agents</div>
+            <div class="row"><span class="key">Explore</span> <span class="desc">Fast read-only (Haiku)</span></div>
+            <div class="row"><span class="key">Plan</span> <span class="desc">Research for plan mode</span></div>
+            <div class="row"><span class="key">General</span> <span class="desc">Full tools, complex tasks</span></div>
+            <div class="row" data-os="mac"><span class="key">Bash</span> <span class="desc">Terminal separate context</span></div>
+            <div class="row" data-os="win"><span class="key">Bash / PowerShell</span> <span class="desc">Terminal separate context (PowerShell when <code>CLAUDE_CODE_USE_POWERSHELL_TOOL=1</code>)</span></div>
+
+            <div class="sub-header">Agent Frontmatter</div>
+            <div class="row"><span class="key">permissionMode</span> <span class="desc">default/acceptEdits/plan/dontAsk/bypassPermissions</span></div>
+            <div class="row"><span class="key">isolation: worktree</span> <span class="desc">Run in git worktree</span></div>
+            <div class="row"><span class="key">memory: user|project|local</span> <span class="desc">Persistent memory</span></div>
+            <div class="row"><span class="key">background: true</span> <span class="desc">Background task</span></div>
+            <div class="row"><span class="key">maxTurns</span> <span class="desc">Limit agentic turns</span></div>
+            <div class="row"><span class="key">initialPrompt</span> <span class="desc">Auto-submit first turn</span></div>
+            <div class="row"><span class="key">SendMessage</span> <span class="desc">Resume agents (replaces resume)</span></div>
+            <div class="row"><span class="key">@agent-name</span> <span class="desc">Mention named subagents<span class="badge-new">NEW</span></span></div>
+          </div>
+        </section>
+
+        <!-- CLI COMMANDS & FLAGS -->
+        <section class="section section-cli">
+          <div class="section-header">🖥️ CLI &amp; Flags</div>
+          <div class="section-content">
+            <div class="sub-header">Core Commands</div>
+            <div class="row"><span class="key">claude</span> <span class="desc">Interactive</span></div>
+            <div class="row"><span class="key">claude "q"</span> <span class="desc">With prompt</span></div>
+            <div class="row"><span class="key">claude -p "q"</span> <span class="desc">Headless (SDK)</span></div>
+            <div class="row"><span class="key">claude -c</span> <span class="desc">Continue last</span></div>
+            <div class="row"><span class="key">claude -r "n"</span> <span class="desc">Resume by ID/name</span></div>
+            <div class="row"><span class="key">claude update</span> <span class="desc">Update</span></div>
+            <div class="row"><span class="key">claude auth login</span> <span class="desc">Sign in (--sso, --console)</span></div>
+            <div class="row"><span class="key">claude agents</span> <span class="desc">List agents</span></div>
+            <div class="row"><span class="key">claude mcp</span> <span class="desc">MCP config</span></div>
+            <div class="row"><span class="key">claude plugin</span> <span class="desc">Plugin management</span></div>
+
+            <div class="sub-header">Key Flags</div>
+            <div class="row"><span class="key">--model</span> <span class="desc">Set model</span></div>
+            <div class="row"><span class="key">-n / --name</span> <span class="desc">Session name</span></div>
+            <div class="row"><span class="key">--resume, -r</span> <span class="desc">Resume session</span></div>
+            <div class="row"><span class="key">--continue, -c</span> <span class="desc">Continue most recent</span></div>
+            <div class="row"><span class="key">--add-dir</span> <span class="desc">Add working dir</span></div>
+            <div class="row"><span class="key">--agent</span> <span class="desc">Use agent</span></div>
+            <div class="row"><span class="key">--agents</span> <span class="desc">Define agents via JSON</span></div>
+            <div class="row"><span class="key">--allowedTools</span> <span class="desc">Pre-approve tools</span></div>
+            <div class="row"><span class="key">--disallowedTools</span> <span class="desc">Remove tools</span></div>
+            <div class="row"><span class="key">--allow-danger…</span> <span class="desc">Add bypassPerms to ⇧Tab cycle</span></div>
+            <div class="row"><span class="key">--output-format</span> <span class="desc">text/json/stream-json</span></div>
+            <div class="row"><span class="key">--json-schema</span> <span class="desc">Structured output</span></div>
+            <div class="row"><span class="key">--max-turns</span> <span class="desc">Limit turns</span></div>
+            <div class="row"><span class="key">--max-budget-usd</span> <span class="desc">Cost cap</span></div>
+            <div class="row"><span class="key">--exclude-dyn…</span> <span class="desc">Better prompt caching<span class="badge-new">NEW</span></span></div>
+            <div class="row"><span class="key">--bare</span> <span class="desc">Minimal (no hooks/MCP/memory)</span></div>
+            <div class="row"><span class="key">--channels</span> <span class="desc">MCP push notifications</span></div>
+            <div class="row"><span class="key">--remote</span> <span class="desc">Web session on claude.ai</span></div>
+            <div class="row"><span class="key">--rc / --remote-control</span> <span class="desc">Remote Control mode</span></div>
+            <div class="row"><span class="key">--effort</span> <span class="desc">low/medium/high/xhigh/max</span></div>
+            <div class="row"><span class="key">--permission-mode</span> <span class="desc">default/acceptEdits/plan/auto/dontAsk/bypassPermissions</span></div>
+            <div class="row"><span class="key">--dangerously-skip-permissions</span> <span class="desc">Skip all prompts ⚠️</span></div>
+            <div class="row"><span class="key">--chrome / --no-chrome</span> <span class="desc">Chrome on/off</span></div>
+            <div class="row"><span class="key">--debug [filter]</span> <span class="desc">Debug logging</span></div>
+            <div class="row"><span class="key">--system-prompt</span> <span class="desc">Custom system prompt</span></div>
+            <div class="row"><span class="key">--settings &lt;file&gt;</span> <span class="desc">Load settings JSON</span></div>
+          </div>
+        </section>
+      </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <span>원본 사이트:</span>
+      <a href="https://cc.storyfox.cz/" target="_blank" rel="noopener noreferrer">https://cc.storyfox.cz/</a>
+    </footer>
+  </div>
+
+  <script>
+    // === OS toggle ===
+    (function() {
+      var body = document.body;
+      var toggle = document.getElementById('osToggle');
+      var btns = toggle.querySelectorAll('.os-btn');
+
+      function detectOS() {
+        var p = navigator.platform || '';
+        var ua = navigator.userAgent || '';
+        if (/Mac|iPhone|iPod|iPad/.test(p) || /Mac/.test(ua)) return 'mac';
+        return 'win';
+      }
+
+      function apply(os) {
+        body.setAttribute('data-os', os);
+        btns.forEach(function(b) { b.classList.toggle('active', b.getAttribute('data-os-btn') === os); });
+        try { localStorage.setItem('cc-os', os); } catch (e) {}
+      }
+
+      var saved;
+      try { saved = localStorage.getItem('cc-os'); } catch (e) {}
+      apply(saved || detectOS());
+
+      btns.forEach(function(btn) {
+        btn.addEventListener('click', function() { apply(btn.getAttribute('data-os-btn')); });
+      });
+    })();
+
+    // === Zoom controls ===
+    (function() {
+      var html = document.documentElement;
+      var levelEl = document.getElementById('zoomLevel');
+      var MIN = 0.7, MAX = 1.8, STEP = 0.1;
+
+      function clamp(v) { return Math.min(MAX, Math.max(MIN, Math.round(v * 100) / 100)); }
+
+      function apply(z) {
+        z = clamp(z);
+        html.style.setProperty('--zoom', z);
+        levelEl.textContent = Math.round(z * 100) + '%';
+        try { localStorage.setItem('cc-zoom', String(z)); } catch (e) {}
+      }
+
+      var saved;
+      try { saved = parseFloat(localStorage.getItem('cc-zoom')); } catch (e) {}
+      apply(isNaN(saved) ? 1 : saved);
+
+      document.getElementById('zoomIn').addEventListener('click', function() {
+        apply(parseFloat(getComputedStyle(html).getPropertyValue('--zoom')) + STEP);
+      });
+      document.getElementById('zoomOut').addEventListener('click', function() {
+        apply(parseFloat(getComputedStyle(html).getPropertyValue('--zoom')) - STEP);
+      });
+      levelEl.addEventListener('click', function() { apply(1); });
+
+      // Ctrl/Cmd + / - / 0 keyboard shortcuts
+      document.addEventListener('keydown', function(e) {
+        if (!(e.ctrlKey || e.metaKey)) return;
+        var cur = parseFloat(getComputedStyle(html).getPropertyValue('--zoom')) || 1;
+        if (e.key === '=' || e.key === '+') { e.preventDefault(); apply(cur + STEP); }
+        else if (e.key === '-') { e.preventDefault(); apply(cur - STEP); }
+        else if (e.key === '0') { e.preventDefault(); apply(1); }
+      });
+    })();
+  </script>
+</body>
+</html>
