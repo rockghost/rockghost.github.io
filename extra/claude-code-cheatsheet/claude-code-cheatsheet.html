@@ -44,9 +44,17 @@
       font-size: 15px;
     }
 
-    /* Only the cheatsheet grid scales with --zoom */
+    /* Only the cheatsheet grid scales with --zoom.
+       transform: scale() scales everything (cards + fonts + gaps) proportionally.
+       The wrapper's height is set by JS to reserve space for the scaled grid. */
+    .main-grid-wrap {
+      width: 100%;
+    }
     .main-grid {
-      zoom: var(--zoom);
+      transform: scale(var(--zoom));
+      transform-origin: top center;
+      width: 120%;
+      margin-left: -10%;
     }
 
     body {
@@ -436,6 +444,7 @@
     </header>
 
     <!-- MAIN GRID -->
+    <div class="main-grid-wrap">
     <main class="main-grid">
 
       <!-- KEYBOARD + MCP WRAPPER -->
@@ -804,6 +813,7 @@
       </div>
 
     </main>
+    </div>
 
     <!-- FOOTER -->
     <footer class="footer">
@@ -845,14 +855,28 @@
     (function() {
       var html = document.documentElement;
       var levelEl = document.getElementById('zoomLevel');
+      var wrap = document.querySelector('.main-grid-wrap');
+      var grid = document.querySelector('.main-grid');
       var MIN = 0.7, MAX = 1.8, STEP = 0.1;
 
       function clamp(v) { return Math.min(MAX, Math.max(MIN, Math.round(v * 100) / 100)); }
+
+      function currentZoom() {
+        return parseFloat(getComputedStyle(html).getPropertyValue('--zoom')) || 1;
+      }
+
+      // transform: scale() doesn't affect layout, so reserve vertical space
+      // on the wrapper equal to the scaled grid height.
+      function syncWrapHeight() {
+        if (!wrap || !grid) return;
+        wrap.style.height = (grid.offsetHeight * currentZoom()) + 'px';
+      }
 
       function apply(z) {
         z = clamp(z);
         html.style.setProperty('--zoom', z);
         levelEl.textContent = Math.round(z * 100) + '%';
+        syncWrapHeight();
         try { localStorage.setItem('cc-zoom', String(z)); } catch (e) {}
       }
 
@@ -860,18 +884,25 @@
       try { saved = parseFloat(localStorage.getItem('cc-zoom')); } catch (e) {}
       apply(isNaN(saved) ? 1 : saved);
 
+      // Re-sync when the grid's natural size changes (window resize, OS toggle,
+      // font load, etc.).
+      window.addEventListener('resize', syncWrapHeight);
+      if (window.ResizeObserver && grid) {
+        new ResizeObserver(syncWrapHeight).observe(grid);
+      }
+
       document.getElementById('zoomIn').addEventListener('click', function() {
-        apply(parseFloat(getComputedStyle(html).getPropertyValue('--zoom')) + STEP);
+        apply(currentZoom() + STEP);
       });
       document.getElementById('zoomOut').addEventListener('click', function() {
-        apply(parseFloat(getComputedStyle(html).getPropertyValue('--zoom')) - STEP);
+        apply(currentZoom() - STEP);
       });
       levelEl.addEventListener('click', function() { apply(1); });
 
       // Ctrl/Cmd + / - / 0 keyboard shortcuts
       document.addEventListener('keydown', function(e) {
         if (!(e.ctrlKey || e.metaKey)) return;
-        var cur = parseFloat(getComputedStyle(html).getPropertyValue('--zoom')) || 1;
+        var cur = currentZoom();
         if (e.key === '=' || e.key === '+') { e.preventDefault(); apply(cur + STEP); }
         else if (e.key === '-') { e.preventDefault(); apply(cur - STEP); }
         else if (e.key === '0') { e.preventDefault(); apply(1); }
